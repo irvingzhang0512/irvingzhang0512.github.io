@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hexo,工具,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Hexo使用指北">
+<meta name="keywords" content="hexo,工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 概览">
+<meta property="og:url" content="http://yoursite.com/2019/07/13/hexo-overview/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="Hexo使用指北">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/5d5mtniqkz03sdop717xjeq1/image_1cbg9al9v1pcs19kl149g1tn128d9.png">
+<meta property="og:updated_time" content="2019-07-13T04:59:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo 概览">
+<meta name="twitter:description" content="Hexo使用指北">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/5d5mtniqkz03sdop717xjeq1/image_1cbg9al9v1pcs19kl149g1tn128d9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/13/hexo-overview/">
+
+
+
+
+
+  <title>Hexo 概览 | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/hexo-overview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo 概览</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-13T12:59:58+08:00">
+                2019-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  Hexo使用指北
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo中文文档</a><ul>
+<li>在<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">《概述》</a>中有介绍如何安装git/nodejs/hexo-cli。</li>
+<li>在<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">《配置》</a>中有介绍<code>站点配置文件</code>。</li>
+</ul>
+</li>
+<li><a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">Next主题官网</a></li>
+</ul>
+<h2 id="1-简单安装与常用命令"><a href="#1-简单安装与常用命令" class="headerlink" title="1. 简单安装与常用命令"></a>1. 简单安装与常用命令</h2><h3 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1. 安装"></a>1.1. 安装</h3><ul>
+<li>总体思路：<ul>
+<li>先安装git/nodejs，再安装hexo。</li>
+<li>安装next主题。</li>
+<li>设置Github Pages。</li>
+</ul>
+</li>
+<li>安装Hexo：<ul>
+<li>主要参考：<a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">Hexo中文文档 - 概述</a></li>
+<li>安装前提：安装Git和Node.js。<ul>
+<li>Windows：<a href="https://gitforwindows.org/" target="_blank" rel="noopener">git for Windows</a> &amp; <a href="http://nodejs.org/" target="_blank" rel="noopener">node.js官网</a>。注意，安装git时勾选<code>Add to PATH</code>选项。</li>
+<li>Mac：<code>brew install git</code> &amp; <code>curl https://raw.github.com/creationix/nvm/master/install.sh | sh</code>。</li>
+</ul>
+</li>
+<li>安装Hexo：<code>npm install -g hexo-cli</code>。</li>
+</ul>
+</li>
+<li>Next主题安装：<ul>
+<li>主要参考：<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">NexT 使用文档 - 开始使用</a></li>
+<li><code>cd your-hexo-site</code>, <code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></li>
+<li>修改Hexo的站点配置文件，即主目录下的<code>_config.yml</code>，修改内容<code>theme: next</code>。</li>
+</ul>
+</li>
+<li>设置 Github Pages<ul>
+<li>主要参考：<a href="https://hexo.io/zh-cn/docs/deployment.html" target="_blank" rel="noopener">Hexo中文文档 - 部署</a></li>
+<li>更多信息请参考：<a href="https://pages.github.com/" target="_blank" rel="noopener">Github Pages 官方主页</a>。简单说就是：<ul>
+<li>在Github上新建一个repo，命名为<code>yourname.github.io</code>。</li>
+<li>之后就可以通过<code>http://yourname.github.io</code>来访问部署在该repo中的信息。</li>
+</ul>
+</li>
+<li>为了将Hexo部署到GithubPages中<ol>
+<li>安装<code>hexxo-deployer-git</code>，命令为<code>npm install hexo-deployer-git --save</code>。</li>
+<li>修改站点配置文件，如下。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-常用命令"><a href="#1-2-常用命令" class="headerlink" title="1.2. 常用命令"></a>1.2. 常用命令</h3><ul>
+<li>主要参考：<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">Hexo中文文档 - 指令</a></li>
+<li>建站<ul>
+<li><code>hexo init [folder]</code></li>
+<li>新建一个站点（包括新建文件夹）。</li>
+</ul>
+</li>
+<li>新建各类页面<ul>
+<li><code>hexo new [layout] &lt;title&gt;</code></li>
+<li><code>[layout]</code>对应<code>scaffolds</code>文件夹下的各个模版。</li>
+<li>新建普通文章：<code>hexo new post new-blog-title</code></li>
+<li>新建page，用于主页上的<code>分类、关于、标签</code>等页面。<ul>
+<li><code>hexo new page &quot;about&quot;</code></li>
+<li>对于<code>categories</code>或<code>tags</code>页面，在文章首部需要指定<code>type</code>类型。如下所示，这样会有特殊效果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>页面相关<ul>
+<li>生成静态页面：<code>hexo generate</code></li>
+<li>清除静态页面：<code>hexo clean</code></li>
+<li>本地测试：<code>hexo server [--debug]</code><ul>
+<li>默认端口为4000，由于福新阅读器默认占用4000端口，所以可能无法使用。</li>
+<li>可以通过<code>-p</code>或<code>--port</code>设置端口。</li>
+<li>配合<code>--debug</code>同时使用，可以动态更新NexT主题中的内容。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-简单配置"><a href="#2-简单配置" class="headerlink" title="2. 简单配置"></a>2. 简单配置</h2><ul>
+<li>介绍用到的配置.</li>
+</ul>
+<h3 id="2-1-站点配置文件"><a href="#2-1-站点配置文件" class="headerlink" title="2.1. 站点配置文件"></a>2.1. 站点配置文件</h3><ul>
+<li><p>参考资料：<a href="https://hexo.io/zh-cn/docs/configuration" target="_blank" rel="noopener">《Hexo - 配置》</a></p>
+</li>
+<li><p>网站基本信息</p>
+<ul>
+<li>中英文设置在主题文件夹的<code>language</code>文件夹中。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: 清欢小屋 # 标题</span><br><span class="line">subtitle: </span><br><span class="line">description: 人间有味是清欢 # 简介</span><br><span class="line">keywords: </span><br><span class="line">author: Irving # 名称</span><br><span class="line">language: zh-Hans # 语言选择</span><br><span class="line">timezone:</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>设置主题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署到github</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span> <span class="comment"># Github中repo地址</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">[branch]</span> <span class="comment"># 指定branch</span></span><br><span class="line"><span class="attr">  message:</span> <span class="string">[message]</span> <span class="comment">#指定提交时的信息</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="2-2-Next配置文件"><a href="#2-2-Next配置文件" class="headerlink" title="2.2. Next配置文件"></a>2.2. Next配置文件</h3><ul>
+<li><p>参考资料：</p>
+<ul>
+<li><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">Next基本配置</a></li>
+<li><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">Next更多配置</a></li>
+</ul>
+</li>
+<li><p>选择Scheme（下面的设置都是基于<code>Gemini</code>进行）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置公式</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mathjax:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  per_page:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  cdn:</span> <span class="string">//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置favicon（即小图标），其中路径是基于<code>source</code>文件夹。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">favicon:</span></span><br><span class="line"><span class="attr">  small:</span> <span class="string">/images/favicon.ico</span></span><br><span class="line"><span class="attr">  medium:</span> <span class="string">/images/favicon.ico</span></span><br><span class="line"><span class="attr">  apple_touch_icon:</span> <span class="string">/images/favicon.ico</span></span><br><span class="line"><span class="attr">  safari_pinned_tab:</span> <span class="string">/images/favicon.ico</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>侧边栏设置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># TOC设置（即侧边栏中的文章章节）</span></span><br><span class="line"><span class="attr">toc:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  number:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  wrap:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 侧边栏头像</span></span><br><span class="line"><span class="attr">avatar:</span> <span class="string">/images/1.jpg</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 社交信息</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line"><span class="attr">  GitHub:</span> <span class="attr">https://github.com/irvingzhang0512</span> <span class="string">||</span> <span class="string">github</span></span><br><span class="line"><span class="attr">  ZhiHu:</span> <span class="attr">https://zhuanlan.zhihu.com/kingbob</span> <span class="string">||</span> <span class="string">book</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 菜单栏</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line"><span class="attr">  about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">user</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 侧边栏位置</span></span><br><span class="line"><span class="attr">sidebar:</span></span><br><span class="line"><span class="attr">  position:</span> <span class="string">right</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<h2 id="3-页面与写作"><a href="#3-页面与写作" class="headerlink" title="3. 页面与写作"></a>3. 页面与写作</h2><h3 id="3-1-页面"><a href="#3-1-页面" class="headerlink" title="3.1. 页面"></a>3.1. 页面</h3><ul>
+<li>页面和普通文章的区别：<ul>
+<li>所在位置：<ul>
+<li>普通文章在<code>/source/_posts</code>文件夹中，就仅有一个文件。</li>
+<li>页面在<code>/source</code>文件夹中，是一个文件夹（其中有一个<code>index.md</code>的文件）。</li>
+</ul>
+</li>
+<li>构建方式：<ul>
+<li>普通文章通过<code>hexo new post title</code>来创建。</li>
+<li>页面通过<code>hexo new page title</code>来创建。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>页面特有的内容：<ul>
+<li>对于分类、标签、归档页面，<code>markdown</code>文件头中有特有的<code>type</code>元素，类型值就是<code>categories</code>、<code>tags</code>、<code>archives</code>。</li>
+<li>对于页面名称，应该与主题配置文件中的<code>menu</code>对应。</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>通过<code>hexo new page categories</code>创建页面。</li>
+<li>修改<code>index.md</code>中的内容，预期得到以下结果<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 分类信息</span><br><span class="line">date: 2018-04-19 22:38:41</span><br><span class="line">type: "categories"</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://static.zybuluo.com/irving512/5d5mtniqkz03sdop717xjeq1/image_1cbg9al9v1pcs19kl149g1tn128d9.png" alt="image_1cbg9al9v1pcs19kl149g1tn128d9.png-24.5kB"></p>
+<h3 id="3-2-写作"><a href="#3-2-写作" class="headerlink" title="3.2. 写作"></a>3.2. 写作</h3><ul>
+<li>Front-matter：<ul>
+<li><a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">Hexo文档 - Front-matter</a></li>
+<li>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量。</li>
+<li>其中 <code>description</code> 会显示到首页中。</li>
+<li>下面举例模版中的内容</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">updated: &#123;&#123; date &#125;&#125;</span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">- </span>father</span><br><span class="line"><span class="bullet">- </span>son</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">- </span>tag1</span><br><span class="line"><span class="bullet">- </span>tag2</span><br><span class="line">description: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>关于more的用法<ul>
+<li>在文章列表中默认隐藏<code>&lt;!-- more --&gt;</code>后的内容。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/18/head-first-statisitcs/15/" rel="next" title="深入浅出统计学(15) 相关与回归">
+                <i class="fa fa-chevron-left"></i> 深入浅出统计学(15) 相关与回归
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简单安装与常用命令"><span class="nav-text">1. 简单安装与常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装"><span class="nav-text">1.1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-常用命令"><span class="nav-text">1.2. 常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-简单配置"><span class="nav-text">2. 简单配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-站点配置文件"><span class="nav-text">2.1. 站点配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Next配置文件"><span class="nav-text">2.2. Next配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-页面与写作"><span class="nav-text">3. 页面与写作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-页面"><span class="nav-text">3.1. 页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-写作"><span class="nav-text">3.2. 写作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
