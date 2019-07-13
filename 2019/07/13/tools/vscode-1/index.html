@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Bello, Babble">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Win10 下 VS Code 的基本配置以及 C++ 环境的安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS Code（1） Win10下 C++ 环境">
+<meta property="og:url" content="http://yoursite.com/2019/07/13/tools/vscode-1/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="Win10 下 VS Code 的基本配置以及 C++ 环境的安装">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/lkhcv0c63p19tw8itagivgcn/image_1df2netqclu11frshrbr8m1top9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/hm40g9zjfet3cgsa053idtgs/image_1df631t0mfv9mg41lqd1aep133p3u.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/9wijrserow05xkdm1plk9n5y/image_1df85artbrbq1jnljuh1s9c1fms9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/3vbu2veodgavfpt7qdwyttns/image_1df5mcsv81jpt8boqkjj6car89.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/nnzionicue84ygwnx2aex48w/image_1df5mhneh1fjo4241icu86b1k5h1g.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/qm0uhpc9vg6vxaijzb9mcmt0/image_1df5mkkms10f016308r95oa1b091t.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/sdi7zpso01belrxmsuz16146/image_1df5tmjn216fgh16k715o513v02a.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/fmmyzriv1bo4n40romk4yb41/image_1df5to4qi4bq8v53pl45613s32n.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/nh0ef8yzt0aae7211t2eacof/image_1df5viot0q38145f8fb1v67lq434.png">
+<meta property="og:updated_time" content="2019-07-13T05:32:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VS Code（1） Win10下 C++ 环境">
+<meta name="twitter:description" content="Win10 下 VS Code 的基本配置以及 C++ 环境的安装">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/lkhcv0c63p19tw8itagivgcn/image_1df2netqclu11frshrbr8m1top9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/13/tools/vscode-1/">
+
+
+
+
+
+  <title>VS Code（1） Win10下 C++ 环境 | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/tools/vscode-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VS Code（1） Win10下 C++ 环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-13T13:32:14+08:00">
+                2019-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/VS-Code/" itemprop="url" rel="index">
+                    <span itemprop="name">VS Code</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  Win10 下 VS Code 的基本配置以及 C++ 环境的安装
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>主要内容：<ul>
+<li>C++编译环境（MinGW）的安装</li>
+<li>VSC常用插件。</li>
+<li>运行第一个C++程序。</li>
+</ul>
+</li>
+<li>版本：<ul>
+<li>VSC 1.36.0</li>
+<li>cpptools 0.24.0</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-MinGW"><a href="#1-MinGW" class="headerlink" title="1. MinGW"></a>1. MinGW</h2><ul>
+<li>目标：本地安装编译器MinGW，并设置系统路径。</li>
+<li>相关资料：<ul>
+<li><a href="http://www.mingw.org/" target="_blank" rel="noopener">官网链接</a></li>
+<li>介绍：<a href="http://rsreland.net/archives/1760" target="_blank" rel="noopener">这里（2016年的文章，可能消息不是最新，但也能帮助理解）</a></li>
+<li>安装教程：<a href="https://www.cnblogs.com/ggg-327931457/p/9694401.html" target="_blank" rel="noopener">这里（18年9月的文章，非常详细）</a></li>
+</ul>
+</li>
+<li>自己的安装思路（图片均来自上面的安装教程）：<ul>
+<li>第一步：从官网下载安装管理器。</li>
+<li>第二步：在安装管理器中选择需要下载的部分。<br><img src="http://static.zybuluo.com/irving512/lkhcv0c63p19tw8itagivgcn/image_1df2netqclu11frshrbr8m1top9.png" alt="image_1df2netqclu11frshrbr8m1top9.png-83.7kB"></li>
+<li>第三步：将MinGW的bin文件夹添加到系统路径。</li>
+<li>第四步：验证，在cmd中尝试使用<code>gcc -v</code>命令。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-VS-Code-插件"><a href="#2-VS-Code-插件" class="headerlink" title="2. VS Code 插件"></a>2. VS Code 插件</h2><ul>
+<li>VSC的安装基本步骤：<ul>
+<li>第一步：从<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">官网</a>下载并安装VSC。</li>
+<li>第二步：安装相关插件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-C-C"><a href="#2-1-C-C" class="headerlink" title="2.1. C/C++"></a>2.1. C/C++</h3><ul>
+<li>作用：C/C++开发环境。</li>
+<li>官方出品的 cpptools。</li>
+<li>参考资料：<ul>
+<li><a href="https://code.visualstudio.com/docs/languages/cpp" target="_blank" rel="noopener">官网文档</a>中有描述如何使用该插件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-Chinese-Simplified-Language-Pack-for-Visual-Studio-Code"><a href="#2-2-Chinese-Simplified-Language-Pack-for-Visual-Studio-Code" class="headerlink" title="2.2. Chinese (Simplified) Language Pack for Visual Studio Code"></a>2.2. Chinese (Simplified) Language Pack for Visual Studio Code</h3><ul>
+<li>作用：中文翻译。</li>
+<li>所有其他语言支持都是通过插件的形式完成。</li>
+</ul>
+<h3 id="2-3-Code-Runner"><a href="#2-3-Code-Runner" class="headerlink" title="2.3. Code Runner"></a>2.3. Code Runner</h3><ul>
+<li>作用：简单的运行程序（最新版本其实也没那么有用了）。</li>
+<li>参考资料：<a href="https://zhuanlan.zhihu.com/p/54861567" target="_blank" rel="noopener">作者的知乎文章</a></li>
+<li>为什么要使用Code Runner：没有非常方便的编译并运行程序的功能。<ul>
+<li>其实最新版本有了，可以通过 <code>C/C++: build and Debug Active File</code> 实现。 来执行，即在<code>tasks.json</code>中配置<code>label</code>为<code>g++.exe build active file</code>的task。</li>
+</ul>
+</li>
+<li>使用方式：<ul>
+<li>通过右键 -&gt; <code>Run Code</code>运行程序。</li>
+<li>通过下图中的小图标。<br><img src="http://static.zybuluo.com/irving512/hm40g9zjfet3cgsa053idtgs/image_1df631t0mfv9mg41lqd1aep133p3u.png" alt="image_1df631t0mfv9mg41lqd1aep133p3u.png-35.9kB"></li>
+<li>可以在<code>F1</code>中运行命令。</li>
+</ul>
+</li>
+<li>原理（不确定）：查了下，应该是根据<code>code-runner.executorMap</code>配置执行命令。<ul>
+<li>以c++为例，就是<code>cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt</code></li>
+</ul>
+</li>
+<li>其他设置：<ul>
+<li><code>Run In Terminal</code>：勾选后，每次调用<code>Run Code</code>都可以。</li>
+<li><code>Save All Files Before Run.</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-Settings-Sync"><a href="#2-4-Settings-Sync" class="headerlink" title="2.4. Settings Sync"></a>2.4. Settings Sync</h3><ul>
+<li>作用：通过Github Gist同步VSC的配置。</li>
+<li>参考资料：<ul>
+<li>该插件的文档。</li>
+<li><a href="https://zhuanlan.zhihu.com/p/71995708" target="_blank" rel="noopener">知乎文章 三分钟教你同步 Visual Studio Code 设置</a></li>
+</ul>
+</li>
+<li>token：<code>84607cec214aac50417ee3c4a601d715c4a240e5</code>。</li>
+</ul>
+<h3 id="2-5-background"><a href="#2-5-background" class="headerlink" title="2.5. background"></a>2.5. background</h3><ul>
+<li>可以在配置中设置本地图片以及css样式。</li>
+<li>举例:<ul>
+<li>需要注意的是本地文件格式。</li>
+<li><code>customImages</code>也可以通过互联网获取。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&quot;background.useDefault&quot;: false,</span><br><span class="line">&quot;background.customImages&quot;: [</span><br><span class="line">    &quot;file:///E:/photo/Fubuki/0be4612442a7d933fff9e281a34bd11372f00141.jpg&quot;</span><br><span class="line">],</span><br><span class="line">&quot;background.useFront&quot;: false,</span><br><span class="line">&quot;background.style&quot;: &#123;</span><br><span class="line">    &quot;content&quot;: &quot;&apos;&apos;&quot;,</span><br><span class="line">    &quot;pointer-events&quot;: &quot;none&quot;,</span><br><span class="line">    &quot;position&quot;: &quot;absolute&quot;,</span><br><span class="line">    &quot;z-index&quot;: &quot;99999&quot;,</span><br><span class="line">    &quot;right&quot;: &quot;200px&quot;,</span><br><span class="line">    &quot;width&quot;: &quot;100%&quot;,</span><br><span class="line">    &quot;height&quot;: &quot;100%&quot;,</span><br><span class="line">    &quot;background-position&quot;: &quot;0% 0%&quot;,</span><br><span class="line">    &quot;background-size&quot;: &quot;cover&quot;,</span><br><span class="line">    &quot;background-repeat&quot;: &quot;no-repeat&quot;,</span><br><span class="line">    &quot;opacity&quot;: 0.1,</span><br><span class="line">    &quot;object-fit&quot;: &quot;scale-down&quot;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://static.zybuluo.com/irving512/9wijrserow05xkdm1plk9n5y/image_1df85artbrbq1jnljuh1s9c1fms9.png" alt="image_1df85artbrbq1jnljuh1s9c1fms9.png-267.4kB"></p>
+<h2 id="3-编写并运行C-程序"><a href="#3-编写并运行C-程序" class="headerlink" title="3. 编写并运行C++程序"></a>3. 编写并运行C++程序</h2><h3 id="3-1-综述"><a href="#3-1-综述" class="headerlink" title="3.1. 综述"></a>3.1. 综述</h3><ul>
+<li>参考资料：<ul>
+<li><a href="https://code.visualstudio.com/docs/cpp/config-mingw" target="_blank" rel="noopener">官方文档：Using Mingw in Visual Studio Code</a></li>
+<li><a href="https://code.visualstudio.com/docs/editor/intellisense" target="_blank" rel="noopener">官方文档：IntelliSense</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/70028925" target="_blank" rel="noopener">知乎文章：用VScode来编写C / C ++代码（转载）</a></li>
+</ul>
+</li>
+<li>VSC中主要通过三个配置文件来对C++程序的编写、运行、调试进行配置：<ul>
+<li><code>c_cpp_properties.json</code>：主要作用是配置IntelliSense。</li>
+<li><code>launch.json</code>：主要作用是帮助调试。</li>
+<li><code>tasks.json</code>：主要作用是构建应用程序。</li>
+</ul>
+</li>
+<li>对于给定下面的 hello world 代码进行测试（代码来自官方文档）。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; msg &#123;<span class="string">"Hello"</span>, <span class="string">"C++"</span>, <span class="string">"World"</span>, <span class="string">"from"</span>, <span class="string">"VS Code!"</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="built_in">string</span>&amp; word : msg)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; word &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="3-2-IntelliSense"><a href="#3-2-IntelliSense" class="headerlink" title="3.2. IntelliSense"></a>3.2. IntelliSense</h3><ul>
+<li>作用：代码编写过程中的一些作用:<ul>
+<li>code completion。一般输入字符串时直接会有显示。如果没有显示，可以通过<code>ctrl+space</code>来获取代码补全信息。<br><img src="http://static.zybuluo.com/irving512/3vbu2veodgavfpt7qdwyttns/image_1df5mcsv81jpt8boqkjj6car89.png" alt="image_1df5mcsv81jpt8boqkjj6car89.png-29.8kB"></li>
+<li>quick info。可以在代码补全时，输入<code>ctrl+space</code>来获取简要信息。<br><img src="http://static.zybuluo.com/irving512/nnzionicue84ygwnx2aex48w/image_1df5mhneh1fjo4241icu86b1k5h1g.png" alt="image_1df5mhneh1fjo4241icu86b1k5h1g.png-42.7kB"></li>
+<li>parameter info。在输入完成一个方法后，会显示参数信息。<br><img src="http://static.zybuluo.com/irving512/qm0uhpc9vg6vxaijzb9mcmt0/image_1df5mkkms10f016308r95oa1b091t.png" alt="image_1df5mkkms10f016308r95oa1b091t.png-90.5kB"></li>
+</ul>
+</li>
+<li><code>c_cpp_properties.json</code><ul>
+<li><a href="https://github.com/microsoft/vscode-cpptools/blob/master/Documentation/LanguageServer/c_cpp_properties.json.md" target="_blank" rel="noopener">官方Github解释</a></li>
+<li>如何生成该文件？<ul>
+<li>直接在<code>.vscode</code>中新建文件。</li>
+<li>通过 <code>&gt;C/C++: Edit Configurations (JSON)</code> 自动创建。</li>
+</ul>
+</li>
+<li>主要参数就是<code>configurations</code>中的<code>compilerPath</code>（好像与使用的STL有关）和<code>includePath</code>（自定义头文件路径）。</li>
+<li>举例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;env&quot; : &#123;</span><br><span class="line">        &quot;myDefaultIncludePath&quot;: [</span><br><span class="line">            &quot;$&#123;workspaceFolder&#125;&quot;,</span><br><span class="line">            &quot;$&#123;workspaceFolder&#125;/include&quot;</span><br><span class="line">        ],</span><br><span class="line">        &quot;myCompilerPath&quot;: &quot;/usr/local/bin/gcc-7&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;Mac&quot;,</span><br><span class="line">            &quot;intelliSenseMode&quot;: &quot;gcc-x64&quot;,</span><br><span class="line">            &quot;includePath&quot;: [ &quot;$&#123;myDefaultIncludePath&#125;&quot;, &quot;/another/path&quot; ],</span><br><span class="line">            &quot;macFrameworkPath&quot;: [ &quot;/System/Library/Frameworks&quot; ],</span><br><span class="line">            &quot;defines&quot;: [ &quot;FOO&quot;, &quot;BAR=100&quot; ],</span><br><span class="line">            &quot;forcedInclude&quot;: [ &quot;$&#123;workspaceFolder&#125;/include/config.h&quot; ],</span><br><span class="line">            &quot;compilerPath&quot;: &quot;E:\\Software\\MinGW\\bin\\g++.exe&quot;,</span><br><span class="line">            &quot;cStandard&quot;: &quot;c11&quot;,</span><br><span class="line">            &quot;cppStandard&quot;: &quot;c++17&quot;,</span><br><span class="line">            &quot;compileCommands&quot;: &quot;/path/to/compile_commands.json&quot;,</span><br><span class="line">            &quot;browse&quot;: &#123;</span><br><span class="line">                &quot;path&quot;: [ &quot;$&#123;workspaceFolder&#125;&quot; ],</span><br><span class="line">                &quot;limitSymbolsToIncludedHeaders&quot;: true,</span><br><span class="line">                &quot;databaseFilename&quot;: &quot;&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    &quot;version&quot;: 4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-构建应用程序"><a href="#3-3-构建应用程序" class="headerlink" title="3.3. 构建应用程序"></a>3.3. 构建应用程序</h3><ul>
+<li><p>在VSC中构建应用程序，需要创建<code>tasks.json</code>。</p>
+<ul>
+<li>感觉VSC中一个重要概念就是tasks。</li>
+<li><a href="https://code.visualstudio.com/docs/editor/tasks" target="_blank" rel="noopener">Tasks官方简介</a>：在VSC中使用一些工具（这些工具原本需要在命令行中设置、运行）。</li>
+</ul>
+</li>
+<li><p>如何创建？</p>
+<ul>
+<li>直接在<code>.vscode</code>中新建文件。</li>
+<li>通过 <code>Tasks：Configure Tasks</code> -&gt; <code>Create tasks.json</code> -&gt; <code>Others</code> 来创建。</li>
+</ul>
+</li>
+<li><p><code>tasks.json</code>举例：</p>
+<ul>
+<li>使用这个执行的就是<code>g++ -g -o helloworld helloworld.cpp</code>命令。</li>
+<li><code>group</code>中的内容，应该就是指的是通过 <code>Tasks: Run Build Task</code> 执行，即<code>ctrl+shift+b</code>。</li>
+<li>在<a href="https://code.visualstudio.com/docs/editor/tasks#_custom-tasks" target="_blank" rel="noopener">这个官方文档</a>中有少量下面参数的介绍。<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"2.0.0"</span>,</span><br><span class="line">    <span class="attr">"tasks"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"label"</span>: <span class="string">"build"</span>,</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"shell"</span>,</span><br><span class="line">            <span class="attr">"command"</span>: <span class="string">"g++"</span>,</span><br><span class="line">            <span class="attr">"args"</span>: [</span><br><span class="line">                <span class="string">"-g"</span>,</span><br><span class="line">                <span class="string">"-o"</span>,</span><br><span class="line">                <span class="string">"$&#123;fileBasenameNoExtension&#125;"</span>,</span><br><span class="line">                <span class="string">"$&#123;fileBasenameNoExtension&#125;.cpp"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"group"</span>: &#123;</span><br><span class="line">                <span class="attr">"kind"</span>: <span class="string">"build"</span>,</span><br><span class="line">                <span class="attr">"isDefault"</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>运行：</p>
+<ul>
+<li>当拥有<code>group</code>为<code>test</code>的配置时，可以通过 <code>Tasks: Run Test Task</code>来运行程序。</li>
+<li>当拥有<code>group</code>为<code>build</code>的配置时，可以通过 <code>Tasks: Run Build Task</code>来运行程序。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-调试程序"><a href="#3-4-调试程序" class="headerlink" title="3.4. 调试程序"></a>3.4. 调试程序</h3><ul>
+<li><p>参考资料：<a href="https://github.com/Microsoft/vscode-cpptools/blob/master/launch.md" target="_blank" rel="noopener">cpptools文档 - Configuring launch.json for C/C++ debugging</a></p>
+</li>
+<li><p>如果要调试，就需要建立<code>launch.json</code>。</p>
+</li>
+<li><p>如果新建<code>launch.json</code>的方法：</p>
+<ul>
+<li>直接创建文件。</li>
+<li>通过下图新建。但好像其实选哪个都会新建<code>launch.json</code>文件。<br><img src="http://static.zybuluo.com/irving512/sdi7zpso01belrxmsuz16146/image_1df5tmjn216fgh16k715o513v02a.png" alt="image_1df5tmjn216fgh16k715o513v02a.png-35.2kB"><br><img src="http://static.zybuluo.com/irving512/fmmyzriv1bo4n40romk4yb41/image_1df5to4qi4bq8v53pl45613s32n.png" alt="image_1df5to4qi4bq8v53pl45613s32n.png-7.2kB"></li>
+</ul>
+</li>
+<li><p>MinGW GDB调试的<code>launch.json</code>举例：</p>
+<ul>
+<li>注意<code>preLaunchTask</code>，这个名字对应的是 <code>tasks.json</code> 中的 <code>label</code>。</li>
+<li>如果不设置<code>preLaunchTask</code>，则需要在调试前自己构建项目（即创建<code>*.exe</code>文件）。<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">     <span class="attr">"configurations"</span>: [</span><br><span class="line">         &#123;</span><br><span class="line">             <span class="attr">"name"</span>: <span class="string">"(gdb) Launch"</span>,</span><br><span class="line">             <span class="attr">"type"</span>: <span class="string">"cppdbg"</span>,</span><br><span class="line">             <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">             <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/$&#123;fileBasenameNoExtension&#125;.exe"</span>,</span><br><span class="line">             <span class="attr">"args"</span>: [],</span><br><span class="line">             <span class="attr">"stopAtEntry"</span>: <span class="literal">true</span>,</span><br><span class="line">             <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceFolder&#125;"</span>,</span><br><span class="line">             <span class="attr">"environment"</span>: [],</span><br><span class="line">             <span class="attr">"externalConsole"</span>: <span class="literal">false</span>,</span><br><span class="line">             <span class="attr">"MIMode"</span>: <span class="string">"gdb"</span>,</span><br><span class="line">             "miDebuggerPath": "E:\\Software\\MinGW\\bin\\gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应</span><br><span class="line">             "preLaunchTask": "build",</span><br><span class="line">             "setupCommands": [</span><br><span class="line">                 &#123;</span><br><span class="line">                     <span class="attr">"description"</span>: <span class="string">"Enable pretty-printing for gdb"</span>,</span><br><span class="line">                     <span class="attr">"text"</span>: <span class="string">"-enable-pretty-printing"</span>,</span><br><span class="line">                     <span class="attr">"ignoreFailures"</span>: <span class="literal">true</span></span><br><span class="line">                 &#125;</span><br><span class="line">             ]</span><br><span class="line">         &#125;</span><br><span class="line">     ]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>调试界面：</p>
+<ul>
+<li>通过<code>F5</code>进行调试。<br><img src="http://static.zybuluo.com/irving512/nh0ef8yzt0aae7211t2eacof/image_1df5viot0q38145f8fb1v67lq434.png" alt="image_1df5viot0q38145f8fb1v67lq434.png-46.3kB"></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/13/tools/hexo-overview/" rel="next" title="Hexo 概览">
+                <i class="fa fa-chevron-left"></i> Hexo 概览
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/13/tools/vscode-2/" rel="prev" title="VS Code（2）查漏补缺">
+                VS Code（2）查漏补缺 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-MinGW"><span class="nav-text">1. MinGW</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-VS-Code-插件"><span class="nav-text">2. VS Code 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-C-C"><span class="nav-text">2.1. C/C++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Chinese-Simplified-Language-Pack-for-Visual-Studio-Code"><span class="nav-text">2.2. Chinese (Simplified) Language Pack for Visual Studio Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Code-Runner"><span class="nav-text">2.3. Code Runner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Settings-Sync"><span class="nav-text">2.4. Settings Sync</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-background"><span class="nav-text">2.5. background</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编写并运行C-程序"><span class="nav-text">3. 编写并运行C++程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-综述"><span class="nav-text">3.1. 综述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-IntelliSense"><span class="nav-text">3.2. IntelliSense</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-构建应用程序"><span class="nav-text">3.3. 构建应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-调试程序"><span class="nav-text">3.4. 调试程序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

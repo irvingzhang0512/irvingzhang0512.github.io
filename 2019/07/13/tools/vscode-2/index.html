@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="《深入浅出统计学》第一章">
+<meta name="description" content="VS Code 使用到的功能汇总">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出统计学(1) 信息图形化">
-<meta property="og:url" content="http://yoursite.com/2018/04/29/head-first-statisitcs/1/index.html">
+<meta property="og:title" content="VS Code（2）查漏补缺">
+<meta property="og:url" content="http://yoursite.com/2019/07/13/tools/vscode-2/index.html">
 <meta property="og:site_name" content="清欢小屋">
-<meta property="og:description" content="《深入浅出统计学》第一章">
+<meta property="og:description" content="VS Code 使用到的功能汇总">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-29T06:49:28.000Z">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/w1ahz6a3v87tvz00zfh950qn/image_1dfa915lq1vurc181psj1mn1ugn9.png">
+<meta property="og:updated_time" content="2019-07-13T05:32:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出统计学(1) 信息图形化">
-<meta name="twitter:description" content="《深入浅出统计学》第一章">
+<meta name="twitter:title" content="VS Code（2）查漏补缺">
+<meta name="twitter:description" content="VS Code 使用到的功能汇总">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/w1ahz6a3v87tvz00zfh950qn/image_1dfa915lq1vurc181psj1mn1ugn9.png">
 
 
 
@@ -119,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/29/head-first-statisitcs/1/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/13/tools/vscode-2/">
 
 
 
 
 
-  <title>深入浅出统计学(1) 信息图形化 | 清欢小屋</title>
+  <title>VS Code（2）查漏补缺 | 清欢小屋</title>
   
 
 
@@ -272,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/29/head-first-statisitcs/1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/tools/vscode-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Irving">
@@ -289,7 +291,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入浅出统计学(1) 信息图形化</h1>
+          <h1 class="post-title" itemprop="name headline">VS Code（2）查漏补缺</h1>
         
 
         <div class="post-meta">
@@ -301,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-29T14:49:28+08:00">
-                2018-04-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-13T13:32:19+08:00">
+                2019-07-13
               </time>
             
 
@@ -324,8 +326,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -335,8 +337,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
+                  <a href="/categories/工具/VS-Code/" itemprop="url" rel="index">
+                    <span itemprop="name">VS Code</span>
                   </a>
                 </span>
 
@@ -359,7 +361,7 @@
 
           
               <div class="post-description">
-                  《深入浅出统计学》第一章
+                  VS Code 使用到的功能汇总
               </div>
           
 
@@ -377,59 +379,166 @@
 
       
         <a id="more"></a>
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>目标：总结VSC的其他常用功能。</li>
+<li>PS：有用到的时候在继续补充其他内容吧。</li>
+</ul>
+<h2 id="1-Markdown"><a href="#1-Markdown" class="headerlink" title="1. Markdown"></a>1. Markdown</h2><ul>
+<li>需求：<ul>
+<li>编写项目的文档。</li>
+<li>简单编辑hexo中的博客。</li>
+<li>PS：博客一般都放在Cmd Markdown中编写。</li>
+</ul>
+</li>
+<li>具体目标：<ul>
+<li>编辑Markdown。</li>
+<li>支持公式。</li>
+<li>支持实时预览。</li>
+</ul>
+</li>
+<li>插件：主要插件有两个，<code>Markdown Preview Enhanced</code> 和 <code>Markdown All in One</code>。<ul>
+<li>文档：<a href="https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/" target="_blank" rel="noopener">Markdown Preview Enhanced文档</a>，<a href="https://github.com/yzhang-gh/vscode-markdown" target="_blank" rel="noopener">Markdown All in One文档</a>。</li>
+<li>下面比较几个（我的）常用功能。</li>
+<li>都装上就完事了……</li>
+<li>好像可以使用七牛云作为图床，后续再研究。</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">比较对象</th>
+<th align="center">Markdown Preview Enhanced</th>
+<th align="center">Markdown All in One</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">功能</td>
+<td align="center">更多</td>
+<td align="center">较少</td>
+</tr>
+<tr>
+<td align="center">公式</td>
+<td align="center">有</td>
+<td align="center">有</td>
+</tr>
+<tr>
+<td align="center">Enter/Tab/BackSpace</td>
+<td align="center">无</td>
+<td align="center">有</td>
+</tr>
+<tr>
+<td align="center">表格格式化</td>
+<td align="center">无</td>
+<td align="center">有</td>
+</tr>
+<tr>
+<td align="center">自动补全（公式、图片、链接）</td>
+<td align="center">无</td>
+<td align="center">有</td>
+</tr>
+<tr>
+<td align="center">导入外部文件</td>
+<td align="center">有</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="center">Code Chunk（运行代码块）</td>
+<td align="center">有</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="center">文档导出</td>
+<td align="center">有</td>
+<td align="center">无</td>
+</tr>
+<tr>
+<td align="center">流程图 / 时序图 等</td>
+<td align="center">有</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+<ul>
+<li>几个重要配置：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "markdown-preview-enhanced.codeBlockTheme": "atom-dark.css", // 代码默认css</span><br><span class="line">    "markdown-preview-enhanced.mathRenderingOption": "MathJax", // 默认使用公式插件</span><br><span class="line">    "markdown-preview-enhanced.previewTheme": "github-dark.css", // 预览框默认css</span><br><span class="line">    "markdown.extension.toc.levels": "1..3", // 启用的标题等级 </span><br><span class="line">    "markdown.extension.toc.unorderedList.marker": "+", // 启用的斜线方式</span><br><span class="line">    "markdown.extension.preview.autoShowPreviewToSide": true, // 打开md文件时，是否自动开启侧面预览框</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h2><h3 id="1-1-数据与信息"><a href="#1-1-数据与信息" class="headerlink" title="1.1. 数据与信息"></a>1.1. 数据与信息</h3><ul>
-<li>数据指的是手机的原始事实和数字。</li>
-<li>信息指的是加入了某种意义的数据。</li>
+</li>
 </ul>
-<h3 id="1-2-频数"><a href="#1-2-频数" class="headerlink" title="1.2. 频数"></a>1.2. 频数</h3><ul>
-<li>表示在一个特定组、或在一个特定区间内的统计对象的数目。类似于数数。</li>
-<li>在设计以百分数为表现内容的图形时：设法指出频数——或是将频数标在图形中间，或标在图形旁边。</li>
-<li>若没有频数，只有百分比，要小心，有可能隐藏真实数据。</li>
+<h2 id="2-Git"><a href="#2-Git" class="headerlink" title="2. Git"></a>2. Git</h2><ul>
+<li>需求：使用Git。</li>
+<li>主要功能：<ul>
+<li>执行各类git命令。</li>
+<li>查看commit log。</li>
+<li>查看push记录。</li>
 </ul>
-<h3 id="1-3-类别数据与数值型数据"><a href="#1-3-类别数据与数值型数据" class="headerlink" title="1.3. 类别数据与数值型数据"></a>1.3. 类别数据与数值型数据</h3><ul>
-<li>类别数据：用以描述某类的性质或特征，也称为定性数据。</li>
-<li>数据型数据：涉及数字，数值具有数字的意义，还设计计量和计数，由于数值型描述的是数量，也称为定量数据。</li>
-</ul>
-<h3 id="1-4-累计频数"><a href="#1-4-累计频数" class="headerlink" title="1.4. 累计频数"></a>1.4. 累计频数</h3><ul>
-<li>向原来的综合中添加新值得到的总和。</li>
-<li></li>
-</ul>
-<h2 id="2-图形化"><a href="#2-图形化" class="headerlink" title="2. 图形化"></a>2. 图形化</h2><h3 id="2-1-饼状图"><a href="#2-1-饼状图" class="headerlink" title="2.1. 饼状图"></a>2.1. 饼状图</h3><p>方便对比不同类别各自所占的比例。</p>
-<h3 id="2-2-条形图："><a href="#2-2-条形图：" class="headerlink" title="2.2. 条形图："></a>2.2. 条形图：</h3><ul>
-<li>能对频数的相对大小进行比较。</li>
-<li>相对于饼状图，优点在于更精确。</li>
-<li>条形图可以是水平（体现百分数）或垂直（体现频数）条形图。</li>
-<li>特殊条形图：<ul>
-<li>堆积条形图（用不同长方形代表不同指标的频数）。</li>
-<li>分段条形图，可同事体现频数和百分比（即同一长方形中显示不同类别数据）。</li>
+</li>
+<li>安装插件：<ul>
+<li>GitLens：作用就是查看每一行代码的代码提交记录。<ul>
+<li>在活动栏中GitLens有单独的图标，如下图所示。</li>
+<li>每一行的记录都能查，还有diff等其他功能，查看文件的历史修改记录也很方便。<br><img src="http://static.zybuluo.com/irving512/w1ahz6a3v87tvz00zfh950qn/image_1dfa915lq1vurc181psj1mn1ugn9.png" alt="image_1dfa915lq1vurc181psj1mn1ugn9.png-26.5kB"></li>
 </ul>
 </li>
 </ul>
-<h3 id="2-3-直方图"><a href="#2-3-直方图" class="headerlink" title="2.3. 直方图"></a>2.3. 直方图</h3><ul>
-<li>直方图用长方形表示得分范围，而不是表示一项（条形图）。</li>
-<li>与条形图外观区别：<ul>
-<li>每个长方形的面积和频数成正比。</li>
-<li>图上的长方形之间没有间隔。</li>
+</li>
+</ul>
+<h2 id="3-Python"><a href="#3-Python" class="headerlink" title="3. Python"></a>3. Python</h2><ul>
+<li>需求：<ul>
+<li>编写Python代码（添加补全相关内容）。</li>
+<li>运行Python代码。</li>
 </ul>
 </li>
-<li>求直方图过程：<ol>
-<li>长方形面积=每组频数</li>
-<li>频数 = 长方形宽度 * 长方形高度</li>
-<li>长方形高度（即频数密度） = 频数/长方形宽度</li>
-</ol>
-</li>
-<li>为什么用频数代表面积：保证每个组的相对大小和与数据成正比，且不失真实。</li>
-</ul>
-<h3 id="2-4-折线图"><a href="#2-4-折线图" class="headerlink" title="2.4. 折线图"></a>2.4. 折线图</h3><ul>
-<li>很好的体现数据的趋势。</li>
-<li>与条形图比较：<ul>
-<li>很容易添加新的数据，不会让图形面目不清。</li>
-<li>更好体现数据趋势。</li>
-<li>虽然能够显示数值，但不如条形图清晰。</li>
+<li>具体功能：<ul>
+<li>代码补全。</li>
+<li>跳转源代码。</li>
 </ul>
 </li>
-<li>只应用于展示数值型数据，不应用于类别数据。</li>
+<li>插件：<ul>
+<li>Python：<ul>
+<li>官方提供的Python环境，主要功能包括补全、代码检查、代码格式化、测试等。</li>
+<li>可以参考<a href="https://code.visualstudio.com/docs/languages/python" target="_blank" rel="noopener">官方文档</a>，有基本使用。</li>
+</ul>
+</li>
+<li>Visual Studio IntelliCode：上面插件提供的代码补全完全不够用，比如不能调用<code>np</code>等库的函数，使用这个插件可以解决问题。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-远程控制"><a href="#4-远程控制" class="headerlink" title="4. 远程控制"></a>4. 远程控制</h2><ul>
+<li>需求：<ul>
+<li>在本地修改远程服务器上的代码。</li>
+<li>使用服务器上的环境运行程序。</li>
+</ul>
+</li>
+<li>参考资料：<a href="https://code.visualstudio.com/docs/remote/ssh" target="_blank" rel="noopener">官方文档：Remote Development using SSH</a></li>
+<li>插件：<ul>
+<li>Remote Development：安装ssh环境，并配置无密码登录（否则每次开启都需要两次输入密码）。</li>
+<li>将变成相关的插件（如Python环境中的Python、Visual Studio IntelliCode安装到远程服务器中）。</li>
+</ul>
+</li>
+<li>基本流程：<ul>
+<li>在服务器上设置免密登录。</li>
+<li>通过<code>Remote-SSH: Open Configuration File</code>配置ssh环境。</li>
+<li>在活动栏中的<code>Remote-SSH</code>中选择CONNECTION并连接（如果没设置免密，这里需要输入两次密码）。</li>
+<li>在活动栏的<code>资源管理器</code>中可以选择需要同步的目录路径。</li>
+<li>进入插件安装界面，在远程服务器中安装对应的插件。<ul>
+<li>UI、主题相关的插件，安装在本地就行。</li>
+<li>跟运行环境有关的插件（如Python、cpptools等）需要安装到远程服务器上。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-同步"><a href="#5-同步" class="headerlink" title="5. 同步"></a>5. 同步</h2><ul>
+<li>需求：将本地文件夹和服务器中文件夹进行文件同步。</li>
+<li>插件：stfp。<ul>
+<li>使用可以参考<a href="https://blog.csdn.net/qq_41359051/article/details/89226060" target="_blank" rel="noopener">这篇博客</a></li>
+<li>使用思路：在<code>.vscode</code>中新建文件<code>sftp.json</code>（也可以通过<code>SFTP: config</code>来新建配置文件）。</li>
+<li>然后通过 download/upload 命令进行同步。</li>
+<li>配置文件举例：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"name"</span>,</span><br><span class="line">    <span class="attr">"host"</span>: <span class="string">"10.10.10.10"</span>,</span><br><span class="line">    <span class="attr">"protocol"</span>: <span class="string">"sftp"</span>,</span><br><span class="line">    <span class="attr">"port"</span>: <span class="number">22</span>,</span><br><span class="line">    <span class="attr">"username"</span>: <span class="string">"ubuntu"</span>,</span><br><span class="line">    <span class="attr">"password"</span>: <span class="string">"123.com"</span>,</span><br><span class="line">    <span class="attr">"remotePath"</span>: <span class="string">"/ssd/zhangyiyang/TF-Semantic-Segmentation"</span>,</span><br><span class="line">    <span class="attr">"uploadOnSave"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
 </ul>
 
       
@@ -455,14 +564,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/07/13/tools/vscode-1/" rel="next" title="VS Code（1） Win10下 C++ 环境">
+                <i class="fa fa-chevron-left"></i> VS Code（1） Win10下 C++ 环境
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/29/head-first-statisitcs/2/" rel="prev" title="深入浅出统计学(2) 集中趋势的度量">
-                深入浅出统计学(2) 集中趋势的度量 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/13/tools/aws/" rel="prev" title="AWS小助手">
+                AWS小助手 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -613,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本概念"><span class="nav-text">1. 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-数据与信息"><span class="nav-text">1.1. 数据与信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-频数"><span class="nav-text">1.2. 频数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-类别数据与数值型数据"><span class="nav-text">1.3. 类别数据与数值型数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-累计频数"><span class="nav-text">1.4. 累计频数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-图形化"><span class="nav-text">2. 图形化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-饼状图"><span class="nav-text">2.1. 饼状图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-条形图："><span class="nav-text">2.2. 条形图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-直方图"><span class="nav-text">2.3. 直方图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-折线图"><span class="nav-text">2.4. 折线图</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Markdown"><span class="nav-text">1. Markdown</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Git"><span class="nav-text">2. Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Python"><span class="nav-text">3. Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-远程控制"><span class="nav-text">4. 远程控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-同步"><span class="nav-text">5. 同步</span></a></li></ol></div>
             
 
           </div>
