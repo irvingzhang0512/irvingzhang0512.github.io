@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Bello, Babble">
+  <meta name="keywords" content="工具,">
 
 
 
@@ -79,17 +79,23 @@
 
 
 
-<meta name="description" content="《深入浅出统计学》第九章">
+<meta name="description" content="Git的基本概念与常用命令">
+<meta name="keywords" content="工具">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出统计学(9) 再谈正态分布的运用">
-<meta property="og:url" content="http://yoursite.com/2018/05/06/head-first-statisitcs/9/index.html">
+<meta property="og:title" content="git">
+<meta property="og:url" content="http://yoursite.com/2019/07/14/tools/git/index.html">
 <meta property="og:site_name" content="清欢小屋">
-<meta property="og:description" content="《深入浅出统计学》第九章">
+<meta property="og:description" content="Git的基本概念与常用命令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-06T11:59:06.000Z">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/9uua28ehkvredij02ehgpdz8/image_1dfl5f0oqecf1vjndr51cb71efc9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/98j2th7j149wdply8xdncw3t/image_1dfofv0091o9m1rbb1iis18q61ihe9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/vnbiz0dcl9gvnaabimz18hsh/image_1dfog14vp1i301bl91g1b1inlq14m.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/29l9yfzy6b89iyuvlisgxqkw/image_1dfog7bt815vh11kh1q4811f21mc313.png">
+<meta property="og:updated_time" content="2019-07-14T15:31:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出统计学(9) 再谈正态分布的运用">
-<meta name="twitter:description" content="《深入浅出统计学》第九章">
+<meta name="twitter:title" content="git">
+<meta name="twitter:description" content="Git的基本概念与常用命令">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/9uua28ehkvredij02ehgpdz8/image_1dfl5f0oqecf1vjndr51cb71efc9.png">
 
 
 
@@ -119,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/06/head-first-statisitcs/9/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/14/tools/git/">
 
 
 
 
 
-  <title>深入浅出统计学(9) 再谈正态分布的运用 | 清欢小屋</title>
+  <title>git | 清欢小屋</title>
   
 
 
@@ -272,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/head-first-statisitcs/9/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/14/tools/git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Irving">
@@ -289,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入浅出统计学(9) 再谈正态分布的运用</h1>
+          <h1 class="post-title" itemprop="name headline">git</h1>
         
 
         <div class="post-meta">
@@ -301,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T19:59:06+08:00">
-                2018-05-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-14T23:31:25+08:00">
+                2019-07-14
               </time>
             
 
@@ -324,8 +330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -335,8 +341,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
+                  <a href="/categories/工具/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -359,7 +365,7 @@
 
           
               <div class="post-description">
-                  《深入浅出统计学》第九章
+                  Git的基本概念与常用命令
               </div>
           
 
@@ -379,53 +385,125 @@
         <a id="more"></a>
 
 
-<h2 id="线性变换与独立观察"><a href="#线性变换与独立观察" class="headerlink" title="线性变换与独立观察"></a>线性变换与独立观察</h2><ul>
-<li>线性变换：<ul>
-<li>概念：描述了数据的基本变化。</li>
-<li>$aX + b \sim N(a\mu + b, a^2\sigma^2)$</li>
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li><a href="https://git-scm.com/" target="_blank" rel="noopener">官网</a>相关资料<ul>
+<li><a href="https://git-scm.com/doc" target="_blank" rel="noopener">官方文档</a></li>
+<li><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">中文参考文献</a></li>
 </ul>
 </li>
-<li>独立观察：<ul>
-<li>概念：描述了有多少数值。</li>
-<li>$X_1 + X_2, + … + X_n \sim N(n\mu, n\sigma^2)$</li>
-</ul>
-</li>
-<li>两者区别：<ul>
-<li>线性变换影响概率分布中的基本数值。</li>
-<li>独立观察影响所处理的事件的数量</li>
+<li>其他资料：<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">《阮一峰 - 常用 Git 命令清单》</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">《廖雪峰 - Git教程》</a></li>
 </ul>
 </li>
 </ul>
-<h2 id="几个常用计算公式："><a href="#几个常用计算公式：" class="headerlink" title="几个常用计算公式："></a>几个常用计算公式：</h2><ul>
-<li>如果X和Y为独立变量，则<ul>
-<li>$$X + Y \sim N(\mu_x + \mu_y, \sigma_x^2 + \sigma_y^2)$$</li>
-<li>$$X - Y \sim N(\mu_x - \mu_y, \sigma_x^2 + \sigma_y^2)$$</li>
+<h2 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h2><ul>
+<li>在使用Git时，常用的分区有：<ul>
+<li>工作区（Workspace）：用户直接操作的的文件。</li>
+<li>暂存区（Index / Stage）：在<code>./.git/index/</code>路径中，包含add/rm后、commit前暂存的数据。</li>
+<li>本地仓库（Repository）：在<code>./.git/</code>路径中，包含之前版本的信息。</li>
+<li>远程仓库（Remote）：</li>
 </ul>
 </li>
-<li>如果X满足正态分布，且a和b都是数字，则：<ul>
-<li>$$aX + b \sim N(a\mu + b, a^2\sigma^2)$$</li>
+<li>盗用<a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">《阮一峰 - 常用 Git 命令清单》</a>中的图。<br><img src="http://static.zybuluo.com/irving512/9uua28ehkvredij02ehgpdz8/image_1dfl5f0oqecf1vjndr51cb71efc9.png" alt="image_1dfl5f0oqecf1vjndr51cb71efc9.png-55.3kB"></li>
+</ul>
+<h2 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h2><h3 id="2-1-基本操作"><a href="#2-1-基本操作" class="headerlink" title="2.1. 基本操作"></a>2.1. 基本操作</h3><ul>
+<li>新建本地仓库：在新建好的文件夹目录下运行 <code>git init</code></li>
+<li>克隆仓库：<code>git clone xxx</code></li>
+<li>查看当前状态：<code>git status</code></li>
+</ul>
+<h3 id="2-2-工作区、暂存区、本地仓库"><a href="#2-2-工作区、暂存区、本地仓库" class="headerlink" title="2.2. 工作区、暂存区、本地仓库"></a>2.2. 工作区、暂存区、本地仓库</h3><ul>
+<li>从工作区到暂存区：add/rm/mv 命令<ul>
+<li><code>git add [file1] [file2] ...</code></li>
+<li><code>git add [dir]</code></li>
+<li><code>git add .</code></li>
+<li><code>git rm [file1] [file2] ...</code></li>
+<li><code>git mv [file-original] [file-renamed]</code></li>
 </ul>
 </li>
-<li>如果$X_1 X_2 .. X_n$是独立的观察结果，则<ul>
-<li>$$X_1 + X_2 + … + X_n \sim N(n\mu, n\sigma^2)$$</li>
+<li>从暂存区到工作区：<ul>
+<li><code>git reset HEAD &lt;filename&gt;</code><ul>
+<li>暂存区中将撤销对应修改，工作区中有等待提交的内容。</li>
+<li>工作区中，若对应文件没有任何修改，则<strong>会</strong>将暂存区中的修改更新到工作区中。</li>
+<li>工作区中，若对应恩建有修改，则<strong>不会</strong>将暂存区中的修改更新到工作区中。</li>
+<li>总的来说，一般会导致<strong>工作区中有等待提交的修改</strong>。</li>
+</ul>
+</li>
+<li><code>git checkout -- &lt;filename&gt;</code><ul>
+<li>这种方法是将暂存区或本地仓库中的内容更新到工作区中，也就是撤销工作区中的更新。</li>
+<li>若暂存区中有等待commit的内容，则会将本地工作区中的内容改变为暂存区中的内容。</li>
+<li>若暂存区中没有数据，则会将本地工作区中内容改变为最新commit的内容。</li>
+<li>总的来说，一般会导致<strong>工作区中没有需要提交的内容</strong>。</li>
 </ul>
 </li>
 </ul>
-<h2 id="正态分布近似代替其他分布"><a href="#正态分布近似代替其他分布" class="headerlink" title="正态分布近似代替其他分布"></a>正态分布近似代替其他分布</h2><ul>
-<li>替代二项分布：<ul>
-<li>如果$X \sim B(n, p)$，且np &gt; 5, nq &gt; 5，则可以使用$X \sim N(np, npq)$近似替代二项分布。</li>
-<li>连续性修正：<ul>
-<li>对于 &lt;= ，要增加一个额外的0.5。</li>
-<li>对于 &gt;= ，要减去一个额外的0.5。</li>
-<li>对于 a &lt;= X &lt;= b，是上述两种的合并，要计算 a - 0.5 &lt;= X &lt;= b + 0.5 。</li>
-<li>对于 &lt; ，要减去一个额外的0.5。</li>
-<li>对于 &gt; ，要增加一个额外的0.5。</li>
+</li>
+<li>从暂存区到本地仓库：commit 命令<ul>
+<li><code>git commit -m [message]</code></li>
+<li><code>git commit [file1] [file2] ... -m [message]</code></li>
+</ul>
+</li>
+<li>从本地仓库到暂存区<ul>
+<li><code>git reset --soft xxx</code></li>
+<li>注意，该命令是撤销 commit，但保留该commit中修改的暂存区信息。</li>
+</ul>
+</li>
+<li>从本地仓库到工作区：<ul>
+<li>与 <code>从暂存区到工作区</code> 中相同的 <code>git checkout -- &lt;filename&gt;</code>。</li>
+<li><code>git reset --hard HEAD^</code>：<ul>
+<li>该命令可以在改变本地仓库的同时，改变工作区内容。</li>
+<li>将工作区内容改变为指定版本的本地仓库内容。</li>
+<li><strong>工作区中没有需要提交的内容</strong>。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>近似泊松分布：<ul>
-<li>如果$X \sim Po(\lambda)$且$\lambda &gt; 15$，则可用$X \sim N(\lambda, \lambda)$进行近似。</li>
+</ul>
+<h3 id="2-3-本地仓库与远程仓库"><a href="#2-3-本地仓库与远程仓库" class="headerlink" title="2.3. 本地仓库与远程仓库"></a>2.3. 本地仓库与远程仓库</h3><ul>
+<li>从本地仓库到远程仓库：push 命令。</li>
+<li>从远程仓库到本地仓库：clone/fetch 命令。<ul>
+<li>pull命令既把远程仓库的内容更新到本地仓库中，又把远程仓库的内容更新到工作区中。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-分支"><a href="#2-4-分支" class="headerlink" title="2.4 分支"></a>2.4 分支</h3><ul>
+<li>分支基本操作：<ul>
+<li>查看本地分支：<code>git branch</code></li>
+<li>新建本地分支：<code>git branch new_branch_name</code></li>
+<li>选择本地分支：<code>git checkout new_branch_name</code></li>
+<li>新建分支并选择：<ul>
+<li><code>git checkout -b new_branch_name</code></li>
+<li>等价于两条命令：<code>git branch new_branch_name</code>, <code>git checkout new_branch_name</code></li>
+</ul>
+</li>
+<li>查看本地与远程分支：<code>git branch -a</code></li>
+<li>删除本地分支：<code>git branch -d new_branch_name</code></li>
+</ul>
+</li>
+<li>简单合并：<ul>
+<li>在branch1执行命令<code>git merge branch2</code>，意思是在branch1的基础上，合并branch2。</li>
+<li>如下图（盗用<a href="https://www.liaoxuefeng.com/wiki/896043488029600/900003767775424" target="_blank" rel="noopener">这里</a>的图），如果branch1是下图中的master，branch2是下图中的dev，则可以直接合并。<br><img src="http://static.zybuluo.com/irving512/98j2th7j149wdply8xdncw3t/image_1dfofv0091o9m1rbb1iis18q61ihe9.png" alt="image_1dfofv0091o9m1rbb1iis18q61ihe9.png-11.1kB"></li>
+</ul>
+</li>
+<li>冲突处理：<ul>
+<li>如下图（盗用<a href="https://www.liaoxuefeng.com/wiki/896043488029600/900004111093344" target="_blank" rel="noopener">这里</a>的图），如果在master中执行<code>git merge feature1</code>，则会提示文件存在冲突，需要手动处理。</li>
+<li>手动处理后，需要重新add文件并commit。<br><img src="http://static.zybuluo.com/irving512/vnbiz0dcl9gvnaabimz18hsh/image_1dfog14vp1i301bl91g1b1inlq14m.png" alt="image_1dfog14vp1i301bl91g1b1inlq14m.png-13.6kB"></li>
+<li>举一个例子说明冲突文件的形式：<ul>
+<li><code>=======</code>前是master分支，后面是feature1分支。</li>
+<li>在VSC中也可以轻松处理。<br><img src="http://static.zybuluo.com/irving512/29l9yfzy6b89iyuvlisgxqkw/image_1dfog7bt815vh11kh1q4811f21mc313.png" alt="image_1dfog7bt815vh11kh1q4811f21mc313.png-14.5kB"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">first line line</span><br><span class="line">second line</span><br><span class="line">=======</span><br><span class="line">first line</span><br><span class="line">second line line</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature1</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-堆栈"><a href="#2-5-堆栈" class="headerlink" title="2.5. 堆栈"></a>2.5. 堆栈</h3><ul>
+<li>作用：当突然有事情，需要临时保存<strong>工作区和暂存区</strong>的数据保存。</li>
+<li>常用命令：<ul>
+<li><code>git stash</code>：将工作区和暂存区的数据保存到堆栈中。</li>
+<li><code>git stash pop</code>：将堆栈中的数据恢复到工作区中。</li>
+<li><code>git stash list</code>：堆栈清单。</li>
 </ul>
 </li>
 </ul>
@@ -444,6 +522,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
+      
 
       
       
@@ -453,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/03/head-first-statisitcs/8/" rel="next" title="深入浅出统计学(8) 正态分布的运用">
-                <i class="fa fa-chevron-left"></i> 深入浅出统计学(8) 正态分布的运用
+              <a href="/2019/07/13/tools/aws/" rel="next" title="AWS小助手">
+                <i class="fa fa-chevron-left"></i> AWS小助手
               </a>
             
           </div>
@@ -462,10 +546,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/07/head-first-statisitcs/10/" rel="prev" title="深入浅出统计学(10) 统计抽样的运用">
-                深入浅出统计学(10) 统计抽样的运用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -615,7 +695,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性变换与独立观察"><span class="nav-text">线性变换与独立观察</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个常用计算公式："><span class="nav-text">几个常用计算公式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正态分布近似代替其他分布"><span class="nav-text">正态分布近似代替其他分布</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-总体介绍"><span class="nav-text">1. 总体介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-常用命令"><span class="nav-text">2. 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本操作"><span class="nav-text">2.1. 基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-工作区、暂存区、本地仓库"><span class="nav-text">2.2. 工作区、暂存区、本地仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-本地仓库与远程仓库"><span class="nav-text">2.3. 本地仓库与远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-分支"><span class="nav-text">2.4 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-堆栈"><span class="nav-text">2.5. 堆栈</span></a></li></ol></li></ol></div>
             
 
           </div>
