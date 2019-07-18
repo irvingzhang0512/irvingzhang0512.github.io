@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Bello, Babble">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CUDA/GPU 相关的基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CUDA&#x2F;GPU 相关">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/tensorflow/cuda-gpu/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="CUDA/GPU 相关的基础知识">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/rh45r2dzay1kbamfjkm2pzvx/image_1dd7p6798vasohs1g2515lb1umc1i.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/9w53g5u9owz5wj5tyjxp9534/image_1dd7p00i71jouov3dk51pl0bhd9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/25xtwzwvfmgoudx6id4c7pf8/image_1dd7p0j31nliig1jpfeohg2dm.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/2rqcouxqqwuh6q6irott86z5/image_1co7kh91d1rfl140e1urq1m3q1r089.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/nhngle6hoefuapetvrvgr3it/image_1co7lcan9itf1g9m93k15o01r07m.png">
+<meta property="og:updated_time" content="2019-07-18T15:00:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CUDA&#x2F;GPU 相关">
+<meta name="twitter:description" content="CUDA/GPU 相关的基础知识">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/rh45r2dzay1kbamfjkm2pzvx/image_1dd7p6798vasohs1g2515lb1umc1i.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/18/tensorflow/cuda-gpu/">
+
+
+
+
+
+  <title>CUDA/GPU 相关 | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/tensorflow/cuda-gpu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CUDA/GPU 相关</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-18T23:00:53+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  CUDA/GPU 相关的基础知识
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>本文记录遇到的GPU/CUDA相关的操作。</li>
+<li>example（把文末的样例放到前面来，方便自己复制……）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">"CUDA_DEVICE_ORDER"</span>]=<span class="string">"PCI_BUS_ID"</span>   <span class="comment"># see issue #152</span></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>]=<span class="string">"0"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">config = tf.ConfigProto()</span><br><span class="line">config.gpu_options.allow_growth = <span class="literal">True</span></span><br><span class="line">config.gpu_options.per_process_gpu_memory_fraction = <span class="literal">True</span></span><br><span class="line">config.log_device_placement = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">tf.enable_eager_execution(config=config)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="1-CUDA"><a href="#1-CUDA" class="headerlink" title="1. CUDA"></a>1. CUDA</h2><h3 id="1-1-安装CUDA以及CUDNN"><a href="#1-1-安装CUDA以及CUDNN" class="headerlink" title="1.1. 安装CUDA以及CUDNN"></a>1.1. 安装CUDA以及CUDNN</h3><ul>
+<li>安装CUDA：<ul>
+<li><a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">cuda下载链接</a></li>
+<li>这里选择 linux - x84_64 - ubuntu - 16.04 - runfile(local)</li>
+<li>在下载连接后有教怎么安装：<ul>
+<li>安装命令 <code>sudo sh cuda_10.1.105_418.39_linux.run</code>。<br><img src="http://static.zybuluo.com/irving512/rh45r2dzay1kbamfjkm2pzvx/image_1dd7p6798vasohs1g2515lb1umc1i.png" alt="image_1dd7p6798vasohs1g2515lb1umc1i.png-38.7kB"></li>
+</ul>
+</li>
+<li><strong>将相关 <code>lib64</code> 目录添加到环境变量 <code>LD_LIBRARY_PATH</code> 中</strong>。</li>
+</ul>
+</li>
+<li>安装cudnn<ul>
+<li><a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cudnn下载链接</a>：稍微有点麻烦，需要登录，下载 cuDNN Library for Linux。</li>
+<li>具体安装可以参考 <a href="https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html" target="_blank" rel="noopener">官方文档</a>，大概思路就是把文件复制到cudn文件夹下。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-多个版本CUDA的切换"><a href="#1-2-多个版本CUDA的切换" class="headerlink" title="1.2. 多个版本CUDA的切换"></a>1.2. 多个版本CUDA的切换</h3><ul>
+<li>参考资料：<a href="https://blog.csdn.net/ksws0292756/article/details/80120561" target="_blank" rel="noopener">CSDN</a></li>
+<li>主要思路：在第二个CUDA时，安装选项<code>Do you want to install a symbolic link at /usr/local/cuda?</code>应该看情况选no。</li>
+<li>切换CUDA版本的本质就是修改<code>/usr/local/cuda</code>的软连接，使其链接到我们想要的cuda版本中。</li>
+<li>修改软连接相关命令：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -rf /usr/local/cuda</span><br><span class="line">sudo ln -s /usr/local/cuda-9.0 /usr/local/cuda</span><br><span class="line">nvcc --version</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="1-3-同一台电脑上多个CUDA版本多个TF版本"><a href="#1-3-同一台电脑上多个CUDA版本多个TF版本" class="headerlink" title="1.3. 同一台电脑上多个CUDA版本多个TF版本"></a>1.3. 同一台电脑上多个CUDA版本多个TF版本</h3><ul>
+<li>碰到的问题：因为一台服务器只有一个默认的cuda版本，所以在安装不同TF版本时往往会报错。<ul>
+<li>例如，tf 1.13.1 需要 cuda 10.0，而 tf 2.0 beta 需要 cuda 10.1 。</li>
+</ul>
+</li>
+<li>解决思路一（<a href="https://medium.com/@peterjussi/multicuda-multiple-versions-of-cuda-on-one-machine-4b6ccda6faae" target="_blank" rel="noopener">参考资料</a>）：<ul>
+<li>由于不同版本中cuda对应的<code>lib64</code>中文件名均与版本相关，所以可以直接将不同版本cuda的<code>lib64</code>文件夹保存到<code>LD_LIBRARY_PATH</code>中。</li>
+<li>举例：<code>export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda-10.1/lib64:$LD_LIBRARY_PATH</code></li>
+</ul>
+</li>
+<li>解决思路二（<a href="https://blog.kovalevskyi.com/multiple-version-of-cuda-libraries-on-the-same-machine-b9502d50ae77" target="_blank" rel="noopener">参考资料</a>）：<ul>
+<li>可以通过conda来实现。</li>
+<li>conda提供一个功能：在进入/退出conda环境时，可以通过设置运行脚本，从而控制系统变量等。</li>
+<li>脚本名称：<ul>
+<li><code>/&lt;path to anaconda&gt;/envs/&lt;env name&gt;/etc/conda/activate.d/</code></li>
+<li><code>/&lt;path to conda&gt;/envs/&lt;env name&gt;/etc/conda/deactivate.d/</code></li>
+</ul>
+</li>
+<li>在<code>activate.sh</code>和<code>deactivate.sh</code>中添加<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># activate.sh</span><br><span class="line">#!/bin/sh</span><br><span class="line">ORIGINAL_LD_LIBRARY_PATH=$LD_LIBRARY_PATH</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda-version/lib64:$LD_LIBRARY_PATH</span><br><span class="line"></span><br><span class="line"># deactivate.sh</span><br><span class="line">#!/bin/sh</span><br><span class="line">export LD_LIBRARY_PATH=$ORIGINAL_LD_LIBRARY_PATH</span><br><span class="line">unset ORIGINAL_LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-查看已经安装好的CUDA以及CUDNN版本："><a href="#1-4-查看已经安装好的CUDA以及CUDNN版本：" class="headerlink" title="1.4. 查看已经安装好的CUDA以及CUDNN版本："></a>1.4. 查看已经安装好的CUDA以及CUDNN版本：</h3><ul>
+<li>查看cuda版本：<code>cat /usr/local/cuda/version.txt</code></li>
+<li>查看cudnn版本：<code>cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</code></li>
+</ul>
+<h3 id="1-5-查看显卡算力"><a href="#1-5-查看显卡算力" class="headerlink" title="1.5. 查看显卡算力"></a>1.5. 查看显卡算力</h3><ul>
+<li><a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">官方链接</a><ul>
+<li>1080Ti / Tesla P4 / Tesla P40 都是 6.1。<br><img src="http://static.zybuluo.com/irving512/9w53g5u9owz5wj5tyjxp9534/image_1dd7p00i71jouov3dk51pl0bhd9.png" alt="image_1dd7p00i71jouov3dk51pl0bhd9.png-65.7kB"><br><img src="http://static.zybuluo.com/irving512/25xtwzwvfmgoudx6id4c7pf8/image_1dd7p0j31nliig1jpfeohg2dm.png" alt="image_1dd7p0j31nliig1jpfeohg2dm.png-86.7kB"></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-6-CUDA-命令"><a href="#1-6-CUDA-命令" class="headerlink" title="1.6. CUDA 命令"></a>1.6. CUDA 命令</h3><ul>
+<li><code>nvidia-smi</code><ul>
+<li><code>GPU</code>: GPU编号，如图中的 <code>0, 1, 2, 3</code>。</li>
+<li><code>Name</code>: GPU型号，如图中的 Tesla P40。</li>
+<li><code>Persistance-M</code>: 持续模式的状态，如图中的<code>Off</code>状态。<ul>
+<li>持续模式的能耗大，但在启动新的GPU应用时，花费时间更少。</li>
+</ul>
+</li>
+<li><code>Fan</code>: 风扇转速，取值从0%到100%。</li>
+<li><code>Temp</code>: 显卡温度，单位为摄氏度。</li>
+<li><code>Perf</code>: 性能状态，从P0到P12。<ul>
+<li>P0代表性能最大（未工作时为P90，达到最大工作限制时为P12）。</li>
+</ul>
+</li>
+<li><code>Pwr:Usage/Cap</code>: 能耗，分别表示当前能耗和能耗上限，如图中的 49W 和 250W。</li>
+<li><code>Bus-Id</code>: 总线相关，不太懂，格式为 domain:bus:device.function。</li>
+<li><code>Disp.A</code>：Display Active，GPU显示是否初始化。 </li>
+<li><code>Memory-Usage</code>: 显存使用率。</li>
+<li><code>Uncoor. ECC</code>: Error Correcting Code，是否开启错误检查和纠正技术。</li>
+<li><code>Volatile GPU-Utils</code>: 浮动GPU使用率。</li>
+<li><code>Compute M.</code>: Compute mode，计算模式，0/DEFAULT，1/EXCLUSIVE_PROCESS，2/PROHIBITED。<br><img src="http://static.zybuluo.com/irving512/2rqcouxqqwuh6q6irott86z5/image_1co7kh91d1rfl140e1urq1m3q1r089.png" alt="image_1co7kh91d1rfl140e1urq1m3q1r089.png-34.3kB"></li>
+</ul>
+</li>
+<li><code>nvidia-smi -L</code><ul>
+<li>查看可用GPU列表。<br><img src="http://static.zybuluo.com/irving512/nhngle6hoefuapetvrvgr3it/image_1co7lcan9itf1g9m93k15o01r07m.png" alt="image_1co7lcan9itf1g9m93k15o01r07m.png-12.4kB"></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-GPU"><a href="#2-GPU" class="headerlink" title="2. GPU"></a>2. GPU</h2><h3 id="2-1-环境变量"><a href="#2-1-环境变量" class="headerlink" title="2.1. 环境变量"></a>2.1. 环境变量</h3><ul>
+<li>环境变量名称 <code>CUDA_VISIBLE_DEVICES</code>。</li>
+<li>Python下设置格式：<ul>
+<li>不使用任何GPU：<code>os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;]=&quot;&quot;</code></li>
+<li>使用单个GPU：<code>os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;]=&quot;0&quot;</code></li>
+<li>使用多个GPU：<code>os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;]=&quot;0,1&quot;</code></li>
+</ul>
+</li>
+<li>一般要配合 <code>os.environ[&quot;CUDA_DEVICE_ORDER&quot;]=&quot;PCI_BUS_ID&quot;</code> 一起使用。<ul>
+<li>原因可以查询 <a href="https://github.com/tensorflow/tensorflow/issues/152" target="_blank" rel="noopener">issue 152</a></li>
+</ul>
+</li>
+<li>关于GPU的编号：<ul>
+<li>不管<code>CUDA_VISIBLE_DEVICES</code>中选择的GPU型号是从多少开始，<code>tf.device</code>中的编号都是从0开始的。</li>
+<li>如 <code>os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;]=&quot;1&quot;</code>，在python中也要使用<code>tf.device(&#39;/gpu:0&#39;)</code> 来使用GPU。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-tf-ConfigProto-配置"><a href="#2-2-tf-ConfigProto-配置" class="headerlink" title="2.2. tf.ConfigProto 配置"></a>2.2. tf.ConfigProto 配置</h3><ul>
+<li>创建 Session 时可以导入配置文件 <code>tf.ConfigProto()</code>，下面介绍该配置文件中内容。</li>
+<li>该 protobuf 文件源码可以参考 <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/protobuf/config.proto" target="_blank" rel="noopener">tensorflow/tensorflow/core/protobuf/config.proto</a>。</li>
+<li><code>ConfigProto</code> 内容如下。<ul>
+<li><code>map&lt;string, int32&gt; device_count</code>：设置每类设备（CPU, GPU）的最大数量。<ul>
+<li>通过这个参数设置GPU数量，显存照样占用，不知道咋回事。</li>
+</ul>
+</li>
+<li><code>int32 inter_op_parallelism_threads</code>：设置多个操作并行运算线程数量。</li>
+<li><code>int32 intra_op_parallelism_threads</code>：设置一个操作内部并行运算的线程数量，0为最优线程数。</li>
+<li><code>bool use_per_session_threads</code>：已经Deprecated了<ul>
+<li>英文文档翻译：近在单线程时有效，如果为True则新建一个线程池，而不是使用全局线程池。</li>
+</ul>
+</li>
+<li><code>repeated ThreadPoolOptionProto session_inter_op_thread_pool</code></li>
+<li><code>int32 placement_period</code></li>
+<li><code>repeated string device_filters</code></li>
+<li><code>GPUOptions gpu_options</code>：GPU相关设置，参考下面。</li>
+<li><code>bool allow_soft_placement</code>：运行设备不满足要求时，自动分配GPU或CPU。<ul>
+<li>GPU上不能完成的设备是否需要转移到CPU上。</li>
+<li>也有其他解释：如果你指定的设备不存在，允许TF自动分配设备。</li>
+</ul>
+</li>
+<li><code>bool log_device_placement</code>：是否观察每个运算所用的设备。<ul>
+<li>若设置为 True，则在运行后会显示。</li>
+<li>好像在jupyter notebook上看不到，但在运行脚本时可以看到。</li>
+</ul>
+</li>
+<li><code>GraphOptions graph_options</code>：计算图设置，不是GPU配置重点，暂不研究。</li>
+<li><code>int64 operation_timeout_in_ms</code></li>
+<li><code>RPCOptions rpc_options</code></li>
+<li><code>ClusterDef cluster_def</code></li>
+<li><code>bool isolate_session_state</code></li>
+<li><code>Experimental experimental</code></li>
+</ul>
+</li>
+<li><code>GPUOptions</code> 内容如下。<ul>
+<li><code>double per_process_gpu_memory_fraction</code>：显存最大占用比例。</li>
+<li><code>bool allow_growth</code>：是否按需分配显存。</li>
+<li><code>string allocator_type</code></li>
+<li><code>int64 deferred_deletion_bytes</code></li>
+<li><code>string visible_device_list</code>：在 visible 的GPU中进行编号映射。<ul>
+<li>如将编号为5的GPU映射为<code>/gpu:0</code>，编号为2的GPU映射为<code>/gpu:1</code>，则该字段应该对应为<code>5,2</code>。</li>
+<li>这里GPU的编号，指的是经过 <code>CUDA_VISIBLE_DEVICES</code> 之后GPU的编号，而不是<code>nvidia-smi</code>中GPU的编号。</li>
+</ul>
+</li>
+<li><code>int32 polling_active_delay_usecs</code></li>
+<li><code>int32 polling_inactive_delay_msecs</code></li>
+<li><code>bool force_gpu_compatible</code></li>
+<li><code>Experimental experimental</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-example"><a href="#2-3-example" class="headerlink" title="2.3. example"></a>2.3. example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">"CUDA_DEVICE_ORDER"</span>]=<span class="string">"PCI_BUS_ID"</span>   <span class="comment"># see issue #152</span></span><br><span class="line">os.environ[<span class="string">"CUDA_VISIBLE_DEVICES"</span>]=<span class="string">"0"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">config = tf.ConfigProto()</span><br><span class="line">config.gpu_options.allow_growth = <span class="literal">True</span></span><br><span class="line">config.gpu_options.per_process_gpu_memory_fraction = <span class="literal">True</span></span><br><span class="line">config.log_device_placement = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">tf.enable_eager_execution(config=config)</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/14/tools/git/" rel="next" title="git">
+                <i class="fa fa-chevron-left"></i> git
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-CUDA"><span class="nav-text">1. CUDA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装CUDA以及CUDNN"><span class="nav-text">1.1. 安装CUDA以及CUDNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-多个版本CUDA的切换"><span class="nav-text">1.2. 多个版本CUDA的切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-同一台电脑上多个CUDA版本多个TF版本"><span class="nav-text">1.3. 同一台电脑上多个CUDA版本多个TF版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-查看已经安装好的CUDA以及CUDNN版本："><span class="nav-text">1.4. 查看已经安装好的CUDA以及CUDNN版本：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-查看显卡算力"><span class="nav-text">1.5. 查看显卡算力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-CUDA-命令"><span class="nav-text">1.6. CUDA 命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-GPU"><span class="nav-text">2. GPU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-环境变量"><span class="nav-text">2.1. 环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-tf-ConfigProto-配置"><span class="nav-text">2.2. tf.ConfigProto 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-example"><span class="nav-text">2.3. example</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
