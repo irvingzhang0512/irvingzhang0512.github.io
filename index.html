@@ -326,19 +326,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/father/" itemprop="url" rel="index">
-                    <span itemprop="name">father</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/father/son/" itemprop="url" rel="index">
-                    <span itemprop="name">son</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -375,85 +364,14 @@
 
       
         
-          
-            <a id="more"></a>
-
-<h2 id="1-apt-命令"><a href="#1-apt-命令" class="headerlink" title="1. apt 命令"></a>1. apt 命令</h2><h3 id="1-1-apt-get报错"><a href="#1-1-apt-get报错" class="headerlink" title="1.1. apt-get报错"></a>1.1. apt-get报错</h3><ul>
-<li>错误为：<code>media change: please insert the disc labeled</code></li>
-<li>解决方案：<code>sudo sed -i &#39;/cdrom/d&#39; /etc/apt/sources.list</code></li>
-</ul>
-<h3 id="1-2-设置-apt-get-源"><a href="#1-2-设置-apt-get-源" class="headerlink" title="1.2. 设置 apt-get 源"></a>1.2. 设置 apt-get 源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 操作sources.list文件</span><br><span class="line">sudo vim /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"># 在sources.list中添加阿里云的源</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse  </span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse  </span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse  </span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse  </span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse  </span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse  </span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse  </span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse  </span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse  </span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-apt命令举例"><a href="#1-3-apt命令举例" class="headerlink" title="1.3. apt命令举例"></a>1.3. apt命令举例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apt install</span><br><span class="line">apt remove</span><br><span class="line">apt purge  # 删除软件和配置文件</span><br><span class="line">apt update</span><br><span class="line">apt upgrade</span><br><span class="line">apt autoremove</span><br><span class="line">apt full-upgrade</span><br><span class="line">apt search</span><br><span class="line">apt show  # 显示安装细节</span><br><span class="line">apt list  # 安装软件列表</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-与dpkg之间的比较"><a href="#1-4-与dpkg之间的比较" class="headerlink" title="1.4. 与dpkg之间的比较"></a>1.4. 与dpkg之间的比较</h3><ul>
-<li>dpkg用来安装deb文件，不解决模块依赖关系，不关心ubuntu软件仓库内的软件。</li>
-<li>apt解决安装模块依赖问题，会咨询软件仓库，不能安装本地deb文件，建立在dpkg之上。</li>
-</ul>
-<h2 id="2-Anaconda安装"><a href="#2-Anaconda安装" class="headerlink" title="2. Anaconda安装"></a>2. Anaconda安装</h2><ul>
-<li>从<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">清华源</a>中下载sh文件。</li>
-<li>执行<code>bash xxx.sh</code>进行安装，一路<code>回车</code>+<code>yes</code>安装成功。</li>
-</ul>
-<h2 id="3-设置ssh服务器"><a href="#3-设置ssh服务器" class="headerlink" title="3. 设置ssh服务器"></a>3. 设置ssh服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 安装openssh-server</span><br><span class="line">sudo apt-get install openssh-server</span><br><span class="line"></span><br><span class="line"># 启动ssh</span><br><span class="line">/etc/init.d/ssh restart</span><br><span class="line"></span><br><span class="line"># 确认ssh-server已经工作</span><br><span class="line">netstat -tlp</span><br><span class="line"></span><br><span class="line"># 在别的机器上使用ssh登录</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-先安装win10-再安装ubuntu后，找不到win10引导"><a href="#4-先安装win10-再安装ubuntu后，找不到win10引导" class="headerlink" title="4. 先安装win10 再安装ubuntu后，找不到win10引导"></a>4. 先安装win10 再安装ubuntu后，找不到win10引导</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 参考 http://blog.csdn.net/JUNJUN_ZHAO/article/details/52103455</span><br><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-teamviewer的使用"><a href="#5-teamviewer的使用" class="headerlink" title="5. teamviewer的使用"></a>5. teamviewer的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 1. 安装</span><br><span class="line">sudo dpkg -i xxx.deb</span><br><span class="line">sudo apt-get -f install</span><br><span class="line"></span><br><span class="line"># 2. 使用</span><br><span class="line"># 695870910</span><br><span class="line">sudo teamviewer daemon stop</span><br><span class="line">sudo teamviewer passwd zyydcyy</span><br><span class="line">sudo teamviewer daemon start</span><br><span class="line">teamviewer info</span><br><span class="line"></span><br><span class="line"># 3. 进入win的teamviewer后，点击ctrl+alt+f2进入命令行模式</span><br></pre></td></tr></table></figure>
-
-<h2 id="6-ngrok"><a href="#6-ngrok" class="headerlink" title="6. ngrok"></a>6. ngrok</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># http://e064d436.ngrok.io</span><br><span class="line"></span><br><span class="line"># 1. 在官网中下载 https://ngrok.com/</span><br><span class="line"># 2. unzip</span><br><span class="line"># 3. 授权</span><br><span class="line">./ngrok authtoken</span><br><span class="line"></span><br><span class="line"># 4. 启用</span><br><span class="line">./ngrok http 80</span><br><span class="line">./ngrok tcp 22</span><br></pre></td></tr></table></figure>
-
-<h2 id="7-配置pip源"><a href="#7-配置pip源" class="headerlink" title="7. 配置pip源"></a>7. 配置pip源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 修改文件 ~/.pip/pip.conf</span><br><span class="line">[global]</span><br><span class="line">index-url = https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-
-<h2 id="8-开放端口"><a href="#8-开放端口" class="headerlink" title="8. 开放端口"></a>8. 开放端口</h2><ul>
-<li><p>文件：<code>/etc/sysconfig/iptables</code></p>
-</li>
-<li><p>需要添加的数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 开启8080端口</span><br><span class="line">-A INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其他操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 重启防火墙</span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="9-设置DNS服务器"><a href="#9-设置DNS服务器" class="headerlink" title="9. 设置DNS服务器"></a>9. 设置DNS服务器</h2><ul>
-<li><p>2.1. 治标不治本的方法</p>
-<ul>
-<li>文件：<code>/etc/resolv.conf</code></li>
-<li>问题：在服务器重启后，会重置该文件，因此该方法治标不治本。</li>
-<li>需要添加的内容：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># nameserver就是设置DNS服务器</span><br><span class="line">nameserver 10.0.30.1</span><br><span class="line">nameserver 10.0.30.7</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>2.2. 根本解决方法</p>
-<ul>
-<li>文件：<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code></li>
-<li><a href="http://lsscto.blog.51cto.com/779396/762240" target="_blank" rel="noopener">参考</a></li>
-<li>需要添加的内容：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 在文件末尾添加以下内容，设置DNS服务器</span><br><span class="line">DNS1=10.0.30.1</span><br><span class="line">DNS2=10.0.30.7</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="10-查看centos版本"><a href="#10-查看centos版本" class="headerlink" title="10. 查看centos版本"></a>10. 查看centos版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/version</span><br></pre></td></tr></table></figure>
-
-<h2 id="11-开机启动脚本"><a href="#11-开机启动脚本" class="headerlink" title="11. 开机启动脚本"></a>11. 开机启动脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/rc.local</span><br><span class="line"></span><br><span class="line">#!/bin/sh</span><br><span class="line">#</span><br><span class="line"># This script will be executed *after* all the other init scripts.</span><br><span class="line"># You can put your own initialization stuff in here if you don&apos;t</span><br><span class="line"># want to do the full Sys V style init stuff.</span><br></pre></td></tr></table></figure>
-
-<h2 id="12-查看进程相关"><a href="#12-查看进程相关" class="headerlink" title="12. 查看进程相关"></a>12. 查看进程相关</h2><ul>
-<li>查看进程命令：<code>ps aux</code></li>
-<li>查看进程对应端口：<ul>
-<li>先要找到进程对应的PID</li>
-<li>再运行下面命令：<code>netstat -nap | grep {PID}</code></li>
-</ul>
-</li>
-<li>查找运行进程更多信息：查看路径<code>/proc/{PID}</code><ul>
-<li><code>cwd</code>链接到执行进程的运行目录。</li>
-<li><code>exe</code>链接到命令的完整路径。</li>
-<li>通过<code>cat cmdline</code>可以查看当前进程的启动命令。</li>
-</ul>
-</li>
-</ul>
-
-          
+          Ubuntu中用到的几个功能描述
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/19/linux/linux-utils/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1930,7 +1848,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1941,7 +1859,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
