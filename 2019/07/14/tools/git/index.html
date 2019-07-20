@@ -91,6 +91,9 @@
 <meta property="og:image" content="http://static.zybuluo.com/irving512/98j2th7j149wdply8xdncw3t/image_1dfofv0091o9m1rbb1iis18q61ihe9.png">
 <meta property="og:image" content="http://static.zybuluo.com/irving512/vnbiz0dcl9gvnaabimz18hsh/image_1dfog14vp1i301bl91g1b1inlq14m.png">
 <meta property="og:image" content="http://static.zybuluo.com/irving512/29l9yfzy6b89iyuvlisgxqkw/image_1dfog7bt815vh11kh1q4811f21mc313.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/zzmmri4rm92imis7e5j3esxw/image_1dg44rn191a7s1eoc70jtd0kjp9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/1ig8q74y236ywinx3va2kp1y/image_1dg44u5lhlns142e1cv01cfi6f61j.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/4xwqmzgscofc8lnjse9arwxq/image_1dg44vpprnm51c3410rovgn170d20.png">
 <meta property="og:updated_time" content="2019-07-14T15:31:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git">
@@ -373,7 +376,6 @@
       
         <a id="more"></a>
 
-
 <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li><a href="https://git-scm.com/" target="_blank" rel="noopener">官网</a>相关资料<ul>
 <li><a href="https://git-scm.com/doc" target="_blank" rel="noopener">官方文档</a></li>
@@ -493,6 +495,21 @@
 <li><code>git stash</code>：将工作区和暂存区的数据保存到堆栈中。</li>
 <li><code>git stash pop</code>：将堆栈中的数据恢复到工作区中。</li>
 <li><code>git stash list</code>：堆栈清单。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-碰到的一些实际情况"><a href="#3-碰到的一些实际情况" class="headerlink" title="3. 碰到的一些实际情况"></a>3. 碰到的一些实际情况</h2><h3 id="3-1-folk后更新最新代码"><a href="#3-1-folk后更新最新代码" class="headerlink" title="3.1. folk后更新最新代码"></a>3.1. folk后更新最新代码</h3><ul>
+<li>方法一 - Github中鼠标操作<ul>
+<li>点击folk库中的 new pull request。<br><img src="http://static.zybuluo.com/irving512/zzmmri4rm92imis7e5j3esxw/image_1dg44rn191a7s1eoc70jtd0kjp9.png" alt="image_1dg44rn191a7s1eoc70jtd0kjp9.png-46.3kB"></li>
+<li>左边改为folk的结果，右边改为原始github repo，然后点击 create pull request。<br><img src="http://static.zybuluo.com/irving512/1ig8q74y236ywinx3va2kp1y/image_1dg44u5lhlns142e1cv01cfi6f61j.png" alt="image_1dg44u5lhlns142e1cv01cfi6f61j.png-47.6kB"></li>
+<li>最后 create pull request 即可。<br><img src="http://static.zybuluo.com/irving512/4xwqmzgscofc8lnjse9arwxq/image_1dg44vpprnm51c3410rovgn170d20.png" alt="image_1dg44vpprnm51c3410rovgn170d20.png-78.3kB"></li>
+</ul>
+</li>
+<li>方法二 - 命令：<ul>
+<li><code>git remote add upstream &lt;original repo url&gt;</code></li>
+<li><code>git fetch upstream</code></li>
+<li><code>git merge upstream/master</code></li>
+<li><code>git push origin master</code></li>
 </ul>
 </li>
 </ul>
@@ -617,7 +634,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -628,7 +645,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -639,7 +656,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -688,7 +705,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-总体介绍"><span class="nav-text">1. 总体介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-常用命令"><span class="nav-text">2. 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本操作"><span class="nav-text">2.1. 基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-工作区、暂存区、本地仓库"><span class="nav-text">2.2. 工作区、暂存区、本地仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-本地仓库与远程仓库"><span class="nav-text">2.3. 本地仓库与远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-分支"><span class="nav-text">2.4 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-堆栈"><span class="nav-text">2.5. 堆栈</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-总体介绍"><span class="nav-text">1. 总体介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-常用命令"><span class="nav-text">2. 常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本操作"><span class="nav-text">2.1. 基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-工作区、暂存区、本地仓库"><span class="nav-text">2.2. 工作区、暂存区、本地仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-本地仓库与远程仓库"><span class="nav-text">2.3. 本地仓库与远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-分支"><span class="nav-text">2.4 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-堆栈"><span class="nav-text">2.5. 堆栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-碰到的一些实际情况"><span class="nav-text">3. 碰到的一些实际情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-folk后更新最新代码"><span class="nav-text">3.1. folk后更新最新代码</span></a></li></ol></li></ol></div>
             
 
           </div>
