@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Bello, Babble">
+  <meta name="keywords" content="Latex,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="《Effective Python》第十三章">
+<meta name="description" content="用到的Latex功能">
+<meta name="keywords" content="Latex">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出统计学(13) 假设检验的运用">
-<meta property="og:url" content="http://yoursite.com/2018/05/18/head-first-statisitcs/13/index.html">
+<meta property="og:title" content="Latex 速查">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/tools/latex-manual/index.html">
 <meta property="og:site_name" content="清欢小屋">
-<meta property="og:description" content="《Effective Python》第十三章">
+<meta property="og:description" content="用到的Latex功能">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-18T15:51:32.000Z">
+<meta property="og:updated_time" content="2019-07-27T16:25:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出统计学(13) 假设检验的运用">
-<meta name="twitter:description" content="《Effective Python》第十三章">
+<meta name="twitter:title" content="Latex 速查">
+<meta name="twitter:description" content="用到的Latex功能">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/18/head-first-statisitcs/13/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/28/tools/latex-manual/">
 
 
 
 
 
-  <title>深入浅出统计学(13) 假设检验的运用 | 清欢小屋</title>
+  <title>Latex 速查 | 清欢小屋</title>
   
 
 
@@ -272,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/head-first-statisitcs/13/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/tools/latex-manual/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Irving">
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入浅出统计学(13) 假设检验的运用</h1>
+          <h1 class="post-title" itemprop="name headline">Latex 速查</h1>
         
 
         <div class="post-meta">
@@ -301,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-18T23:51:32+08:00">
-                2018-05-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-28T00:25:08+08:00">
+                2019-07-28
               </time>
             
 
@@ -324,19 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
                   </a>
                 </span>
 
@@ -359,7 +349,7 @@
 
           
               <div class="post-description">
-                  《Effective Python》第十三章
+                  用到的Latex功能
               </div>
           
 
@@ -378,67 +368,274 @@
       
         <a id="more"></a>
 
-<h2 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h2><ul>
-<li>目标：判断一个假设是否可信。</li>
-<li>假设检验：做出假设或断言，对照证据进行检验。</li>
-<li>步骤：<ul>
-<li>确定要进行检验的假设。</li>
-<li>选择检验统计量。</li>
-<li>确定用于做出决策的拒绝域。</li>
-<li>求出检验统计量的p值。</li>
-<li>查看样本结果是否位于拒绝域内。</li>
-<li>做出决策。</li>
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li><a href="http://www.mohu.org/info/lshort-cn.pdf" target="_blank" rel="noopener">《一份不太简短的 LATEX2e 介绍》</a>PDF下载。</li>
 </ul>
-</li>
-</ul>
-<h2 id="详细过程"><a href="#详细过程" class="headerlink" title="详细过程"></a>详细过程</h2><ul>
-<li>确定假设<ul>
-<li>所需要检验的断言被成为原假设。</li>
-<li>与原假设对立的被成为备择假设。</li>
-<li>原假设与备择假设不用覆盖所有可能。</li>
-</ul>
-</li>
-<li>选择检验统计量<ul>
-<li>检验统计量：用于对假设进行检验的统计量，是与该检验关系最为密切的统计量。</li>
-</ul>
-</li>
-<li>确定拒绝域<ul>
-<li>拒绝域：一组数值，给出反驳元假设的最极端证据。</li>
-<li>为求拒绝域，先定显著性水平，即所度量的一种愿望，希望在样本结果不可能程度达到多大时，就拒绝原假设，一般选择5%或1%。</li>
-<li>检验分类：<ul>
-<li>单尾检验：检验的拒绝域在可能的数据集的一侧。</li>
-<li>双尾检验：拒绝域一分为二位于数据集的两侧。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>求出p值<ul>
-<li>定义：某个小于或等于拒绝域方向上的一个样本数值的概率。</li>
-<li>为取得样本中的各种结果或取得拒绝域方向上的某些更为极端的结果的概率。</li>
-</ul>
-</li>
-<li>样本结果位于拒绝域中吗。</li>
-<li>做出决策。</li>
-</ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li>即使证据很有力，也无法确定断言是错误的。</li>
-<li>假设检验可能出现的错误有两种：<ul>
-<li>第一类错误：错误地拒绝真是假设。<ul>
-<li>$P(第一类错误) = \alpha$，其中$\alpha$为假设的显著性水平。</li>
-</ul>
-</li>
-<li>第二类错误：错误地接受假的原假设。<ul>
-<li>$P(第二类错误) = \beta$</li>
-<li>计算过程：检查是否拥有$H_1$的特定数值，求检验拒绝域以外的数值范围，假定$H_1$为真，求得到这些数值的概率。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>功效：在$H_0$为假的情况下，拒绝$H_0$的概率。<ul>
-<li>$功效 = 1 - \beta$</li>
-</ul>
-</li>
-</ul>
+<h2 id="1-基本符号"><a href="#1-基本符号" class="headerlink" title="1. 基本符号"></a>1. 基本符号</h2><h3 id="1-1-点乘"><a href="#1-1-点乘" class="headerlink" title="1.1. 点乘"></a>1.1. 点乘</h3><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">记号</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">小点</td>
+<td align="center"><code>\cdot</code></td>
+<td align="center">$a \cdot b = 0$</td>
+</tr>
+<tr>
+<td align="center">大点</td>
+<td align="center"><code>\bullet</code></td>
+<td align="center">$a \bullet b = 0$</td>
+</tr>
+</tbody></table>
+<h2 id="1-2-排版相关"><a href="#1-2-排版相关" class="headerlink" title="1.2. 排版相关"></a>1.2. 排版相关</h2><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">记号</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">换行</td>
+<td align="center"><code>//</code></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<h3 id="1-2-一些常用"><a href="#1-2-一些常用" class="headerlink" title="1.2. 一些常用"></a>1.2. 一些常用</h3><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">记号</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">累加</td>
+<td align="center"><code>\sum</code></td>
+<td align="center">$\sum_{i=0}^n$</td>
+</tr>
+<tr>
+<td align="center">连乘</td>
+<td align="center"><code>\prod</code></td>
+<td align="center">$\prod_{i=0}^n$</td>
+</tr>
+<tr>
+<td align="center">偏导</td>
+<td align="center"><code>\partial</code></td>
+<td align="center">$\frac{\partial}{\partial x}f(x, y)$</td>
+</tr>
+</tbody></table>
+<h2 id="2-矩阵符号"><a href="#2-矩阵符号" class="headerlink" title="2. 矩阵符号"></a>2. 矩阵符号</h2><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">记号</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">无括号矩阵</td>
+<td align="center"><code>\begin{matrix} \end{matrix}</code></td>
+<td align="center">$\begin{matrix} 0 &amp; 1 \ 1 &amp; 0 \end{matrix}$</td>
+</tr>
+<tr>
+<td align="center">圆括号矩阵</td>
+<td align="center"><code>\begin{pmatrix} \end{pmatrix}</code></td>
+<td align="center">$\begin{pmatrix} 0 &amp; -i \ i &amp; 0 \end{pmatrix}$</td>
+</tr>
+<tr>
+<td align="center">中括号矩阵</td>
+<td align="center"><code>\begin{bmatrix} \end{bmatrix}</code></td>
+<td align="center">$\begin{bmatrix} 0 &amp; -1 \ 1 &amp; 0 \end{bmatrix}$</td>
+</tr>
+<tr>
+<td align="center">大括号矩阵</td>
+<td align="center"><code>\begin{Bmatrix} \end{Bmatrix}</code></td>
+<td align="center">$\begin{Bmatrix} 1 &amp; 0 \ 0 &amp; -1 \end{Bmatrix}$</td>
+</tr>
+<tr>
+<td align="center">行列式（绝对值）</td>
+<td align="center"><code>\begin{vmatrix} \end{vmatrix}</code></td>
+<td align="center">$\begin{vmatrix} a &amp; b \ c &amp; d \end{vmatrix}$</td>
+</tr>
+<tr>
+<td align="center">范数</td>
+<td align="center"><code>\begin{Vmatrix} \end{Vmatrix}</code></td>
+<td align="center">$\begin{Vmatrix} i &amp; 0 \ 0 &amp; -i \end{Vmatrix}$</td>
+</tr>
+<tr>
+<td align="center">矩阵不同行数据分割</td>
+<td align="center"><code>&amp;</code></td>
+<td align="center">/</td>
+</tr>
+<tr>
+<td align="center">矩阵不同行数据分割</td>
+<td align="center"><code>\\</code></td>
+<td align="center">/</td>
+</tr>
+</tbody></table>
+<h2 id="3-希腊字母"><a href="#3-希腊字母" class="headerlink" title="3. 希腊字母"></a>3. 希腊字母</h2><table>
+<thead>
+<tr>
+<th align="center">英文</th>
+<th align="center">小写</th>
+<th align="center">大写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">alpha</td>
+<td align="center">$\alpha$</td>
+<td align="center">$A$</td>
+</tr>
+<tr>
+<td align="center">beta</td>
+<td align="center">$\beta$</td>
+<td align="center">$B$</td>
+</tr>
+<tr>
+<td align="center">gamma</td>
+<td align="center">$\gamma$</td>
+<td align="center">$\Gamma$</td>
+</tr>
+<tr>
+<td align="center">delta</td>
+<td align="center">$\delta$</td>
+<td align="center">$\Delta$</td>
+</tr>
+<tr>
+<td align="center">epsilon</td>
+<td align="center">$\epsilon$</td>
+<td align="center">$E$</td>
+</tr>
+<tr>
+<td align="center">varepsilon</td>
+<td align="center">$\varepsilon$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">zeta</td>
+<td align="center">$\zeta$</td>
+<td align="center">$Z$</td>
+</tr>
+<tr>
+<td align="center">eta</td>
+<td align="center">$\eta$</td>
+<td align="center">$H$</td>
+</tr>
+<tr>
+<td align="center">theta</td>
+<td align="center">$\theta$</td>
+<td align="center">$\Theta$</td>
+</tr>
+<tr>
+<td align="center">vartheta</td>
+<td align="center">$\vartheta$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">iota</td>
+<td align="center">$\iota$</td>
+<td align="center">$I$</td>
+</tr>
+<tr>
+<td align="center">kappa</td>
+<td align="center">$\kappa$</td>
+<td align="center">$K$</td>
+</tr>
+<tr>
+<td align="center">lambda</td>
+<td align="center">$\lambda$</td>
+<td align="center">$\Lambda$</td>
+</tr>
+<tr>
+<td align="center">mu</td>
+<td align="center">$\mu$</td>
+<td align="center">$M$</td>
+</tr>
+<tr>
+<td align="center">nu</td>
+<td align="center">$\nu$</td>
+<td align="center">$N$</td>
+</tr>
+<tr>
+<td align="center">xi</td>
+<td align="center">$\xi$</td>
+<td align="center">$\Xi$</td>
+</tr>
+<tr>
+<td align="center">omicron</td>
+<td align="center">$\omicron$</td>
+<td align="center">$O$</td>
+</tr>
+<tr>
+<td align="center">pi</td>
+<td align="center">$\pi$</td>
+<td align="center">$\Pi$</td>
+</tr>
+<tr>
+<td align="center">varpi</td>
+<td align="center">$\varpi$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">rho</td>
+<td align="center">$\rho$</td>
+<td align="center">$P$</td>
+</tr>
+<tr>
+<td align="center">varrho</td>
+<td align="center">$\varrho$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">sigma</td>
+<td align="center">$\sigma$</td>
+<td align="center">$\Sigma$</td>
+</tr>
+<tr>
+<td align="center">varsigma</td>
+<td align="center">$\varsigma$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">tau</td>
+<td align="center">$\tau$</td>
+<td align="center">$T$</td>
+</tr>
+<tr>
+<td align="center">upsilon</td>
+<td align="center">$\upsilon$</td>
+<td align="center">$\Upsilon$</td>
+</tr>
+<tr>
+<td align="center">phi</td>
+<td align="center">$\phi$</td>
+<td align="center">$\Phi$</td>
+</tr>
+<tr>
+<td align="center">varphi</td>
+<td align="center">$\varphi$</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">chi</td>
+<td align="center">$\chi$</td>
+<td align="center">X</td>
+</tr>
+<tr>
+<td align="center">psi</td>
+<td align="center">$\psi$</td>
+<td align="center">$\Psi$</td>
+</tr>
+<tr>
+<td align="center">omega</td>
+<td align="center">$\omega$</td>
+<td align="center">$\Omega$</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -454,6 +651,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Latex/" rel="tag"># Latex</a>
+          
+        </div>
+      
 
       
       
@@ -463,8 +666,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/09/head-first-statisitcs/12/" rel="next" title="深入浅出统计学(12) 置信区间的构建">
-                <i class="fa fa-chevron-left"></i> 深入浅出统计学(12) 置信区间的构建
+              <a href="/2019/07/19/linux/linux-utils/" rel="next" title="Ubuntu运维小王子诞生记">
+                <i class="fa fa-chevron-left"></i> Ubuntu运维小王子诞生记
               </a>
             
           </div>
@@ -472,10 +675,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/18/head-first-statisitcs/14/" rel="prev" title="深入浅出统计学(14) $\chi^2$分布">
-                深入浅出统计学(14) $\chi^2$分布 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -625,7 +824,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#假设检验"><span class="nav-text">假设检验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细过程"><span class="nav-text">详细过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本符号"><span class="nav-text">1. 基本符号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-点乘"><span class="nav-text">1.1. 点乘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-排版相关"><span class="nav-text">1.2. 排版相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-一些常用"><span class="nav-text">1.2. 一些常用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-矩阵符号"><span class="nav-text">2. 矩阵符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-希腊字母"><span class="nav-text">3. 希腊字母</span></a></li></ol></div>
             
 
           </div>
