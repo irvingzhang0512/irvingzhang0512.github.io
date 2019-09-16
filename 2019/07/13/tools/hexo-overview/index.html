@@ -88,6 +88,7 @@
 <meta property="og:description" content="Hexo使用指北">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://static.zybuluo.com/irving512/5d5mtniqkz03sdop717xjeq1/image_1cbg9al9v1pcs19kl149g1tn128d9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/wnv8vt0khqr57cpm07lf1snj/image_1dkt47ulvsok19d19nvv7tlol9.png">
 <meta property="og:updated_time" content="2019-07-13T04:59:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo 概览">
@@ -296,6 +297,7 @@
         
 
         <div class="post-meta">
+          
           <span class="post-time">
             
               <span class="post-meta-item-icon">
@@ -348,6 +350,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
 
           
               <div class="post-description">
@@ -377,6 +410,7 @@
 </ul>
 </li>
 <li><a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">Next主题官网</a></li>
+<li><strong><a href="https://hexo-guide.readthedocs.io/zh_CN/latest/index.html" target="_blank" rel="noopener">hexo指南(推荐)</a></strong></li>
 </ul>
 <h2 id="1-简单安装与常用命令"><a href="#1-简单安装与常用命令" class="headerlink" title="1. 简单安装与常用命令"></a>1. 简单安装与常用命令</h2><h3 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1. 安装"></a>1.1. 安装</h3><ul>
 <li>总体思路：<ul>
@@ -487,7 +521,6 @@
 
 </li>
 </ul>
-<hr>
 <h2 id="3-页面与写作"><a href="#3-页面与写作" class="headerlink" title="3. 页面与写作"></a>3. 页面与写作</h2><h3 id="3-1-页面"><a href="#3-1-页面" class="headerlink" title="3.1. 页面"></a>3.1. 页面</h3><ul>
 <li>页面和普通文章的区别：<ul>
 <li>所在位置：<ul>
@@ -517,22 +550,45 @@
 </ul>
 <p><img src="http://static.zybuluo.com/irving512/5d5mtniqkz03sdop717xjeq1/image_1cbg9al9v1pcs19kl149g1tn128d9.png" alt="image_1cbg9al9v1pcs19kl149g1tn128d9.png-24.5kB"></p>
 <h3 id="3-2-写作"><a href="#3-2-写作" class="headerlink" title="3.2. 写作"></a>3.2. 写作</h3><ul>
-<li>Front-matter：<ul>
+<li><p>Front-matter：</p>
+<ul>
 <li><a href="https://hexo.io/zh-cn/docs/front-matter" target="_blank" rel="noopener">Hexo文档 - Front-matter</a></li>
 <li>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量。</li>
 <li>其中 <code>description</code> 会显示到首页中。</li>
-<li>下面举例模版中的内容</li>
-</ul>
+<li>下面举例模版中的内容<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">updated: &#123;&#123; date &#125;&#125;</span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">- </span>father</span><br><span class="line"><span class="bullet">- </span>son</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">- </span>tag1</span><br><span class="line"><span class="bullet">- </span>tag2</span><br><span class="line">description: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">updated: &#123;&#123; date &#125;&#125;</span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">- </span>father</span><br><span class="line"><span class="bullet">- </span>son</span><br><span class="line">tags:</span><br><span class="line"><span class="bullet">- </span>tag1</span><br><span class="line"><span class="bullet">- </span>tag2</span><br><span class="line">description: </span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
+</li>
+<li><p>关于more的用法</p>
 <ul>
-<li>关于more的用法<ul>
 <li>在文章列表中默认隐藏<code>&lt;!-- more --&gt;</code>后的内容。</li>
 </ul>
 </li>
 </ul>
+<h2 id="4-其他"><a href="#4-其他" class="headerlink" title="4. 其他"></a>4. 其他</h2><h3 id="4-1-文章置顶"><a href="#4-1-文章置顶" class="headerlink" title="4.1. 文章置顶"></a>4.1. 文章置顶</h3><ul>
+<li>参考<a href="https://blog.csdn.net/qwerty200696/article/details/79010629" target="_blank" rel="noopener">这篇文章</a>。</li>
+<li>使用插件<a href="https://github.com/netcan/hexo-generator-index-pin-top" target="_blank" rel="noopener">hexo-generator-index-pin-top</a></li>
+<li>流程：<ul>
+<li>第一步，卸载原插件：<code>$ npm uninstall hexo-generator-index --save</code>。</li>
+<li>第二步，安装新插件：<code>$ npm install hexo-generator-index-pin-top --save</code>。</li>
+<li>第三步，在文章开头 Front-matter 中添加 <code>top: True</code>。</li>
+</ul>
+</li>
+<li>在首页显示置顶标志：<ul>
+<li>修改 <code>./themes/next/layout/_macro/post.swig</code> 文件。</li>
+<li>在 <code>&lt;div class=&quot;post-meta&quot;&gt;</code> 下添加以下代码。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if post.top %&#125;</span><br><span class="line">    &lt;i class=&quot;fa fa-thumb-tack&quot;&gt;&lt;/i&gt;</span><br><span class="line">    &lt;font color=7D26CD&gt;置顶&lt;/font&gt;</span><br><span class="line">    &lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-文章字数统计"><a href="#4-2-文章字数统计" class="headerlink" title="4.2. 文章字数统计"></a>4.2. 文章字数统计</h3><ul>
+<li>next 主题默认使用 <code>hexo-wordcount</code> 插件。</li>
+<li>在主题配置文件中有以下配置：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Post wordcount display settings</span><br><span class="line"># Dependencies: https://github.com/willin/hexo-wordcount</span><br><span class="line">post_wordcount:</span><br><span class="line">  item_text: true # 是否有文字说明，即有没有&quot;字数统计&quot;和&quot;阅读时长&quot;这几个字</span><br><span class="line">  wordcount: true # 字数统计</span><br><span class="line">  min2read: true # 最少阅读时间</span><br><span class="line">  totalcount: false</span><br><span class="line">  separated_meta: true # 要不要另起一行</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><img src="http://static.zybuluo.com/irving512/wnv8vt0khqr57cpm07lf1snj/image_1dkt47ulvsok19d19nvv7tlol9.png" alt="image_1dkt47ulvsok19d19nvv7tlol9.png-8.7kB"></p>
 
       
     </div>
@@ -725,7 +781,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简单安装与常用命令"><span class="nav-text">1. 简单安装与常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装"><span class="nav-text">1.1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-常用命令"><span class="nav-text">1.2. 常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-简单配置"><span class="nav-text">2. 简单配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-站点配置文件"><span class="nav-text">2.1. 站点配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Next配置文件"><span class="nav-text">2.2. Next配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-页面与写作"><span class="nav-text">3. 页面与写作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-页面"><span class="nav-text">3.1. 页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-写作"><span class="nav-text">3.2. 写作</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简单安装与常用命令"><span class="nav-text">1. 简单安装与常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装"><span class="nav-text">1.1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-常用命令"><span class="nav-text">1.2. 常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-简单配置"><span class="nav-text">2. 简单配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-站点配置文件"><span class="nav-text">2.1. 站点配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Next配置文件"><span class="nav-text">2.2. Next配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-页面与写作"><span class="nav-text">3. 页面与写作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-页面"><span class="nav-text">3.1. 页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-写作"><span class="nav-text">3.2. 写作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-其他"><span class="nav-text">4. 其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-文章置顶"><span class="nav-text">4.1. 文章置顶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-文章字数统计"><span class="nav-text">4.2. 文章字数统计</span></a></li></ol></li></ol></div>
             
 
           </div>
