@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Python中断言(assert)的基本使用以及注意事项">
+<meta name="description" content="Python&amp;Anaconda的基本操作">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python手册(4) 断言 assert">
-<meta property="og:url" content="http://yoursite.com/2019/09/16/python/python-manual-4/index.html">
+<meta property="og:title" content="Python手册(1) Anaconda &amp; pip">
+<meta property="og:url" content="http://yoursite.com/2019/08/01/python/manual/python-manual-1/index.html">
 <meta property="og:site_name" content="清欢小屋">
-<meta property="og:description" content="Python中断言(assert)的基本使用以及注意事项">
+<meta property="og:description" content="Python&amp;Anaconda的基本操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-16T11:41:03.000Z">
+<meta property="og:updated_time" content="2019-08-01T11:36:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python手册(4) 断言 assert">
-<meta name="twitter:description" content="Python中断言(assert)的基本使用以及注意事项">
+<meta name="twitter:title" content="Python手册(1) Anaconda &amp; pip">
+<meta name="twitter:description" content="Python&amp;Anaconda的基本操作">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/09/16/python/python-manual-4/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/01/python/manual/python-manual-1/">
 
 
 
 
 
-  <title>Python手册(4) 断言 assert | 清欢小屋</title>
+  <title>Python手册(1) Anaconda & pip | 清欢小屋</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/python/python-manual-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/python/manual/python-manual-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Irving">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python手册(4) 断言 assert</h1>
+          <h1 class="post-title" itemprop="name headline">Python手册(1) Anaconda & pip</h1>
         
 
         <div class="post-meta">
@@ -303,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-16T19:41:03+08:00">
-                2019-09-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-01T19:36:39+08:00">
+                2019-08-01
               </time>
             
 
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  373
+                  343
                 </span>
               
 
@@ -392,7 +392,7 @@
 
           
               <div class="post-description">
-                  Python中断言(assert)的基本使用以及注意事项
+                  Python&Anaconda的基本操作
               </div>
           
 
@@ -411,42 +411,56 @@
       
         <a id="more"></a>
 
-<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>参考资料：<ul>
-<li>《深入理解Python特性》2.1节。</li>
-<li><a href="https://docs.python.org/zh-cn/3.6/reference/simple_stmts.html#the-assert-statement" target="_blank" rel="noopener">Python官方文档：7.3. The assert statement</a></li>
+<h2 id="0-资料"><a href="#0-资料" class="headerlink" title="0. 资料"></a>0. 资料</h2><ul>
+<li><a href="https://www.anaconda.com/download/" target="_blank" rel="noopener">Anaconda官网</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">Anaconda清华镜像</a></li>
 </ul>
+<h2 id="1-Anaconda"><a href="#1-Anaconda" class="headerlink" title="1. Anaconda"></a>1. Anaconda</h2><h3 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1. 安装"></a>1.1. 安装</h3><ul>
+<li><p>建议使用<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">清华镜像</a>下载，安装完成后执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Windows直接安装。</p>
+</li>
+<li><p>Ubuntu安装如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo bash Anaconda3-4.3.0-Linux-x86_64.sh </span><br><span class="line"># 一路回车+yes（注意最后一步是问是否要将Anaconda安装到系统路径）</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-<h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h2><ul>
-<li><p>根据Python官方文档，Python解释器会将断言<code>&quot;assert expression1, expression2</code>转换为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __debug__:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> expression1:</span><br><span class="line">        <span class="keyword">raise</span> AssertionError(expression2)</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-环境相关"><a href="#1-2-环境相关" class="headerlink" title="1.2. 环境相关"></a>1.2. 环境相关</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 安装</span><br><span class="line">conda create --name tensorflow python=3.6</span><br><span class="line"></span><br><span class="line"># 激活</span><br><span class="line">activate tensorflow # Windows</span><br><span class="line">source activate tensorflow # Linux &amp; Mac</span><br><span class="line"></span><br><span class="line"># 撤销激活</span><br><span class="line">deactivate tensorflow # Windows</span><br><span class="line">conda deactivate tensorflow # Linux &amp; Mac</span><br><span class="line"></span><br><span class="line"># 删除</span><br><span class="line">conda remove --name tensorflow --all</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-package相关"><a href="#1-3-package相关" class="headerlink" title="1.3. package相关"></a>1.3. package相关</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br><span class="line">conda install numpy</span><br><span class="line">conda uninstall numpy</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-碰到的问题"><a href="#1-4-碰到的问题" class="headerlink" title="1.4. 碰到的问题"></a>1.4. 碰到的问题</h3><ul>
+<li>使用Conda安装Keras时，不能使用tensorflow-gpu版，只能使用cpu版。<ul>
+<li>解决方案：要么 keras 和 tensorflow 分别安装，要么使用 keras-gpu。</li>
+</ul>
 </li>
-<li><p><code>__debug__</code> 简介：</p>
+<li>不能安装happybase。<ul>
+<li>解决方案：使用pip安装。</li>
+</ul>
+</li>
+<li>固定版本：<code>conda install tensorflow-gpu=1.12.0</code></li>
+</ul>
+<h2 id="2-pip"><a href="#2-pip" class="headerlink" title="2. pip"></a>2. pip</h2><h3 id="2-1-镜像"><a href="#2-1-镜像" class="headerlink" title="2.1. 镜像"></a>2.1. 镜像</h3><ul>
+<li><p>windows镜像设置，修改<code>%HOMEPATH%\pip\pip.ini</code>。</p>
+</li>
+<li><p>linux镜像设置，修改<code>~/.pip/pip.conf</code>。</p>
+</li>
+<li><p>镜像文件内容如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br><span class="line">[install]</span><br><span class="line">trusted-host=pypi.douban.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>镜像选择</p>
 <ul>
-<li>作用：用来指定是否使用断言。</li>
-<li>设置值：该内置变量的值会在解释器启动时确定，默认为<code>True</code>，如果指定了<code>-O</code>选项，就会设置为<code>False</code>。</li>
-<li>注意事项：不能直接在程序中修改值。</li>
+<li>阿里云：<a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a></li>
+<li>中国科技大学：<a href="https://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.mirrors.ustc.edu.cn/simple/</a> </li>
+<li>豆瓣(douban)：<a href="http://pypi.douban.com/simple/" target="_blank" rel="noopener">http://pypi.douban.com/simple/</a> </li>
+<li>清华大学：<a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a></li>
+<li>中国科学技术大学：<a href="http://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple/</a></li>
 </ul>
 </li>
 </ul>
-<h2 id="2-使用场景"><a href="#2-使用场景" class="headerlink" title="2. 使用场景"></a>2. 使用场景</h2><ul>
-<li>断言是为了告诉开发人员，程序中发生了<strong>不可恢复</strong>的错误。</li>
-<li>断言主要用于<strong>程序内部自检</strong>。</li>
-<li>断言是一种<strong>调试辅助</strong>功能，<strong>不是</strong>用来处理运行时错误的机制。</li>
-</ul>
-<h2 id="3-常见陷阱"><a href="#3-常见陷阱" class="headerlink" title="3. 常见陷阱"></a>3. 常见陷阱</h2><h3 id="3-1-不能使用断言来验证数据"><a href="#3-1-不能使用断言来验证数据" class="headerlink" title="3.1. 不能使用断言来验证数据"></a>3.1. 不能使用断言来验证数据</h3><ul>
-<li>因为断言可能会被全局禁用，所以不能用断言。</li>
-</ul>
-<h3 id="3-2-永不失败的断言"><a href="#3-2-永不失败的断言" class="headerlink" title="3.2. 永不失败的断言"></a>3.2. 永不失败的断言</h3><ul>
-<li>永不失败的断言是毫无用处的</li>
-<li>可以使用代码 Linter 来防止这种情况。</li>
-<li>PS：这也是为什么总是对单元测试用例先做一个快速的冒烟测试。</li>
-</ul>
-<h3 id="3-3-其他注意事项"><a href="#3-3-其他注意事项" class="headerlink" title="3.3. 其他注意事项"></a>3.3. 其他注意事项</h3><ul>
-<li>Python断言语句是一种测试某个条件的调试辅助功能，可作为程序的内部自检。</li>
-<li>断言应仅用于开发人员识别bug，而不是用于处理运行时错误的机制。</li>
-<li>设置解释器可全局禁用断言。</li>
+<h3 id="2-2-其他"><a href="#2-2-其他" class="headerlink" title="2.2. 其他"></a>2.2. 其他</h3><ul>
+<li>指定版本：<code>pip install tensorflow==1.12.0</code></li>
 </ul>
 
       
@@ -478,8 +492,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/16/python/python-manual-3/" rel="next" title="Python手册(3) 异常处理">
-                <i class="fa fa-chevron-left"></i> Python手册(3) 异常处理
+              <a href="/2019/07/28/tools/latex-manual/" rel="next" title="Latex 速查">
+                <i class="fa fa-chevron-left"></i> Latex 速查
               </a>
             
           </div>
@@ -488,8 +502,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/25/python/python-manual-5/" rel="prev" title="Python手册(5) 解析式、生成器、迭代器">
-                Python手册(5) 解析式、生成器、迭代器 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/01/python/manual/python-manual-2/" rel="prev" title="Python手册(2) Pandas">
+                Python手册(2) Pandas <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -640,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-text">1. 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用场景"><span class="nav-text">2. 使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-常见陷阱"><span class="nav-text">3. 常见陷阱</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-不能使用断言来验证数据"><span class="nav-text">3.1. 不能使用断言来验证数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-永不失败的断言"><span class="nav-text">3.2. 永不失败的断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-其他注意事项"><span class="nav-text">3.3. 其他注意事项</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-资料"><span class="nav-text">0. 资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Anaconda"><span class="nav-text">1. Anaconda</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装"><span class="nav-text">1.1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-环境相关"><span class="nav-text">1.2. 环境相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-package相关"><span class="nav-text">1.3. package相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-碰到的问题"><span class="nav-text">1.4. 碰到的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pip"><span class="nav-text">2. pip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-镜像"><span class="nav-text">2.1. 镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-其他"><span class="nav-text">2.2. 其他</span></a></li></ol></li></ol></div>
             
 
           </div>

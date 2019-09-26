@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Python&amp;Anaconda的基本操作">
+<meta name="description" content="Python中异常处理相关内容简介">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python手册(1) Anaconda &amp; pip">
-<meta property="og:url" content="http://yoursite.com/2019/08/01/python/python-manual-1/index.html">
+<meta property="og:title" content="Python手册(3) 异常处理">
+<meta property="og:url" content="http://yoursite.com/2019/09/16/python/manual/python-manual-3/index.html">
 <meta property="og:site_name" content="清欢小屋">
-<meta property="og:description" content="Python&amp;Anaconda的基本操作">
+<meta property="og:description" content="Python中异常处理相关内容简介">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-01T11:36:39.000Z">
+<meta property="og:updated_time" content="2019-09-16T11:41:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python手册(1) Anaconda &amp; pip">
-<meta name="twitter:description" content="Python&amp;Anaconda的基本操作">
+<meta name="twitter:title" content="Python手册(3) 异常处理">
+<meta name="twitter:description" content="Python中异常处理相关内容简介">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/01/python/python-manual-1/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/16/python/manual/python-manual-3/">
 
 
 
 
 
-  <title>Python手册(1) Anaconda & pip | 清欢小屋</title>
+  <title>Python手册(3) 异常处理 | 清欢小屋</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/01/python/python-manual-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/16/python/manual/python-manual-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Irving">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python手册(1) Anaconda & pip</h1>
+          <h1 class="post-title" itemprop="name headline">Python手册(3) 异常处理</h1>
         
 
         <div class="post-meta">
@@ -303,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-01T19:36:39+08:00">
-                2019-08-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-16T19:41:00+08:00">
+                2019-09-16
               </time>
             
 
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  343
+                  434
                 </span>
               
 
@@ -392,7 +392,7 @@
 
           
               <div class="post-description">
-                  Python&Anaconda的基本操作
+                  Python中异常处理相关内容简介
               </div>
           
 
@@ -411,56 +411,49 @@
       
         <a id="more"></a>
 
-<h2 id="0-资料"><a href="#0-资料" class="headerlink" title="0. 资料"></a>0. 资料</h2><ul>
-<li><a href="https://www.anaconda.com/download/" target="_blank" rel="noopener">Anaconda官网</a></li>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">Anaconda清华镜像</a></li>
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>参考资料：<ul>
+<li><a href="https://docs.python.org/zh-cn/3/tutorial/errors.html" target="_blank" rel="noopener">Python官方文档</a></li>
 </ul>
-<h2 id="1-Anaconda"><a href="#1-Anaconda" class="headerlink" title="1. Anaconda"></a>1. Anaconda</h2><h3 id="1-1-安装"><a href="#1-1-安装" class="headerlink" title="1.1. 安装"></a>1.1. 安装</h3><ul>
-<li><p>建议使用<a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">清华镜像</a>下载，安装完成后执行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>Windows直接安装。</p>
-</li>
-<li><p>Ubuntu安装如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo bash Anaconda3-4.3.0-Linux-x86_64.sh </span><br><span class="line"># 一路回车+yes（注意最后一步是问是否要将Anaconda安装到系统路径）</span><br></pre></td></tr></table></figure>
+</ul>
+<h2 id="1-内建异常类型"><a href="#1-内建异常类型" class="headerlink" title="1. 内建异常类型"></a>1. 内建异常类型</h2><ul>
+<li><a href="https://docs.python.org/zh-cn/3/library/exceptions.html#bltin-exceptions" target="_blank" rel="noopener">Python文档：内置异常</a><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 内建异常类型</span></span><br><span class="line"><span class="comment"># Exception</span></span><br><span class="line"><span class="comment"># AttributeError</span></span><br><span class="line"><span class="comment"># IOError</span></span><br><span class="line"><span class="comment"># IndexError</span></span><br><span class="line"><span class="comment"># KeyError</span></span><br><span class="line"><span class="comment"># ValueError</span></span><br><span class="line"><span class="comment"># NameError</span></span><br><span class="line"><span class="comment"># SyntaxError</span></span><br><span class="line"><span class="comment"># ZeroDivisionError</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h3 id="1-2-环境相关"><a href="#1-2-环境相关" class="headerlink" title="1.2. 环境相关"></a>1.2. 环境相关</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 安装</span><br><span class="line">conda create --name tensorflow python=3.6</span><br><span class="line"></span><br><span class="line"># 激活</span><br><span class="line">activate tensorflow # Windows</span><br><span class="line">source activate tensorflow # Linux &amp; Mac</span><br><span class="line"></span><br><span class="line"># 撤销激活</span><br><span class="line">deactivate tensorflow # Windows</span><br><span class="line">conda deactivate tensorflow # Linux &amp; Mac</span><br><span class="line"></span><br><span class="line"># 删除</span><br><span class="line">conda remove --name tensorflow --all</span><br></pre></td></tr></table></figure>
+<h3 id="2-新建异常类型"><a href="#2-新建异常类型" class="headerlink" title="2. 新建异常类型"></a>2. 新建异常类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class MyException(Exception): pass</span><br><span class="line"></span><br><span class="line">class MyException(Exception):</span><br><span class="line">    def __init__(self, error_msg):</span><br><span class="line">        self.error_msg = error_msg</span><br></pre></td></tr></table></figure>
 
-<h3 id="1-3-package相关"><a href="#1-3-package相关" class="headerlink" title="1.3. package相关"></a>1.3. package相关</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda list</span><br><span class="line">conda install numpy</span><br><span class="line">conda uninstall numpy</span><br></pre></td></tr></table></figure>
+<h2 id="3-捕获异常"><a href="#3-捕获异常" class="headerlink" title="3. 捕获异常"></a>3. 捕获异常</h2><h3 id="3-1-基本使用"><a href="#3-1-基本使用" class="headerlink" title="3.1. 基本使用"></a>3.1. 基本使用</h3><ul>
+<li><code>try</code>：运行可能会抛出异常的代码。</li>
+<li><code>except</code>：该关键字有以下多种功能<ul>
+<li>捕获一个或多个特定异常</li>
+<li>捕获其他所有异常</li>
+</ul>
+</li>
+<li><code>else</code>：当没有出现异常时执行</li>
+<li><code>finally</code>：不管如何都执行</li>
+<li>其他：<ul>
+<li>抛出的异常只会被一个except捕获。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exception_handle</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        print(<span class="string">"try"</span>)</span><br><span class="line">        <span class="keyword">raise</span> ValueError <span class="comment"># 抛出特定异常</span></span><br><span class="line">    <span class="keyword">except</span> IndexError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="comment"># 捕获一个异常，并获取异常对象</span></span><br><span class="line">        <span class="comment"># 不对异常进行处理，继续抛出异常</span></span><br><span class="line">        <span class="keyword">raise</span></span><br><span class="line">    <span class="keyword">except</span> (KeyError, ValueError) <span class="keyword">as</span> e:</span><br><span class="line">        <span class="comment"># 捕获某两类异常，并获取异常对象</span></span><br><span class="line">        print(e)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment"># 捕获除了上述三种异常之外的所有异常</span></span><br><span class="line">        print(<span class="string">"except"</span>)</span><br><span class="line">        <span class="keyword">raise</span> <span class="comment"># 抛出捕获到的异常</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 当没有捕获异常时执行</span></span><br><span class="line">        print(<span class="string">"else"</span>)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="comment"># 不管是否捕获异常，都要执行</span></span><br><span class="line">        print(<span class="string">"finally"</span>)</span><br></pre></td></tr></table></figure>
 
-<h3 id="1-4-碰到的问题"><a href="#1-4-碰到的问题" class="headerlink" title="1.4. 碰到的问题"></a>1.4. 碰到的问题</h3><ul>
-<li>使用Conda安装Keras时，不能使用tensorflow-gpu版，只能使用cpu版。<ul>
-<li>解决方案：要么 keras 和 tensorflow 分别安装，要么使用 keras-gpu。</li>
+</li>
 </ul>
 </li>
-<li>不能安装happybase。<ul>
-<li>解决方案：使用pip安装。</li>
 </ul>
-</li>
-<li>固定版本：<code>conda install tensorflow-gpu=1.12.0</code></li>
-</ul>
-<h2 id="2-pip"><a href="#2-pip" class="headerlink" title="2. pip"></a>2. pip</h2><h3 id="2-1-镜像"><a href="#2-1-镜像" class="headerlink" title="2.1. 镜像"></a>2.1. 镜像</h3><ul>
-<li><p>windows镜像设置，修改<code>%HOMEPATH%\pip\pip.ini</code>。</p>
-</li>
-<li><p>linux镜像设置，修改<code>~/.pip/pip.conf</code>。</p>
-</li>
-<li><p>镜像文件内容如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.douban.com/simple</span><br><span class="line">[install]</span><br><span class="line">trusted-host=pypi.douban.com</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>镜像选择</p>
+<h3 id="3-2-异常类的基类与派生类"><a href="#3-2-异常类的基类与派生类" class="headerlink" title="3.2. 异常类的基类与派生类"></a>3.2. 异常类的基类与派生类</h3><ul>
+<li><p>即抛出的异常为A，处理异常的类别为B：</p>
 <ul>
-<li>阿里云：<a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a></li>
-<li>中国科技大学：<a href="https://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.mirrors.ustc.edu.cn/simple/</a> </li>
-<li>豆瓣(douban)：<a href="http://pypi.douban.com/simple/" target="_blank" rel="noopener">http://pypi.douban.com/simple/</a> </li>
-<li>清华大学：<a href="https://pypi.tuna.tsinghua.edu.cn/simple/" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple/</a></li>
-<li>中国科学技术大学：<a href="http://pypi.mirrors.ustc.edu.cn/simple/" target="_blank" rel="noopener">http://pypi.mirrors.ustc.edu.cn/simple/</a></li>
+<li>如果B是A的基类，则A异常会被正常捕获。</li>
+<li>如果A是B的基类（而不是同一类），A异常不会被捕获。</li>
 </ul>
 </li>
-</ul>
-<h3 id="2-2-其他"><a href="#2-2-其他" class="headerlink" title="2.2. 其他"></a>2.2. 其他</h3><ul>
-<li>指定版本：<code>pip install tensorflow==1.12.0</code></li>
+<li><p>下面代码的输出结果是 <code>B C D</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(Exception)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(C)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> cls <span class="keyword">in</span> [B, C, D]:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">raise</span> cls()</span><br><span class="line">    <span class="keyword">except</span> D:</span><br><span class="line">        print(<span class="string">"D"</span>)</span><br><span class="line">    <span class="keyword">except</span> C:</span><br><span class="line">        print(<span class="string">"C"</span>)</span><br><span class="line">    <span class="keyword">except</span> B:</span><br><span class="line">        print(<span class="string">"B"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果将<code>except B</code>放到最前面，则输出的结果为<code>B B B</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span><span class="params">(Exception)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span><span class="params">(B)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span><span class="params">(C)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> cls <span class="keyword">in</span> [B, C, D]:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">raise</span> cls()</span><br><span class="line">    <span class="keyword">except</span> B:</span><br><span class="line">        print(<span class="string">"B"</span>)</span><br><span class="line">    <span class="keyword">except</span> D:</span><br><span class="line">        print(<span class="string">"D"</span>)</span><br><span class="line">    <span class="keyword">except</span> C:</span><br><span class="line">        print(<span class="string">"C"</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
 
       
@@ -492,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/28/tools/latex-manual/" rel="next" title="Latex 速查">
-                <i class="fa fa-chevron-left"></i> Latex 速查
+              <a href="/2019/08/01/python/manual/python-manual-2/" rel="next" title="Python手册(2) Pandas">
+                <i class="fa fa-chevron-left"></i> Python手册(2) Pandas
               </a>
             
           </div>
@@ -502,8 +495,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/01/python/python-manual-2/" rel="prev" title="Python手册(2) Pandas">
-                Python手册(2) Pandas <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/16/python/manual/python-manual-4/" rel="prev" title="Python手册(4) 断言 assert">
+                Python手册(4) 断言 assert <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -654,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-资料"><span class="nav-text">0. 资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Anaconda"><span class="nav-text">1. Anaconda</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-安装"><span class="nav-text">1.1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-环境相关"><span class="nav-text">1.2. 环境相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-package相关"><span class="nav-text">1.3. package相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-碰到的问题"><span class="nav-text">1.4. 碰到的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-pip"><span class="nav-text">2. pip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-镜像"><span class="nav-text">2.1. 镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-其他"><span class="nav-text">2.2. 其他</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-内建异常类型"><span class="nav-text">1. 内建异常类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-新建异常类型"><span class="nav-text">2. 新建异常类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-捕获异常"><span class="nav-text">3. 捕获异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-基本使用"><span class="nav-text">3.1. 基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-异常类的基类与派生类"><span class="nav-text">3.2. 异常类的基类与派生类</span></a></li></ol></li></ol></div>
             
 
           </div>
