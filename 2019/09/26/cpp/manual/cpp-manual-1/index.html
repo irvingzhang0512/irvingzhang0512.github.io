@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="AWS,">
+  <meta name="keywords" content="C++,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="AWS 的基本使用，包括创建实例、连接实例、安装shadowsocks">
-<meta name="keywords" content="AWS">
+<meta name="description" content="OpenCV C++ API 简介">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AWS小助手">
-<meta property="og:url" content="http://yoursite.com/2019/07/13/tools/aws/index.html">
+<meta property="og:title" content="C++手册(1) OpenCV">
+<meta property="og:url" content="http://yoursite.com/2019/09/26/cpp/manual/cpp-manual-1/index.html">
 <meta property="og:site_name" content="清欢小屋">
-<meta property="og:description" content="AWS 的基本使用，包括创建实例、连接实例、安装shadowsocks">
+<meta property="og:description" content="OpenCV C++ API 简介">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-13T05:44:52.000Z">
+<meta property="og:updated_time" content="2019-09-26T15:15:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AWS小助手">
-<meta name="twitter:description" content="AWS 的基本使用，包括创建实例、连接实例、安装shadowsocks">
+<meta name="twitter:title" content="C++手册(1) OpenCV">
+<meta name="twitter:description" content="OpenCV C++ API 简介">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/13/tools/aws/">
+  <link rel="canonical" href="http://yoursite.com/2019/09/26/cpp/manual/cpp-manual-1/">
 
 
 
 
 
-  <title>AWS小助手 | 清欢小屋</title>
+  <title>C++手册(1) OpenCV | 清欢小屋</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/tools/aws/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/cpp/manual/cpp-manual-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Irving">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AWS小助手</h1>
+          <h1 class="post-title" itemprop="name headline">C++手册(1) OpenCV</h1>
         
 
         <div class="post-meta">
@@ -303,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-13T13:44:52+08:00">
-                2019-07-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T23:15:24+08:00">
+                2019-09-26
               </time>
             
 
@@ -326,8 +326,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/手册/" itemprop="url" rel="index">
+                    <span itemprop="name">手册</span>
                   </a>
                 </span>
 
@@ -357,7 +368,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  595
+                  567
                 </span>
               
 
@@ -381,7 +392,7 @@
 
           
               <div class="post-description">
-                  AWS 的基本使用，包括创建实例、连接实例、安装shadowsocks
+                  OpenCV C++ API 简介
               </div>
           
 
@@ -398,58 +409,96 @@
       
 
       
-        <h2 id="1-创建实例"><a href="#1-创建实例" class="headerlink" title="1. 创建实例"></a>1. 创建实例</h2><ul>
-<li>AWS实例注意事项：<ul>
-<li>实例按需付费，即按小时付钱。可以定时关机/开机节省开支。</li>
-<li>实例所使用的流量是需要付费的，包括实例域因特网、实例域amazon之间的数据传输。<ul>
-<li>实例到因特网：1G免费，之后大概1块1G。</li>
-<li>因特网到实例：免费。</li>
-<li>amazon到实例：大概5毛1G。</li>
+        <a id="more"></a>
+
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>在学习《Learning OpenCV 3》过程中的一些记录。</li>
+</ul>
+<h2 id="1-展示窗口"><a href="#1-展示窗口" class="headerlink" title="1. 展示窗口"></a>1. 展示窗口</h2><h3 id="1-1-流水账"><a href="#1-1-流水账" class="headerlink" title="1.1. 流水账"></a>1.1. 流水账</h3><ul>
+<li><code>cv::namedWindow(&quot;Example1&quot;, cv::WINDOW_AUTOSIZE)</code><ul>
+<li>构建窗口。</li>
+<li>第一个参数是框的名称，第二个用于尺寸参数。</li>
 </ul>
 </li>
-<li>AWS包括公共IP和弹性IP，其异同可以看<a href="https://blog.csdn.net/fedora18/article/details/44219493" target="_blank" rel="noopener">这里</a>，个人总结如下：<ul>
-<li>实例默认分配的公共IP在关机重启后可能会改变。</li>
-<li>如果想要绑定IP，可以给账户创建弹性IP。弹性IP是和AWS帐号绑定的，需要费用，0.005刀每小时，一个月大概4美金，大概25-30元。</li>
+<li><code>cv::imshow(&quot;Example1&quot;, img)</code><ul>
+<li>在窗口中展示图片。</li>
+<li>第一个参数用于选择定义过的 <code>cv::namedWindow</code>，第二个参数是图像对象，即<code>cv::Mat</code>对象。</li>
 </ul>
 </li>
-<li>删除AWS实例后，要清楚卷，参考<a href="http://blog.csdn.net/topbean/article/details/46455555" target="_blank" rel="noopener">这里</a></li>
+<li><code>cv::waitKey(0)</code><ul>
+<li>停留在当前画面的时间。</li>
+<li>如果是0，则无限停留；如果是数字，则停留对应的毫秒。</li>
+<li>返回值是按下按钮的ASCII码。</li>
 </ul>
 </li>
-<li>关于AWS的资费：<ul>
-<li>参考网址：<a href="https://amazonaws-china.com/cn/ec2/pricing/on-demand/" target="_blank" rel="noopener">Amazon EC2 定价</a>，里面包含实例的费用、网络传输的费用等。</li>
-</ul>
-</li>
-<li>其他需要设置的：安全组要设置一下，不然不能访问。</li>
-</ul>
-<h2 id="2-连接实例"><a href="#2-连接实例" class="headerlink" title="2. 连接实例"></a>2. 连接实例</h2><h3 id="2-1-Windows中使用PuTTY"><a href="#2-1-Windows中使用PuTTY" class="headerlink" title="2.1. Windows中使用PuTTY"></a>2.1. Windows中使用PuTTY</h3><ul>
-<li><a href="https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/putty.html?icmpid=docs_ec2_console" target="_blank" rel="noopener">AWS的官方帮助文档</a></li>
-<li>第一步：在<a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/" target="_blank" rel="noopener">这里</a>下载全套的Putty组件。</li>
-<li>第二步：使用PuTTYgen工具，将<code>pem</code>文件转换为<code>ppk</code>文件。<ul>
-<li>打开PuttyGen，选择<code>Type of key to generate</code>为<code>RSA</code>。</li>
-<li>通过<code>load</code>选择<code>pem</code>文件（请注意，要选择时文件类型应为all files）。</li>
-<li>通过<code>Save private key</code>，并选择存储位置，获得<code>ppk</code>文件。</li>
-</ul>
-</li>
-<li>第三步：通过Putty工具，连接AWS服务器。<ul>
-<li><code>Host Name</code>中格式为<code>username@server_ip</code>。ubuntu中username一般就是<code>ubuntu</code>。</li>
-<li>通过<code>Connection - SSH - Auth</code>中的<code>Private key file for authentication</code>，选择刚刚生成的<code>ppk</code>文件。</li>
-<li>在<code>Session</code>中保存当前连接。</li>
+<li><code>cv::destroyWindow(&quot;Example1&quot;)</code><ul>
+<li>关闭窗口。</li>
+<li>参数是窗口名称。</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-2-Mac中直接使用ssh"><a href="#2-2-Mac中直接使用ssh" class="headerlink" title="2.2. Mac中直接使用ssh"></a>2.2. Mac中直接使用ssh</h3><ul>
-<li>第一步：您的密钥必须不公开可见，SSH 才能工作。如果需要，请使用此命令<code>chmod 400 xxx.pem</code>。</li>
-<li>第二步：通过 <code>ssh -i &quot;xxx.pem&quot; username@server_ip</code>，其中username一般在ubuntu中为<code>ubuntu</code>。</li>
+<h3 id="1-2-应用"><a href="#1-2-应用" class="headerlink" title="1.2. 应用"></a>1.2. 应用</h3><ul>
+<li>创建窗口，显示图片，按键结束，销毁窗口。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">namedWindow(<span class="string">"Example"</span>, cv::WINDOW_AUTOSIZE);</span><br><span class="line">imshow(<span class="string">"Example"</span>, img);</span><br><span class="line">waitKey(<span class="number">0</span>);</span><br><span class="line">destroyWindow(<span class="string">"Example2-2"</span>);</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<h2 id="3-shadowsocks"><a href="#3-shadowsocks" class="headerlink" title="3. shadowsocks"></a>3. shadowsocks</h2><ul>
-<li><p>安装shadowsocks：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install python-pip</span><br><span class="line">pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<h3 id="2-图像-amp-视频"><a href="#2-图像-amp-视频" class="headerlink" title="2. 图像 &amp; 视频"></a>2. 图像 &amp; 视频</h3><h3 id="2-1-基本对象"><a href="#2-1-基本对象" class="headerlink" title="2.1. 基本对象"></a>2.1. 基本对象</h3><ul>
+<li><code>cv::Mat</code><ul>
+<li>用于保存图片。</li>
+</ul>
 </li>
-<li><p>配置文件（保存在<code>/home/ubuntu/config.json</code>中）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">        &quot;server&quot;: &quot;0.0.0.0&quot;,</span><br><span class="line">        &quot;server_port&quot;: 443,</span><br><span class="line">        &quot;local_address&quot;: &quot;127.0.0.1&quot;,</span><br><span class="line">        &quot;local_port&quot;: 443,</span><br><span class="line">        &quot;password&quot;: &quot;123456&quot;,</span><br><span class="line">        &quot;timeout&quot;: 300,</span><br><span class="line">        &quot;method&quot;: &quot;aes-256-cfb&quot;,</span><br><span class="line">        &quot;fast_open&quot;: false,</span><br><span class="line">        &quot;workers&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><code>cv::VideoCapture</code><ul>
+<li>用于保存视频。</li>
+</ul>
 </li>
-<li><p>常用命令（设置开机启动脚本<code>sudo vim /etc/rc.local</code>，好像没用）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /home/ubuntu/.local/bin/ssserver -c /home/ubuntu/config.json -d start/stop/restart</span><br></pre></td></tr></table></figure>
+<li><code>cv::imread(&quot;/path/to/img&quot;, -1)</code><ul>
+<li>读取图片。</li>
+<li>读一个参数是图片地址，第二个参数是图像颜色选择。</li>
+</ul>
+</li>
+<li>视频对应的参数：<ul>
+<li><code>cv::CAP_PROP_POS_FRAMES</code>：当前位置（在第几帧）。</li>
+<li><code>cv::CAP_PROP_FRAME_WIDTH</code>：图像宽度。</li>
+<li><code>cv::CAP_PROP_FRAME_HEIGHT</code>：图像高度。</li>
+<li><code>cv::CAP_PROP_FRAME_COUNT</code>：总帧数。</li>
+<li><code>cv::cv::CAP_PROP_FPS</code>：FPS。</li>
+<li><code>cv::CAP_PROP_FRAME_COUNT</code>：总帧数</li>
+<li><code>cv::CAP_PROP_FRAME_COUNT</code>：总帧数</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-数字图像处理"><a href="#2-2-数字图像处理" class="headerlink" title="2.2. 数字图像处理"></a>2.2. 数字图像处理</h3><ul>
+<li><code>cv::GaussianBlur</code><ul>
+<li>高斯滤波。</li>
+</ul>
+</li>
+<li><code>cv::pyrDown()</code> <code>cv::pryUp()</code><ul>
+<li>图像金字塔，其实就是按比例缩小变大。</li>
+</ul>
+</li>
+<li><code>cv::cvtColor(img_rgb, img_gry, cv::COLOR_BGR2GRAY)</code><ul>
+<li>改变图像的color map。</li>
+<li>第一个参数是输入图像，第二个参数是输出图像，第三个参数是颜色变换目标。</li>
+<li>第一第二个参数都是<code>cv::Mat</code>对象。</li>
+</ul>
+</li>
+<li><code>cv::Canny</code><ul>
+<li>边缘检测的一种算法。</li>
+</ul>
+</li>
+<li><code>cv::logPolar</code></li>
+<li><code>cv::Point2f</code></li>
+</ul>
+<h3 id="2-3-应用"><a href="#2-3-应用" class="headerlink" title="2.3. 应用"></a>2.3. 应用</h3><ul>
+<li><p>读取视频</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cv::VideoCapture cap;</span><br><span class="line">cap.open(<span class="built_in">std</span>::<span class="built_in">string</span>(argv[<span class="number">1</span>]));</span><br><span class="line"></span><br><span class="line">cv::Mat frame;</span><br><span class="line"><span class="keyword">for</span>(;;) &#123;</span><br><span class="line">	cap &gt;&gt; frame;</span><br><span class="line">	<span class="keyword">if</span>(frame.empty()) <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取/设置图像中某一位置的像素值</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">16</span>, y = <span class="number">32</span>;</span><br><span class="line">cv::Mat img;</span><br><span class="line">img = cv::imread(argv[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line"># 设置某一位置的像素值</span><br><span class="line">img.at&lt;uchar&gt;(x, y) = <span class="number">128</span>;</span><br><span class="line"></span><br><span class="line"># 获取某一位置的像素值</span><br><span class="line">cv::Vec3b intensity = img.at&lt;cv::Vec3b&gt;(y, x);</span><br><span class="line">uchar blue = intensity[<span class="number">0</span>];	</span><br><span class="line">uchar green = intensity[<span class="number">1</span>];</span><br><span class="line">uchar red = intensity[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建视频文件</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> fps = capture.get(cv::CAP_PROP_FPS);</span><br><span class="line">cv::<span class="function">Size <span class="title">size</span><span class="params">((<span class="keyword">int</span>)capture.get(cv::CAP_PROP_FRAME_WIDTH),</span></span></span><br><span class="line"><span class="function"><span class="params">		(<span class="keyword">int</span>)capture.get(cv::CAP_PROP_FRAME_HEIGHT))</span></span>;</span><br><span class="line">cv::VideoWriter writer;</span><br><span class="line">writer.open(argv[<span class="number">2</span>], CV_FOURCC(<span class="string">'M'</span>, <span class="string">'J'</span>, <span class="string">'P'</span>, <span class="string">'G'</span>), fps, size);</span><br><span class="line"><span class="keyword">while</span> True:</span><br><span class="line">    ...</span><br><span class="line">	writer &lt;&lt; frame;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -470,7 +519,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/AWS/" rel="tag"># AWS</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
         </div>
       
@@ -483,8 +532,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/13/tools/vscode-2/" rel="next" title="VS Code(2)查漏补缺">
-                <i class="fa fa-chevron-left"></i> VS Code(2)查漏补缺
+              <a href="/2019/09/25/contents/" rel="next" title="博客目录">
+                <i class="fa fa-chevron-left"></i> 博客目录
               </a>
             
           </div>
@@ -492,10 +541,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/14/tools/git/" rel="prev" title="git">
-                git <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -645,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建实例"><span class="nav-text">1. 创建实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-连接实例"><span class="nav-text">2. 连接实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Windows中使用PuTTY"><span class="nav-text">2.1. Windows中使用PuTTY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Mac中直接使用ssh"><span class="nav-text">2.2. Mac中直接使用ssh</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-shadowsocks"><span class="nav-text">3. shadowsocks</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-展示窗口"><span class="nav-text">1. 展示窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-流水账"><span class="nav-text">1.1. 流水账</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-应用"><span class="nav-text">1.2. 应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-图像-amp-视频"><span class="nav-text">2. 图像 &amp; 视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本对象"><span class="nav-text">2.1. 基本对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-数字图像处理"><span class="nav-text">2.2. 数字图像处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-应用"><span class="nav-text">2.3. 应用</span></a></li></ol></li></ol></div>
             
 
           </div>
