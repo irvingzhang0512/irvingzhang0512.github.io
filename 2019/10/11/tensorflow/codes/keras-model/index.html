@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="源码分析,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="浏览了模型构建相关源码">
+<meta name="keywords" content="源码分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tf.keras 模型相关源码分析">
+<meta property="og:url" content="http://yoursite.com/2019/10/11/tensorflow/codes/keras-model/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="浏览了模型构建相关源码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-11T07:06:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tf.keras 模型相关源码分析">
+<meta name="twitter:description" content="浏览了模型构建相关源码">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/11/tensorflow/codes/keras-model/">
+
+
+
+
+
+  <title>tf.keras 模型相关源码分析 | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/tensorflow/codes/keras-model/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">tf.keras 模型相关源码分析</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-11T15:06:40+08:00">
+                2019-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/实践/" itemprop="url" rel="index">
+                    <span itemprop="name">实践</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  浏览了模型构建相关源码
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>为什么要学 <code>tf.keras</code> 模型相关源码？<ul>
+<li>在TF1.x和TF2.x中，模型构建都推荐使用 <code>tf.keras</code>，两者可以通用。</li>
+<li>在TF1.x中参数管理都是使用 global variables，即 <code>tf.get_collection</code> 相关，但TF2.x中不推荐使用这种方法。</li>
+<li>使用 <code>tf.keras</code> 管理参数（如通过 <code>model.variables</code> 获取参数等），是TF1.x和TF2.x的通用方法。但由于没有具体使用过，相关的资料好像也没有特别全的，所以希望自己研究源码学习一遍，理解底层实现原理。</li>
+</ul>
+</li>
+<li>本文源码基于 <code>1.14.0</code>。<ul>
+<li><code>1.13.2</code>中没有<code>tf.Module</code>。</li>
+<li><code>1.14.0</code>和<code>2.0.0rc1</code>的keras模型源码相同。</li>
+<li><code>1.15.0</code>和<code>2.0.0</code>的keras源码相同，但这版本源码在VSCode上代码跳转上存在一些问题，目前无法处理。<ul>
+<li>与<code>1.14.0</code>的主要区别在于整理了API，新建了<code>tensorflow_core</code>，具体keras模型相关的代码应该没什么改变。</li>
+<li>跳转不能正常使用的原因如下：<a href="https://github.com/tensorflow/tensorflow/issues/31973" target="_blank" rel="noopener">tensorflow issue #31973</a>、<a href="https://github.com/microsoft/python-language-server/issues/818" target="_blank" rel="noopener">vscode-python-language-server issue #818</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>本文主要包含以下几个模块的学习：<code>tf.keras.Model</code>、<code>Network</code>、<code>tf.keras.layers.Layer</code>、<code>tf.Module</code></li>
+<li>参考资料：<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/73575776" target="_blank" rel="noopener">TensorFlow 2.0学习笔记之状态容器</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/65668632" target="_blank" rel="noopener">tf.keras一个存在自定义层时加载模型时的小坑</a></li>
+</ul>
+</li>
+<li>提一句：如果要看<code>tf.keras.Model</code>有具体哪些模型相关功能，主要参考<code>Network</code>类即可。</li>
+</ul>
+<h2 id="1-tf-Module"><a href="#1-tf-Module" class="headerlink" title="1. tf.Module"></a>1. tf.Module</h2><h3 id="1-1-基本情况"><a href="#1-1-基本情况" class="headerlink" title="1.1. 基本情况"></a>1.1. 基本情况</h3><ul>
+<li>位于 <code>tensorflow.python.module.module.py</code>。</li>
+<li>定位：是一个容器，包含 <code>tf.Variable</code>、<code>tf.Module</code>、一些函数。</li>
+<li>作用有以下三个：<ul>
+<li>参数管理。</li>
+<li>子模块管理。</li>
+<li><code>name_scope</code>应用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-功能简介"><a href="#1-2-功能简介" class="headerlink" title="1.2. 功能简介"></a>1.2. 功能简介</h3><ul>
+<li>参数管理：<ul>
+<li>概述：提供<code>variables</code>、<code>trainable_variables</code>属性管理<code>tf.Variable</code>。</li>
+<li>相关属性(property)：<code>variables</code>、<code>trainable_variables</code></li>
+<li>相关方法：<code>_flatten</code>、<code>_flatten_module</code></li>
+</ul>
+</li>
+<li>子模块管理：<ul>
+<li>概述：提供<code>submodules</code>属性管理其他 <code>tf.Module</code>。</li>
+<li>相关属性(property)：<code>submodules</code>。</li>
+<li>相关方法：<code>_flatten</code>、<code>_flatten_module</code>。</li>
+</ul>
+</li>
+<li><code>name_scope</code> 应用：<ul>
+<li>概述：为当前module提供<code>tf.name_scope</code>对象，主要作用是在tensorboard中group operations以及为变量名create hierarchies。</li>
+<li>相关属性：<code>name_scope</code></li>
+<li>相关方法：<code>classmethod</code> - <code>name_scope</code>。</li>
+<li>建议使用方法：<ul>
+<li>方法一：在代码块中添加 <code>with self.name_scope:</code>。</li>
+<li>方法二：使用<code>@tf.Module.with_name_scope</code>修饰除构造器以外的方法。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-参数、子模块代码分析"><a href="#1-3-参数、子模块代码分析" class="headerlink" title="1.3. 参数、子模块代码分析"></a>1.3. 参数、子模块代码分析</h3><ul>
+<li><p>这两部分代码都调用了以下两个方法：<code>_flatten</code>、<code>_flatten_module</code>。</p>
+</li>
+<li><p>参数、子模块管理的思路都一样，大致思路如下：</p>
+<ul>
+<li>使用<code>tf.Module</code>使用成员变量保存参数或子模块。</li>
+<li>在<code>_flatten_module</code>中使用内置函数 <code>vars</code> 获取当前对象所有属性（即成员变量）。</li>
+</ul>
+</li>
+<li><p><code>_flatten</code> 源码分析</p>
+<ul>
+<li>该方法包含详细文档，需要仔细看下。</li>
+<li>主要功能就是调用了 <code>_flatten_module</code> 方法。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_flatten</span><span class="params">(self,</span></span></span><br><span class="line"><span class="function"><span class="params">             recursive=True,</span></span></span><br><span class="line"><span class="function"><span class="params">             predicate=None,</span></span></span><br><span class="line"><span class="function"><span class="params">             attribute_traversal_key=None,</span></span></span><br><span class="line"><span class="function"><span class="params">             with_path=False)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    recursive: Whether to recurse into child modules or not.</span></span><br><span class="line"><span class="string">    是否要递归寻找子模块的对应内容</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    predicate: (Optional) If set then only values matching predicate are</span></span><br><span class="line"><span class="string">      yielded. A value of `None` (the default) means no items will be</span></span><br><span class="line"><span class="string">      filtered.</span></span><br><span class="line"><span class="string">    使用该方法过滤对象成员变量（如判断是variables, trainable_variables, modules）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    attribute_traversal_key: (Optional) Method to rekey object attributes</span></span><br><span class="line"><span class="string">      before they are sorted. Contract is the same as `key` argument to</span></span><br><span class="line"><span class="string">      builtin `sorted` and only applies to object properties.</span></span><br><span class="line"><span class="string">    重新生成key</span></span><br><span class="line"><span class="string">      </span></span><br><span class="line"><span class="string">    with_path: (Optional) Whether to include the path to the object as well</span></span><br><span class="line"><span class="string">      as the object itself. If `with_path` is `True` then leaves will not be</span></span><br><span class="line"><span class="string">      de-duplicated (e.g. if the same leaf instance is reachable via multiple</span></span><br><span class="line"><span class="string">      modules then it will be yielded multiple times with different paths).</span></span><br><span class="line"><span class="string">    如果是True，则返回的key为tuple，包含多个元素；</span></span><br><span class="line"><span class="string">    如果是False，则只返回当前元素名称（即成员变量名称）</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    Flat generator for leaves of the current module and optionally all</span></span><br><span class="line"><span class="string">    submodules.</span></span><br><span class="line"><span class="string">    返回的是生成器(即yield结果)</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  <span class="keyword">if</span> predicate <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    predicate = <span class="keyword">lambda</span> _: <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> _flatten_module(</span><br><span class="line">      self,</span><br><span class="line">      recursive=recursive,</span><br><span class="line">      predicate=predicate,</span><br><span class="line">      attributes_to_ignore=self._TF_MODULE_IGNORED_PROPERTIES,</span><br><span class="line">      attribute_traversal_key=attribute_traversal_key,</span><br><span class="line">      with_path=with_path)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>_flatten_module</code> 源码分析</p>
+<ul>
+<li>几个理解重点：<ul>
+<li><code>vars</code>：内置函数，获取对象所有成员变量。</li>
+<li><code>id</code>：内置函数，获取对象内存地址。</li>
+<li><code>flatten_with_tuple_paths</code>：返回一组元组，每个元组包含属性path和属性值。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_flatten_module</span><span class="params">(module,</span></span></span><br><span class="line"><span class="function"><span class="params">                    recursive,</span></span></span><br><span class="line"><span class="function"><span class="params">                    predicate,</span></span></span><br><span class="line"><span class="function"><span class="params">                    attribute_traversal_key,</span></span></span><br><span class="line"><span class="function"><span class="params">                    attributes_to_ignore,</span></span></span><br><span class="line"><span class="function"><span class="params">                    with_path,</span></span></span><br><span class="line"><span class="function"><span class="params">                    module_path=<span class="params">()</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                    seen=None)</span>:</span></span><br><span class="line">  <span class="string">"""Implementation of `flatten`."""</span></span><br><span class="line">  <span class="keyword">if</span> seen <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    seen = set([id(module)])</span><br><span class="line"></span><br><span class="line">  module_dict = vars(module)</span><br><span class="line">  submodules = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> key <span class="keyword">in</span> sorted(module_dict, key=attribute_traversal_key):</span><br><span class="line">    <span class="keyword">if</span> key <span class="keyword">in</span> attributes_to_ignore:</span><br><span class="line">      <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> leaf_path, leaf <span class="keyword">in</span> nest.flatten_with_tuple_paths(module_dict[key]):</span><br><span class="line">      leaf_path = (key,) + leaf_path</span><br><span class="line"></span><br><span class="line">      <span class="comment"># TODO(tomhennigan) Handle cycles for `with_path=True` (e.g. `a.a = a`).</span></span><br><span class="line">      <span class="comment"># 在 with_path 为 False 时，确定每个leaf只迭代一次</span></span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">not</span> with_path:</span><br><span class="line">        leaf_id = id(leaf)</span><br><span class="line">        <span class="keyword">if</span> leaf_id <span class="keyword">in</span> seen:</span><br><span class="line">          <span class="keyword">continue</span></span><br><span class="line">        seen.add(leaf_id)</span><br><span class="line"></span><br><span class="line">      <span class="comment"># 判断当前成员变量/属性是否符合要求，符合则输出</span></span><br><span class="line">      <span class="keyword">if</span> predicate(leaf):</span><br><span class="line">        <span class="keyword">if</span> with_path:</span><br><span class="line">          <span class="keyword">yield</span> module_path + leaf_path, leaf</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">          <span class="keyword">yield</span> leaf</span><br><span class="line">      </span><br><span class="line">      <span class="comment"># 如果当前成员变量/属性是 `tf.Module`，则继续递归查询叶节点</span></span><br><span class="line">      <span class="keyword">if</span> recursive <span class="keyword">and</span> _is_module(leaf):</span><br><span class="line">        <span class="comment"># Walk direct properties first then recurse.</span></span><br><span class="line">        submodules.append((module_path + leaf_path, leaf))</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 递归查询叶节点</span></span><br><span class="line">  <span class="keyword">for</span> submodule_path, submodule <span class="keyword">in</span> submodules:</span><br><span class="line">    subvalues = _flatten_module(</span><br><span class="line">        submodule,</span><br><span class="line">        recursive=recursive,</span><br><span class="line">        predicate=predicate,</span><br><span class="line">        attribute_traversal_key=attribute_traversal_key,</span><br><span class="line">        attributes_to_ignore=submodule._TF_MODULE_IGNORED_PROPERTIES,</span><br><span class="line">        with_path=with_path,</span><br><span class="line">        module_path=submodule_path,</span><br><span class="line">        seen=seen)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> subvalue <span class="keyword">in</span> subvalues:</span><br><span class="line">      <span class="comment"># Predicate is already tested for these values.</span></span><br><span class="line">      <span class="keyword">yield</span> subvalue</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-tf-keras-layers-Layer"><a href="#2-tf-keras-layers-Layer" class="headerlink" title="2. tf.keras.layers.Layer"></a>2. tf.keras.layers.Layer</h2><h3 id="2-1-基本情况"><a href="#2-1-基本情况" class="headerlink" title="2.1. 基本情况"></a>2.1. 基本情况</h3><ul>
+<li>位于 <code>tensorflow.python.keras.engine.base_layer</code></li>
+<li>参考资料：<ul>
+<li><a href="https://blog.ddlee.cn/posts/4943e1b8/" target="_blank" rel="noopener">源码笔记 keras源码分析之Layer、Tensor和Node</a></li>
+<li><a href="https://blog.csdn.net/u012526436/article/details/98206560" target="_blank" rel="noopener">keras源码分析之Layer</a></li>
+</ul>
+</li>
+<li>概述：<ul>
+<li>所有layer的父类。</li>
+<li>继承了 <code>tf.Module</code>，但参数管理并没有使用 <code>tf.Module</code> 中那一套，而是自己构建的一套。</li>
+</ul>
+</li>
+<li>主要功能：<ul>
+<li>构建模型正向过程。</li>
+<li>参数管理（weight/loss/metric/update）。</li>
+</ul>
+</li>
+<li>自定义实现时，建议实现三个方法：<ul>
+<li><code>__init__()</code>：使用成员变量保存配置信息。</li>
+<li><code>build()</code>：在知道输入数据的shape和dtype后，在调用<code>__call__</code>时会调用一次该方法。</li>
+<li><code>call()</code>：在确认<code>build</code>被调用后，在<code>__call__</code>中被调用。</li>
+</ul>
+</li>
+<li>初始化方法<ul>
+<li>定义：<code>def __init__(self, trainable=True, name=None, dtype=None, **kwargs):</code></li>
+<li><code>kwargs</code> 可以设置的参数包括：<code>input_shape</code>, <code>batch_input_shape</code>, <code>batch_size</code>, <code>weights</code>, <code>activity_regularizer</code>。</li>
+<li>作用：看了源码，就是初始化了一大串成员变量，没什么太多值得一提的。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-call-方法"><a href="#2-2-call-方法" class="headerlink" title="2.2. __call__ 方法"></a>2.2. <code>__call__</code> 方法</h3><ul>
+<li>定义：<code>def __call__(self, inputs, *args, **kwargs):</code></li>
+<li>作用：模型的前向过程，主要就是调用了 <code>call</code> 方法，注意 <code>args</code> 和 <code>kwargs</code> 都是要导入 <code>call</code> 方法中的。</li>
+<li>相关方法：<ul>
+<li><code>__call__</code></li>
+<li><code>build</code></li>
+<li><code>call</code></li>
+</ul>
+</li>
+<li>流程：<ul>
+<li>将输入数据 <code>inputs</code> （如tuple, dict, 单个元素等）转换为 Python list。</li>
+<li>以下操作都包裹在 <code>name_scope(self.name)</code> 。<ul>
+<li>调用 <code>_maybe_build()</code>，其中查看<code>built</code>的取值，如果为True则直接返回。</li>
+<li>判断输入数据是否符合要求。</li>
+<li>调用 <code>call</code> 方法。</li>
+</ul>
+</li>
+<li>如果有 <code>_initial_weights</code> 则调用 <code>set_weights</code> 设置数据。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-config-相关"><a href="#2-3-config-相关" class="headerlink" title="2.3. config 相关"></a>2.3. config 相关</h3><ul>
+<li>概述：Layer的config是一个Python字典对象，可使用该对象reinstantiated相同的Layer对象。</li>
+<li>主要的参数就是：name, trainable, _batch_input_shape, dtype</li>
+<li>相关方法：<ul>
+<li><code>get_config</code>：获取dict对象。</li>
+<li><code>from_config</code>：通过dict对象和class类，获取一个新的对象。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-nodes-相关"><a href="#2-4-nodes-相关" class="headerlink" title="2.4. nodes 相关"></a>2.4. nodes 相关</h3><ul>
+<li>概述：用于处理Layer之间的相互连接关系。</li>
+<li>相关属性：<ul>
+<li><code>inbound_nodes</code>：其实就是调用了成员变量 <code>_inbound_nodes</code></li>
+<li><code>outbound_nodes</code>：其实就是调用了成员变量 <code>_outbound_nodes</code></li>
+<li><code>output_shape</code></li>
+<li><code>input_shape</code></li>
+<li><code>output</code></li>
+<li><code>input</code></li>
+</ul>
+</li>
+<li>相关方法：<ul>
+<li><code>_add_inbound_node</code></li>
+<li><code>get_input_shape_at</code></li>
+<li><code>get_output_shape_at</code></li>
+<li><code>get_input_at</code></li>
+<li><code>get_output_at</code></li>
+<li><code>get_input_mask_at</code></li>
+<li><code>get_output_mask_at</code></li>
+</ul>
+</li>
+<li><code>class Node</code><ul>
+<li>在 <code>Layer</code> 所在文件中定义。</li>
+<li>作用：连接多个Layer的就是Node。</li>
+<li><code>inbound_nodes</code> 是别的Layer连接到本Layer。</li>
+<li><code>outbound_nodes</code> 是本Layer连接到别的Layer。</li>
+<li>初始化参数：<ul>
+<li><code>outbound_layer</code>：输入 <code>input_tensors</code> 并得到 <code>output_tensors</code> 的层。</li>
+<li><code>inbound_layers</code>：Layer序列，长度与 <code>input_tensors</code> 相同，即得到每个 <code>input_tensor</code> 的来源。</li>
+<li><code>node_indices</code>：整数序列，长度与 <code>inbound_layers</code> 相同，与 <code>node_indices[i]</code> 中node对应 <code>input_tensors[i]</code>。</li>
+<li><code>tensor_indices</code>：整数序列，长度与 inbound_layers 相同，与 <code>input_tenosrs[i]</code>中output tensors 对应。</li>
+<li><code>input_tensors</code></li>
+<li><code>output_tensors</code></li>
+</ul>
+</li>
+<li>node 对象在 <code>call</code> 方法被调用时生成。</li>
+</ul>
+</li>
+<li>举例：若产生A层到B层的连接，则Node对象被建立，<code>A.outbound_nodes</code> 和 <code>B.inbound_nodes</code> 分别添加该Node。</li>
+<li>自己画了图感受了一下，猜测调用一次Layer就创建一个Node，像Siamese那样调用多次Layer就创建多个Node。</li>
+<li>input/output相关（包括大多数shape相关）属性/操作都是调用了 <code>inbound_nodes</code> 来处理。</li>
+</ul>
+<h3 id="2-6-参数管理"><a href="#2-6-参数管理" class="headerlink" title="2.6. 参数管理"></a>2.6. 参数管理</h3><ul>
+<li>weights<ul>
+<li>也就是 <code>variables</code> 的别名</li>
+<li>从底层实现来看，包括当前Layer直接保存的weights和当前Layer包含的其他layers对象中的weights参数。</li>
+<li>当前Layer的weights主要保存在 <code>_trainable_weights</code> 和 <code>_non_trainable_weights</code> 两个序列中。</li>
+<li>相关方法：<ul>
+<li><code>add_wegiht</code>：类似于 <code>tf.get_variable</code>，创建好后加入上述对应序列中。</li>
+<li><code>set_weights</code>：通过ndarray对象赋值。</li>
+<li><code>get_weights</code>：获取得到 ndarray 结果。</li>
+</ul>
+</li>
+<li>相关属性<ul>
+<li><code>trainable_weights</code>：获取本Layer以及其他Layer的所有trainable weights。</li>
+<li><code>non_trainable_weights</code>：获取本Layer以及其他Layer的所有non_trainable weights。</li>
+<li><code>weights</code>：上述两个属性的集合。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>loss<ul>
+<li>对应了三个成员变量，分别是 <code>_losses</code>, <code>_eager_losses</code>, <code>callable_losses</code>。第三个参数一般就是 regularizer。</li>
+<li>相关属性 - <code>losses</code>：<ul>
+<li>分为当前Layer losses以及子Layer losses。</li>
+<li>当前Layer Losses：根据是否是eager模式获取 <code>_losses</code> 或 <code>_eager_losses</code>，之后通过 <code>_callable_losses</code> 获取对应数据。</li>
+<li>子Layer Losses 类似。</li>
+</ul>
+</li>
+<li>相关方法：<ul>
+<li><code>add_loss</code>：eager模式下不支持。输入数据可以是tensors，也可以是无参数的callable对象，确定类型后添加到对应的序列中。</li>
+<li><code>get_loss_for(self, inputs)</code>：<ul>
+<li>与对应 inputs 对应的losses。</li>
+<li>如果inputs为空，则返回所有 <code>_unconditional_loss</code>。</li>
+<li>通过 <code>tf_utils.get_reachable_from_inputs</code> 获取所有能够连接到的tensor，判断<code>losses</code>中哪些是能够连接到的tensor，并返回。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>update<ul>
+<li>用于存储weights更新操作，如BN。</li>
+<li>相关方法：<ul>
+<li><code>add_update</code>：将输入的updates存入<code>_updates</code>中，并根据是否输入inputs设置对应的<code>_unconditional_update</code>属性。</li>
+<li><code>get_updates_for</code>：如果输入inputs为None，则输入所有<code>_unconditional_update</code>为True的updates；如果inputs不为None，则通过<code>tf_utils.get_reachable_from_inputs</code>获取对应的updates。</li>
+</ul>
+</li>
+<li>相关属性：<ul>
+<li>成员变量<code>_updates</code>：保存当前Layer的相关操作。</li>
+<li><code>updates</code>：会返回当前Layer以及对应子Layer的所有updates。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>metric<ul>
+<li>性能指标没有属性，只有成员变量<code>_metrics</code>以及<code>_metrics_tensors</code>。</li>
+<li>相关方法：<code>add_metric(add_metric(self, value, aggregation=None, name=None))</code><ul>
+<li><code>value</code>是tensor，也没啥难度。获取tensor和对应updates应该是在之前做的。</li>
+</ul>
+</li>
+<li>相关属性：<ul>
+<li><code>_metrics</code>：list</li>
+<li><code>_metrics_tensors</code>：dict，key是string，value是tensor。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Network"><a href="#3-Network" class="headerlink" title="3. Network"></a>3. Network</h2><h3 id="3-1-基本情况"><a href="#3-1-基本情况" class="headerlink" title="3.1. 基本情况"></a>3.1. 基本情况</h3><ul>
+<li>位于 <code>tensorflow.python.keras.engine.network</code></li>
+<li>概述：<code>Network</code> 是由一系列 <code>Layer</code> 的拓扑组成。<code>Model</code> 对象仅仅是在 <code>Network</code> 的基础上加上一些训练过程。</li>
+<li>作用：使用keras构建模型其实就是构建了一个 <code>Network</code> 对象。</li>
+<li>Network提供了两种构建模型的方式<ul>
+<li>Graph Networks：就是使用 functional api 构建模型。</li>
+<li>Subclass Networks：新建class（继承<code>tf.keras.Model</code>）。</li>
+</ul>
+</li>
+<li>Graph Networks 支持的但 Subclass Networks 不支持的特性：<ul>
+<li>Model cloning (<code>keras.models.clone</code>)</li>
+<li>Serialization (<code>model.get_config()/from_config</code>, <code>model.to_json()/to_yaml()</code></li>
+<li>Whole-model saving (<code>model.save()</code>)</li>
+</ul>
+</li>
+<li>Subclass Networks 模式可通过 name/dynamic 来创建对象。</li>
+<li>初始化源码分析<ul>
+<li>作用：<ul>
+<li>通过输入参数，确定是使用 Graph Network 还是 Subclassed Network。</li>
+<li>确认无 legacy layers，好像意思就是 <code>tf.layers.Layers</code> 中的对象。</li>
+</ul>
+</li>
+<li>使用 Graph Network 的情况：<ul>
+<li>可变参数数量为2。</li>
+<li>可变参数数量为1且命名参数中存在 <code>outputs</code>。</li>
+<li>可变查宿数量为0且命名参数中存在 <code>inputs</code> 和 <code>outputs</code>。</li>
+</ul>
+</li>
+<li>除上述情况外，其他均使用 Subclassed Network。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span>  <span class="comment"># pylint: disable=super-init-not-called</span></span><br><span class="line">    <span class="comment"># Signature detection</span></span><br><span class="line">    <span class="keyword">if</span> (len(args) == <span class="number">2</span> <span class="keyword">or</span></span><br><span class="line">        len(args) == <span class="number">1</span> <span class="keyword">and</span> <span class="string">'outputs'</span> <span class="keyword">in</span> kwargs <span class="keyword">or</span></span><br><span class="line">        <span class="string">'inputs'</span> <span class="keyword">in</span> kwargs <span class="keyword">and</span> <span class="string">'outputs'</span> <span class="keyword">in</span> kwargs):</span><br><span class="line">      <span class="comment"># Graph network</span></span><br><span class="line">      self._init_graph_network(*args, **kwargs)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      <span class="comment"># Subclassed network</span></span><br><span class="line">      self._init_subclassed_network(**kwargs)</span><br><span class="line">    </span><br><span class="line">    tf_utils.assert_no_legacy_layers(self.layers)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-Graph-Network-初始化"><a href="#3-2-Graph-Network-初始化" class="headerlink" title="3.2. Graph Network 初始化"></a>3.2. Graph Network 初始化</h3><ul>
+<li>流程：<ul>
+<li>命名参数确认：只允许有 name/trainable 这两个命名参数，其他参数均不允许。</li>
+<li>输入输出初始化。<ul>
+<li>包括为所有 outputs 设置 <code>create_keras_history</code> 属性。</li>
+</ul>
+</li>
+<li>基本初始化（与 Subclassed Model 通用）：初始化了一票成员变量。</li>
+<li>判断输入输出是否合法。<ul>
+<li>每个输入tensor不能重复出现，否则抛出异常。</li>
+<li>每个输入tensor必须有 <code>_keras_history</code>，否则抛出异常。</li>
+<li>每个输入必须是 input tensor，否则输出 warning 日志。</li>
+<li>所有输入的batch size应该不矛盾，否则。</li>
+<li>每个输出tensor必须有 <code>_keras_history</code>，否则抛出异常。</li>
+</ul>
+</li>
+<li>初始化一票成员变量。</li>
+<li>获取所有相关的nodes和layers。<ul>
+<li>感觉大概就是从 outputs 开始，使用DFS往前找Layer和Node。</li>
+<li>把找到的nodes和layers存放到对应的成员被变量中。</li>
+</ul>
+</li>
+<li>创建Node，关联inputs和outputs。</li>
+<li>设置 <code>input_names</code> 和 <code>output_names</code>。</li>
+</ul>
+</li>
+<li>正向流程：<ul>
+<li>相关函数<code>call</code>，其中主要就是调用了 <code>_run_internal_graph</code> 方法。</li>
+<li><code>_run_internal_graph</code> 方法的主要流程就是 Depth 依次获取各层nodes，然后依次调用layer计算output tensors。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-Subclassed-Network-初始化"><a href="#3-3-Subclassed-Network-初始化" class="headerlink" title="3.3. Subclassed Network 初始化"></a>3.3. Subclassed Network 初始化</h3><ul>
+<li>好像没啥多的工作。</li>
+<li><code>def build(self, input_shape):</code> 方法：<ul>
+<li>作用：根据 input shapes 构建模型，用于 Subclassed Network。</li>
+<li>在实现过程中，是创建了 <code>tf.placeholder</code> 后调用 <code>call</code> 方法。  </li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-config-相关"><a href="#3-4-config-相关" class="headerlink" title="3.4. config 相关"></a>3.4. config 相关</h3><ul>
+<li>相关方法：<code>to_json</code>, <code>to_yaml</code>, <code>get_config</code>, <code>from_config</code>。</li>
+<li>作用：获取模型的配置文件（json/yaml 形式），可以通过这个配置文件重新获取模型。</li>
+</ul>
+<h3 id="3-5-模型权重相关"><a href="#3-5-模型权重相关" class="headerlink" title="3.5. 模型权重相关"></a>3.5. 模型权重相关</h3><ul>
+<li>相关方法：<code>save</code>, <code>save_weights</code>, <code>load_weights</code></li>
+<li>相关属性：<code>trainable_weights</code>，<code>non_trainable_weights</code>, <code>weights</code><ul>
+<li><code>weights</code>：所有<code>_layers</code>的weights以及当前Model的weights。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-6-Layers-相关"><a href="#3-6-Layers-相关" class="headerlink" title="3.6. Layers 相关"></a>3.6. Layers 相关</h3><ul>
+<li>相关属性：<code>layers</code></li>
+<li>相关方法：<code>get_layer</code></li>
+<li>概述：<ul>
+<li>在构建模型的过程中初始化了 <code>_layers</code> 成员变量。</li>
+<li><code>get_layer</code> 就是根据名称来获取对应的对象。</li>
+<li><code>layers</code> 就是在 <code>_layers</code> 的基础上过滤掉 Layer-like containers。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-7-summary"><a href="#3-7-summary" class="headerlink" title="3.7. summary"></a>3.7. summary</h3><ul>
+<li>作用：打印网络信息。</li>
+<li>细节：<ul>
+<li>必须在调用过 <code>build</code> 方法后使用，否则报错。</li>
+<li>可以选择每行输出长度、输出信息位置、输出方法（默认使用<code>print</code>）。</li>
+<li>输出信息主要包括 Layer type, output shape, param, connected to 四个方面，分别使用 <code>layer.name + &#39;(&#39; + layer.__class__.__name__ + &#39;)&#39;</code>, <code>layer.output_shape</code>, <code>layer.count_params()</code> 来获取。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-tf-keras-Model"><a href="#4-tf-keras-Model" class="headerlink" title="4. tf.keras.Model"></a>4. tf.keras.Model</h2><h3 id="4-1-概述"><a href="#4-1-概述" class="headerlink" title="4.1. 概述"></a>4.1. 概述</h3><ul>
+<li>功能：在 Module 的基础上增加一系列模型训练、预测、评估相关的操作。</li>
+<li>主要模块：<ul>
+<li>distribution_strategy 相关。<ul>
+<li>在 TF2.x中，<code>distribute</code> 不可用，需要使用 distribution strategy scope 替代。</li>
+<li>如 <code>get_weights</code>, <code>load_weights</code>。</li>
+</ul>
+</li>
+<li><code>compile</code></li>
+<li><code>metrics</code>, <code>metrics_names</code>, <code>reset_metrics</code></li>
+<li><code>fit</code>, <code>fit_generator</code>, <code>train_on_batch</code></li>
+<li><code>evaluate</code>, <code>evaluate_generator</code></li>
+<li><code>predict</code>, <code>predict_generator</code>, <code>predict_on_batch</code>, <code>test_on_batch</code></li>
+</ul>
+</li>
+<li>这些都不是模型相关，而是训练/预测/评估相关，这不是本文的主要内容。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/源码分析/" rel="tag"># 源码分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/11/python/manual/python-manual-7/" rel="next" title="Python 手册(7) 函数&装饰器">
+                <i class="fa fa-chevron-left"></i> Python 手册(7) 函数&装饰器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-tf-Module"><span class="nav-text">1. tf.Module</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-基本情况"><span class="nav-text">1.1. 基本情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-功能简介"><span class="nav-text">1.2. 功能简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-参数、子模块代码分析"><span class="nav-text">1.3. 参数、子模块代码分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-tf-keras-layers-Layer"><span class="nav-text">2. tf.keras.layers.Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本情况"><span class="nav-text">2.1. 基本情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-call-方法"><span class="nav-text">2.2. __call__ 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-config-相关"><span class="nav-text">2.3. config 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-nodes-相关"><span class="nav-text">2.4. nodes 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-参数管理"><span class="nav-text">2.6. 参数管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Network"><span class="nav-text">3. Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-基本情况"><span class="nav-text">3.1. 基本情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Graph-Network-初始化"><span class="nav-text">3.2. Graph Network 初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Subclassed-Network-初始化"><span class="nav-text">3.3. Subclassed Network 初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-config-相关"><span class="nav-text">3.4. config 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-模型权重相关"><span class="nav-text">3.5. 模型权重相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-Layers-相关"><span class="nav-text">3.6. Layers 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-summary"><span class="nav-text">3.7. summary</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-tf-keras-Model"><span class="nav-text">4. tf.keras.Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-概述"><span class="nav-text">4.1. 概述</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
