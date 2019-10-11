@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简单介绍Python中的函数和装饰器">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 手册(7) 函数&amp;装饰器">
+<meta property="og:url" content="http://yoursite.com/2019/10/11/python/manual/python-manual-7/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="简单介绍Python中的函数和装饰器">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-11T06:58:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 手册(7) 函数&amp;装饰器">
+<meta name="twitter:description" content="简单介绍Python中的函数和装饰器">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/11/python/manual/python-manual-7/">
+
+
+
+
+
+  <title>Python 手册(7) 函数&装饰器 | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/11/python/manual/python-manual-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 手册(7) 函数&装饰器</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-11T14:58:19+08:00">
+                2019-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/手册/" itemprop="url" rel="index">
+                    <span itemprop="name">手册</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  简单介绍Python中的函数和装饰器
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>参考资料：<ul>
+<li>《流畅的Python》第五、六、七章</li>
+<li>《Python Cookbook》第七、九章</li>
+<li>《深入理解Python特性》第三章</li>
+</ul>
+</li>
+<li>TODO（目前不太关心的）：<ul>
+<li>标准库里有很多内置的装饰器。 </li>
+<li>闭包没有具体展开。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-函数"><a href="#1-函数" class="headerlink" title="1. 函数"></a>1. 函数</h2><h3 id="1-1-基本概念"><a href="#1-1-基本概念" class="headerlink" title="1.1. 基本概念"></a>1.1. 基本概念</h3><ul>
+<li>（编程语言中的）一等对象：运行时创建、能赋值给变量或数据结构中的元素、能作为参数传给函数、能作为函数返回结果。</li>
+<li>函数是一等对象。<ul>
+<li>高阶函数：接受函数作为参数，或把函数作为结果返回的函数。</li>
+<li>函数对象及其名称是相互独立的实体，换句话说，指向函数的变量和函数本身实际上是彼此独立的。</li>
+</ul>
+</li>
+<li><strong>闭包</strong>：<ul>
+<li>即词法闭包，在程序流不在闭包范围内的情况下，也能记住封闭作用域中的值。</li>
+<li>内部函数不仅可以从父函数返回，还可以捕获并携带父函数的某些状态。</li>
+</ul>
+</li>
+<li>普通对象也可以作为函数使用，即有些对象不是函数，也可以调用。<ul>
+<li>实现方式：实现<code>__call__</code> 方法。</li>
+<li>其他：Python内置函数 <code>callable</code> 用于检查一个对象是否可以调用。</li>
+<li>可调用函数包括：用于定义的函数、内置函数、内置方法、方法、类、类的实例、生成器函数。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-lambda-表达式"><a href="#1-2-lambda-表达式" class="headerlink" title="1.2. lambda 表达式"></a>1.2. lambda 表达式</h3><ul>
+<li>作用：快速声明小型匿名函数，根据功能也有人称之为<strong>单表达式函数</strong>。<ul>
+<li>匿名函数：猜测就是没有函数名的函数。</li>
+<li>与匿名函数相对的是<strong>具名函数</strong>。</li>
+<li>lambda只是语法糖。</li>
+</ul>
+</li>
+<li>实例：<code>(lambda x, y: x+y)(5, 3)</code></li>
+<li>使用场景：<ul>
+<li>可迭代对象进行排序时，使用lambda表达式定义简短的key函数，如 <code>sorted(ruples, key=lambda x: x[1])</code></li>
+<li>其他好像推荐用得比较少。</li>
+</ul>
+</li>
+<li>注意事项：<ul>
+<li>不应过度使用 lambda。</li>
+<li>使用前总是先问问自己：使用普通具名函数或列表解析式是否更加清晰。</li>
+</ul>
+</li>
+<li>在匿名函数中绑定变量的值：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果直接使用，则不会记住变量的值，而是跟变量一起变化</span></span><br><span class="line">x = <span class="number">10</span></span><br><span class="line">a = labmda y: x + y</span><br><span class="line">x = <span class="number">20</span></span><br><span class="line">b = <span class="keyword">lambda</span> y: x + y</span><br><span class="line">a(<span class="number">10</span>) <span class="comment"># 30</span></span><br><span class="line">b(<span class="number">10</span>) <span class="comment"># 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以设置默认参数来实现</span></span><br><span class="line">x = <span class="number">10</span></span><br><span class="line">a = labmda y, x=x: x + y</span><br><span class="line">x = <span class="number">20</span></span><br><span class="line">b = <span class="keyword">lambda</span> y, x=x: x + y</span><br><span class="line">a(<span class="number">10</span>) <span class="comment"># 20</span></span><br><span class="line">b(<span class="number">10</span>) <span class="comment"># 30</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="1-3-和"><a href="#1-3-和" class="headerlink" title="1.3. * 和 **"></a>1.3. * 和 **</h3><ul>
+<li>作为函数参数时，经常使用<code>*args</code>和<code>**kwargs</code>这两种形式，功能是让函数接受<strong>可选</strong>参数，使得代码更灵活。<ul>
+<li>args和kwargs只是约定俗成的名称，可以修改。</li>
+<li><code>*args</code>获取的对象是元组，<code>**kwargs</code>获取的对象是字典。</li>
+</ul>
+</li>
+<li>可用于解包<ul>
+<li><code>*</code>可用于解包序列。</li>
+<li><code>**</code>可用于解包字典。</li>
+<li>高效参数解包有助于模块和函数编写更灵活。</li>
+</ul>
+</li>
+<li>以<code>*</code>打头的参数只能作为最后一个位置参数，但可以存在其他参数；以<code>**</code>打头的参数只能作为最后一个参数出现。<ul>
+<li><code>def f(x, *args, y)</code> 是允许的。</li>
+</ul>
+</li>
+<li>单独的星号可以作为分隔符，用于分隔位置参数与命名关键字参数。<ul>
+<li>星号本身不是参数。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-变量作用域"><a href="#1-4-变量作用域" class="headerlink" title="1.4. 变量作用域"></a>1.4. 变量作用域</h3><ul>
+<li>从作用域角度看，变量分为局部变量和全局变量。</li>
+<li>函数内部出现的变量默认为局部变量。<ul>
+<li>如果同名局部变量不存在，且存在同名全局变量，也不会直接调用全局变量。</li>
+<li>如果想在局部作用域中使用全局变量，必须在局部作用域中先使用<code>global</code>关键字声明全局变量<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1</span></span><br><span class="line">b = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">()</span>:</span></span><br><span class="line">    c = <span class="number">3</span></span><br><span class="line">    <span class="keyword">global</span> b</span><br><span class="line">    print(a) <span class="comment"># 报错，无法直接获取全局变量</span></span><br><span class="line">    print(b) <span class="comment"># 正常，因为已经在局部作用域中声明了全局变量</span></span><br><span class="line">    print(c) <span class="comment"># 正常，直接调用局部变量</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-装饰器"><a href="#2-装饰器" class="headerlink" title="2. 装饰器"></a>2. 装饰器</h2><h3 id="2-1-基本概念"><a href="#2-1-基本概念" class="headerlink" title="2.1. 基本概念"></a>2.1. 基本概念</h3><ul>
+<li>作用：<ul>
+<li>用来临时扩展和修改可调用对象（函数、方法、类）的行为，同时又不会永久修改可调用对象本身。</li>
+<li>将通用功能应用到现有的类或函数的行为上。</li>
+</ul>
+</li>
+<li>应用举例：日志、访问控制与授权、计算执行时间、限制请求速率、缓存。</li>
+<li>本质：<ul>
+<li>定义内部函数，扩充原函数的功能，并替代原函数。</li>
+<li>装饰器就是语法糖，简化上述过程。</li>
+</ul>
+</li>
+<li>多装饰器修饰应用顺序从下到上，可称为<strong>装饰器栈</strong>。</li>
+</ul>
+<h3 id="2-2-基本形式举例"><a href="#2-2-基本形式举例" class="headerlink" title="2.2. 基本形式举例"></a>2.2. 基本形式举例</h3><h4 id="2-2-1-形式一：最简单的装饰器，不实现任何功能。"><a href="#2-2-1-形式一：最简单的装饰器，不实现任何功能。" class="headerlink" title="2.2.1 形式一：最简单的装饰器，不实现任何功能。"></a>2.2.1 形式一：最简单的装饰器，不实现任何功能。</h4><ul>
+<li>该装饰器不能实现任何功能，只是用于帮助理解装饰器本质。</li>
+<li>从该实例可以看出，装饰器其实就是语法糖。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">null_decorator</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> func</span><br><span class="line"></span><br><span class="line"><span class="meta">@null_decorator</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greet</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello!'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 上面这种装饰器语法等价于下面的方法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greet</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello!'</span></span><br><span class="line">greet = null_decorator(greet)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="2-2-2-形式二：装饰器的基本形式。"><a href="#2-2-2-形式二：装饰器的基本形式。" class="headerlink" title="2.2.2. 形式二：装饰器的基本形式。"></a>2.2.2. 形式二：装饰器的基本形式。</h4><ul>
+<li>实际起作用的装饰器形式如下。</li>
+<li>从该实例中可以参数，基本装饰器就是定义内部函数，通过内部函数来扩充源函数的功能。</li>
+<li>通常，装饰器会把函数替换成另一个函数。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uppercase</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">        original_result = func()</span><br><span class="line">        modified_result = original_result.upper()</span><br><span class="line">        <span class="keyword">return</span> modified_result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@uppercase</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greet</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello!'</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="2-2-3-形式三：参数化装饰器。"><a href="#2-2-3-形式三：参数化装饰器。" class="headerlink" title="2.2.3. 形式三：参数化装饰器。"></a>2.2.3. 形式三：参数化装饰器。</h4><ul>
+<li>直观的看，所谓参数化装饰器，其实就是定义了内部函数的内部函数。</li>
+<li>另外一种理解参数化装饰器，其实就是构建一个装饰器工厂函数，把参数传给它，返回一个装饰器。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">registry = set()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">(active=True)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorate</span><span class="params">(func)</span>:</span></span><br><span class="line">        print(<span class="string">'running register(active=%s)-&gt;decorate(%s)'</span> % (active, func))</span><br><span class="line">        <span class="keyword">if</span> active:</span><br><span class="line">            registry.add(func)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            registry.discard(func)</span><br><span class="line">        <span class="keyword">return</span> func</span><br><span class="line">    <span class="keyword">return</span> decorate</span><br><span class="line"></span><br><span class="line"><span class="meta">@register(active=False)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'running f1()'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@register() # 注意，这里不能少了括号，否则报错</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'running f2()'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f3</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'running f3()'</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="2-2-4-形式四：多种形式装饰器。"><a href="#2-2-4-形式四：多种形式装饰器。" class="headerlink" title="2.2.4. 形式四：多种形式装饰器。"></a>2.2.4. 形式四：多种形式装饰器。</h4><ul>
+<li>编写一个单独的装饰器，既可以使用<code>@decorator</code>，也可以使用<code>@decorator(x, y, z)</code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logged</span><span class="params">(func=None, *, level=logging.DEBUG, name=None, message=None)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> func <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> partial(logged, level=level, name=name, message=message)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="2-2-5-形式五：类中定义装饰器。"><a href="#2-2-5-形式五：类中定义装饰器。" class="headerlink" title="2.2.5. 形式五：类中定义装饰器。"></a>2.2.5. 形式五：类中定义装饰器。</h4><ul>
+<li>其实 <code>@property</code> 也是使用类实现的。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator1</span><span class="params">(self, func)</span>:</span></span><br><span class="line"><span class="meta">        @wraps(func)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">            print(<span class="string">'Decorator 1'</span>)</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decorator2</span><span class="params">(cls, func)</span>:</span></span><br><span class="line"><span class="meta">        @wraps(func)</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">            print(<span class="string">'Decorator 2'</span>)</span><br><span class="line">            <span class="keyword">return</span> func(*args, **kwargs)</span><br><span class="line">        <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line"></span><br><span class="line"><span class="meta">@a.decorator1</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greet</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello!'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@A.decorator2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">spam</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="2-3-装饰器执行时间"><a href="#2-3-装饰器执行时间" class="headerlink" title="2.3. 装饰器执行时间"></a>2.3. 装饰器执行时间</h3><ul>
+<li>装饰器的一个关键特性，是在<strong>被装饰的函数定义之后立即执行</strong>，通常是在导入时。</li>
+<li>换个说法：函数装饰器在导入模块时立即执行，而被装饰的函数只在明确调用时运行。</li>
+<li>这突出了Python程序员所说的<strong>导入时</strong>和<strong>运行时</strong>之间的区别。</li>
+<li>具体查看以下实例：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">(func)</span>:</span></span><br><span class="line">    print(<span class="string">'running register(%s)'</span> % func)</span><br><span class="line">    <span class="keyword">return</span> func</span><br><span class="line"></span><br><span class="line"><span class="meta">@register</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'running f1()'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@register</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'running f2()'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'running main()'</span>)</span><br><span class="line">    f1()</span><br><span class="line">    f2()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出结果</span></span><br><span class="line"><span class="comment"># running register(&lt;function f1 at xxx&gt;)</span></span><br><span class="line"><span class="comment"># running register(&lt;function f2 at xxx&gt;)</span></span><br><span class="line"><span class="comment"># running main()</span></span><br><span class="line"><span class="comment"># running f1()</span></span><br><span class="line"><span class="comment"># running f2()</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="2-5-无法调试（无法获取元数据）"><a href="#2-5-无法调试（无法获取元数据）" class="headerlink" title="2.5. 无法调试（无法获取元数据）"></a>2.5. 无法调试（无法获取元数据）</h3><ul>
+<li>如果使用最朴素的方法定义装饰器，可能会导致函数<strong>无法调试</strong>，即函数的元数据（如文档、原函数名称、参数列表）被隐藏。<ul>
+<li>解决方案：使用<code>functools.wraps</code>装饰器，如下例子。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uppercase</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">return</span> func().upper()</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/26/python/manual/python-manual-6/" rel="next" title="Python手册(6) cv2">
+                <i class="fa fa-chevron-left"></i> Python手册(6) cv2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-函数"><span class="nav-text">1. 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-基本概念"><span class="nav-text">1.1. 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-lambda-表达式"><span class="nav-text">1.2. lambda 表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-和"><span class="nav-text">1.3. * 和 **</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-变量作用域"><span class="nav-text">1.4. 变量作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-装饰器"><span class="nav-text">2. 装饰器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本概念"><span class="nav-text">2.1. 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-基本形式举例"><span class="nav-text">2.2. 基本形式举例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-形式一：最简单的装饰器，不实现任何功能。"><span class="nav-text">2.2.1 形式一：最简单的装饰器，不实现任何功能。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-形式二：装饰器的基本形式。"><span class="nav-text">2.2.2. 形式二：装饰器的基本形式。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-形式三：参数化装饰器。"><span class="nav-text">2.2.3. 形式三：参数化装饰器。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-形式四：多种形式装饰器。"><span class="nav-text">2.2.4. 形式四：多种形式装饰器。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-5-形式五：类中定义装饰器。"><span class="nav-text">2.2.5. 形式五：类中定义装饰器。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-装饰器执行时间"><span class="nav-text">2.3. 装饰器执行时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-无法调试（无法获取元数据）"><span class="nav-text">2.5. 无法调试（无法获取元数据）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
