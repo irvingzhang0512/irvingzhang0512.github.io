@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍Python中MySQL的基本使用（SQLAlchemy包）">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python手册(8) MySQL">
+<meta property="og:url" content="http://yoursite.com/2019/10/12/python/manual/python-manual-8/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="介绍Python中MySQL的基本使用（SQLAlchemy包）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-12T00:45:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python手册(8) MySQL">
+<meta name="twitter:description" content="介绍Python中MySQL的基本使用（SQLAlchemy包）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/12/python/manual/python-manual-8/">
+
+
+
+
+
+  <title>Python手册(8) MySQL | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/12/python/manual/python-manual-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python手册(8) MySQL</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-12T08:45:17+08:00">
+                2019-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/手册/" itemprop="url" rel="index">
+                    <span itemprop="name">手册</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  994
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  介绍Python中MySQL的基本使用（SQLAlchemy包）
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>安装MySQL驱动：<code>pip install pymysql</code></li>
+<li>安装ORM框架：<code>pip install sqlalchemy</code></li>
+<li>SQLAlchemy资料：<ul>
+<li><a href="http://docs.sqlalchemy.org/en/latest/intro.html" target="_blank" rel="noopener">文档</a></li>
+<li><a href="http://docs.sqlalchemy.org/en/latest/orm/tutorial.html" target="_blank" rel="noopener">Tutorial</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-SQLAlchemy-的基本使用"><a href="#1-SQLAlchemy-的基本使用" class="headerlink" title="1. SQLAlchemy 的基本使用"></a>1. SQLAlchemy 的基本使用</h2><h3 id="1-1-创建engine"><a href="#1-1-创建engine" class="headerlink" title="1.1. 创建engine"></a>1.1. 创建engine</h3><ul>
+<li>主要两个功能：<ol>
+<li>构建MySQL的URL，格式为<code>数据库类型+数据库驱动名称://用户名:口令@机器地址:端口号/数据库名</code></li>
+<li>在URL中处理编码问题，具体参考 <a href="http://blog.51cto.com/firefish/112794" target="_blank" rel="noopener">这里</a>。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"></span><br><span class="line"><span class="comment"># echo如果为True，则后续操作会输出很多日志，看需求</span></span><br><span class="line">engine = create_engine(<span class="string">"mysql+pymysql://root:123456@0.0.0.0/db_name?charset=utf8"</span>, encoding=<span class="string">'utf8'</span>, echo=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="1-2-创建表映射-amp-新建表"><a href="#1-2-创建表映射-amp-新建表" class="headerlink" title="1.2. 创建表映射 &amp; 新建表"></a>1.2. 创建表映射 &amp; 新建表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String, Float</span><br><span class="line"></span><br><span class="line">Base = declarative_base()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 表结构</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTable</span><span class="params">(Base)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'t_table_name'</span></span><br><span class="line">    id = Column(Integer, primary_key=<span class="literal">True</span>, autoincrement=<span class="literal">True</span>)</span><br><span class="line">    name = Column(String(<span class="number">32</span>))</span><br><span class="line">    unit_price = Column(Float)</span><br><span class="line">    address = Column(String(<span class="number">255</span>))</span><br><span class="line">    comment = Column(String(<span class="number">255</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建表</span></span><br><span class="line">Base.metadata.create_all(engine)</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-建立数据库记录实例"><a href="#1-3-建立数据库记录实例" class="headerlink" title="1.3. 建立数据库记录实例"></a>1.3. 建立数据库记录实例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">record = MyTable(name=<span class="string">"XX小区"</span>, unit_price=<span class="number">22000.5</span>, address=<span class="string">"中山路50号"</span>, comment=<span class="string">"其他信息"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-创建会话实例"><a href="#1-4-创建会话实例" class="headerlink" title="1.4. 创建会话实例"></a>1.4. 创建会话实例</h3><ul>
+<li><p>提供了两种方式进行操作，下面分别介绍。</p>
+</li>
+<li><p>使用Session实例，通过ORM或SQL语句的方式操作数据库。</p>
+<ul>
+<li>session操作要通过<code>commit</code>提交。在使用完session实例后，要调用<code>close</code>关闭。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建Session实例</span></span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</span><br><span class="line">Session = sessionmaker(bind=engine)</span><br><span class="line">session = Session()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Insert操作</span></span><br><span class="line"><span class="comment"># 流程：先建立数据库记录实例，再通过`session`的`add`添加一条记录，通过`add_all`实现批量添加。</span></span><br><span class="line">record = MyTable(name=<span class="string">"XX"</span>, unit_price=<span class="number">22000.5</span>, address=<span class="string">"50"</span>, comment=<span class="string">"other"</span>)</span><br><span class="line">session.add(record)</span><br><span class="line">session.add_all([MyTable(name=<span class="string">"XXX小区"</span>, unit_price=<span class="number">3000.5</span>, address=<span class="string">"建国路50号"</span>, comment=<span class="string">"其他信息"</span>),</span><br><span class="line">                MyTable(name=<span class="string">"XXXX小区"</span>, unit_price=<span class="number">41000.5</span>, address=<span class="string">"和平路50号"</span>, comment=<span class="string">"其他信息"</span>),</span><br><span class="line">                MyTable(name=<span class="string">"XXXXX小区"</span>, unit_price=<span class="number">13000.5</span>, address=<span class="string">"天目山路50号"</span>, comment=<span class="string">"其他信息"</span>)])</span><br><span class="line">session.commit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Select操作</span></span><br><span class="line"><span class="comment"># 流程：通过session的`query`获取查询结果，对结果通过`filter`筛选，得到数据库记录实例。</span></span><br><span class="line">q = session.query(MyTable)</span><br><span class="line">q = q.filter(MyTable.id==<span class="number">5</span>)</span><br><span class="line">record = q.one()</span><br><span class="line">print(record.id, record.name, record.address, record.comment)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Update操作</span></span><br><span class="line"><span class="comment"># 流程：先通过Select操作获取数据库记录实例，修改实例变量，再提交。</span></span><br><span class="line">record.name = <span class="string">'UPDATE NAME'</span></span><br><span class="line">session.commit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Delete操作</span></span><br><span class="line"><span class="comment"># 流程：先通过Select获取数据库实例，再通过`session`的`delete`函数删除。</span></span><br><span class="line">session.delete(record)</span><br><span class="line">session.commit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 直接执行SQL语句</span></span><br><span class="line">session.execute(<span class="string">'SELECT * FROM t_user'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>使用Connection实例，直接通过SQL语句操作数据库。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接执行sql语句</span></span><br><span class="line"><span class="keyword">with</span> engine.connect() <span class="keyword">as</span> con:</span><br><span class="line">    rs = con.execute(<span class="string">'SELECT * FROM t_user'</span>)</span><br><span class="line">    data = rs.fetchone()[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="2-小功能"><a href="#2-小功能" class="headerlink" title="2. 小功能"></a>2. 小功能</h2><h3 id="2-1-自动设置-DateTime-相关字段"><a href="#2-1-自动设置-DateTime-相关字段" class="headerlink" title="2.1. 自动设置 DateTime 相关字段"></a>2.1. 自动设置 DateTime 相关字段</h3><ul>
+<li>主要参考<a href="https://blog.csdn.net/kuangshp128/article/details/85700701" target="_blank" rel="noopener">这篇博客</a></li>
+<li>注意 onupdate 字段，具体参考下面代码<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> uuid <span class="keyword">import</span> uuid4</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String, DateTime, Boolean, TIMESTAMP, func</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> relationship</span><br><span class="line"><span class="keyword">from</span> sqlalchemy_demo.connect <span class="keyword">import</span> Base</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserModule</span><span class="params">(Base)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'user'</span></span><br><span class="line"></span><br><span class="line">    uuid = Column(String(<span class="number">36</span>), unique=<span class="literal">True</span>, nullable=<span class="literal">False</span>, default=<span class="keyword">lambda</span>: str(uuid4()), comment=<span class="string">'uuid'</span>)</span><br><span class="line">    id = Column(Integer, primary_key=<span class="literal">True</span>, autoincrement=<span class="literal">True</span>, comment=<span class="string">'用户id'</span>)</span><br><span class="line">    user_name = Column(String(<span class="number">30</span>), nullable=<span class="literal">False</span>, unique=<span class="literal">True</span>, comment=<span class="string">'用户名'</span>)</span><br><span class="line">    password = Column(String(<span class="number">64</span>), nullable=<span class="literal">False</span>, comment=<span class="string">'用户密码'</span>)</span><br><span class="line">    createtime = Column(DateTime, server_default=func.now(), comment=<span class="string">'创建时间'</span>)</span><br><span class="line">    <span class="comment"># onupdate设置自动更改</span></span><br><span class="line">    updatetime = Column(DateTime, server_default=func.now(), onupdate=func.now(), comment=<span class="string">'修改时间'</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="3-实例"><a href="#3-实例" class="headerlink" title="3. 实例"></a>3. 实例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String, Float</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</span><br><span class="line"></span><br><span class="line">MYSQL_URL = <span class="string">"mysql+pymysql://root:123456@0.0.0.0/db_name?charset=utf8"</span></span><br><span class="line">MYSQL_ECHO = <span class="literal">True</span>  <span class="comment"># 如果为True，则后续操作会输出很多日志，看需求</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建引擎以及相关内容</span></span><br><span class="line">engine = create_engine(MYSQL_URL, encoding=<span class="string">'utf8'</span>, echo=MYSQL_ECHO)</span><br><span class="line">Base = declarative_base()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义表结构（表名、字段）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTable</span><span class="params">(Base)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'t_table_name'</span></span><br><span class="line">    id = Column(Integer, primary_key=<span class="literal">True</span>, autoincrement=<span class="literal">True</span>)</span><br><span class="line">    name = Column(String(<span class="number">32</span>))</span><br><span class="line">    unit_price = Column(Float)</span><br><span class="line">    comment = Column(String(<span class="number">255</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建表</span></span><br><span class="line">Base.metadata.create_all(engine)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过Session，以ORM的形式来增删改差</span></span><br><span class="line"><span class="comment"># 创建Session实例</span></span><br><span class="line">Session = sessionmaker(bind=engine)</span><br><span class="line">session = Session()</span><br><span class="line"><span class="comment"># 增</span></span><br><span class="line">record = MyTable(name=<span class="string">"XX"</span>, unit_price=<span class="number">22000.5</span>, comment=<span class="string">"other"</span>)</span><br><span class="line">session.add(record)</span><br><span class="line">session.add_all([MyTable(name=<span class="string">"XXX小区"</span>, unit_price=<span class="number">3000.5</span>, comment=<span class="string">"其他信息1"</span>),</span><br><span class="line">                 MyTable(name=<span class="string">"XXXX小区"</span>, unit_price=<span class="number">41000.5</span>, comment=<span class="string">"其他信息2"</span>),</span><br><span class="line">                 MyTable(name=<span class="string">"XXXXX小区"</span>, unit_price=<span class="number">13000.5</span>, comment=<span class="string">"其他信息3"</span>)])</span><br><span class="line">session.commit()</span><br><span class="line"><span class="comment"># 查</span></span><br><span class="line">q = session.query(MyTable)</span><br><span class="line">q = q.filter(MyTable.id==<span class="number">5</span>)</span><br><span class="line">record = q.one()</span><br><span class="line">print(record.id, record.name, record.address, record.comment)</span><br><span class="line"><span class="comment"># 改</span></span><br><span class="line">record.name = <span class="string">'UPDATE NAME'</span></span><br><span class="line">session.commit()</span><br><span class="line"><span class="comment"># 删</span></span><br><span class="line">session.delete(record)</span><br><span class="line">session.commit()</span><br><span class="line"><span class="comment"># 通过Session直接执行sql语句</span></span><br><span class="line">session.execute(<span class="string">'SELECT * FROM t_user'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过connection执行sql语句</span></span><br><span class="line"><span class="keyword">with</span> engine.connect() <span class="keyword">as</span> con:</span><br><span class="line">    rs = con.execute(<span class="string">'SELECT * FROM t_user'</span>)</span><br><span class="line">    data = rs.fetchone()[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/11/tensorflow/codes/keras-model/" rel="next" title="tf.keras 模型相关源码分析">
+                <i class="fa fa-chevron-left"></i> tf.keras 模型相关源码分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/12/python/manual/python-manual-9/" rel="prev" title="Python手册(9) Flask & Swagger">
+                Python手册(9) Flask & Swagger <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SQLAlchemy-的基本使用"><span class="nav-text">1. SQLAlchemy 的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-创建engine"><span class="nav-text">1.1. 创建engine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-创建表映射-amp-新建表"><span class="nav-text">1.2. 创建表映射 &amp; 新建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-建立数据库记录实例"><span class="nav-text">1.3. 建立数据库记录实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-创建会话实例"><span class="nav-text">1.4. 创建会话实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-小功能"><span class="nav-text">2. 小功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-自动设置-DateTime-相关字段"><span class="nav-text">2.1. 自动设置 DateTime 相关字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-实例"><span class="nav-text">3. 实例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

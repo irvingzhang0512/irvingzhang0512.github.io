@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Flask 以及使用Flask restplus构建Swagger文档介绍">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python手册(9) Flask &amp; Swagger">
+<meta property="og:url" content="http://yoursite.com/2019/10/12/python/manual/python-manual-9/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="Flask 以及使用Flask restplus构建Swagger文档介绍">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/bt7qvkocodmjjmqboos4d9ek/image_1dmv0fparp4s1iifna1i91elc1t.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/noj1ar1mfpw9srh6rzkjp36d/image_1dmv0i67v1aqcorr1lj71b0d1v7v2q.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/u8jqpg6azm33jwr04t6k5xbu/image_1dmunsmsq1fgcmcj1orihgeb4n9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/qx6ul0e5lm0nlxqgjloy8e2s/image_1dmunu6lm5fuf5u4th1r63md2m.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/0u77o21rg6hjqmshcewp1156/image_1dmuo56a71md01d3fovu1opl105l13.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/idjtcvw94xu88440f599xui2/image_1dmv0nbma19t61mnf1o9ufqdvoe37.png">
+<meta property="og:updated_time" content="2019-10-12T03:54:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python手册(9) Flask &amp; Swagger">
+<meta name="twitter:description" content="Flask 以及使用Flask restplus构建Swagger文档介绍">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/bt7qvkocodmjjmqboos4d9ek/image_1dmv0fparp4s1iifna1i91elc1t.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/12/python/manual/python-manual-9/">
+
+
+
+
+
+  <title>Python手册(9) Flask & Swagger | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/12/python/manual/python-manual-9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python手册(9) Flask & Swagger</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-12T11:54:42+08:00">
+                2019-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/手册/" itemprop="url" rel="index">
+                    <span itemprop="name">手册</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  Flask 以及使用Flask restplus构建Swagger文档介绍
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>之前是Java后端工程师，写过不少代码。现在一方面好久没写Java了，一方面也想省力，所以就用了Flask。</li>
+<li>参考资料：<ul>
+<li><a href="http://docs.jinkan.org/docs/flask/" target="_blank" rel="noopener">Flask中文文档</a></li>
+<li><a href="https://flask-restplus.readthedocs.io/en/stable/" target="_blank" rel="noopener">Flask-RESTPlus 文档</a></li>
+</ul>
+</li>
+<li>安装：<ul>
+<li>安装flask：<code>pip install flask</code></li>
+<li>安装swagger：<code>pip install flask-restplus</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-基本功能"><a href="#1-基本功能" class="headerlink" title="1. 基本功能"></a>1. 基本功能</h2><ul>
+<li>需要注意的是，使用 <code>flask-restplus</code> 后，设置路径、参数的方法与原始flask有所不同。</li>
+<li>本文记录的都是 <code>flask-restplus</code> 的功能。</li>
+<li>需要实现的功能：<ul>
+<li>构建URL、设置静态文件（<code>1.1. 最简单的实例</code>）</li>
+<li>设置请求方法（POST/GET/…）（<code>1.2. 设置请求方法</code>）</li>
+<li>设置参数，包括URL参数和body内参数（<code>1.3. 设置参数</code>）</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-最简单的实例"><a href="#1-1-最简单的实例" class="headerlink" title="1.1. 最简单的实例"></a>1.1. 最简单的实例</h3><ul>
+<li><p>以下实例来自 Flask-RESTPlus 教程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask_restplus <span class="keyword">import</span> Resource, Api</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">api = Api(app)</span><br><span class="line"></span><br><span class="line"><span class="meta">@api.route('/hello')</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span><span class="params">(Resource)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">'hello'</span>: <span class="string">'world'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用对象 <code>Flask</code></p>
+<ul>
+<li>主要参数介绍：<ul>
+<li><code>import_name</code>：应用名称。</li>
+<li><code>static_url_path</code>：静态路径对应的URL，默认为<code>static_folder</code>的文件夹名，如果不为空则必须以<code>/</code>开头。</li>
+<li><code>static_folder</code>：静态路径对应的文件夹，默认是<code>static</code>文件夹。</li>
+<li><code>static_path</code>：deprecated，建议使用 <code>static_url_path</code> 替代。</li>
+</ul>
+</li>
+<li>静态文件获取主要通过上述几个参数。</li>
+<li>对象定义：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">flask</span>.<span class="title">Flask</span><span class="params">(import_name, </span></span></span><br><span class="line"><span class="class"><span class="params">                  static_path=None, static_url_path=None, static_folder=<span class="string">'static'</span>, </span></span></span><br><span class="line"><span class="class"><span class="params">                  template_folder=<span class="string">'templates'</span>, </span></span></span><br><span class="line"><span class="class"><span class="params">                  instance_path=None, instance_relative_config=False)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>应用运行 <code>app.run()</code></p>
+<ul>
+<li>主要参数：<code>port</code>, <code>host</code>, <code>debug</code>。</li>
+<li><code>host</code> 设置访问权限，如果是<code>127.0.0.1</code>则只能本地访问，如果是 <code>0.0.0.0</code> 则服务器公开可用。</li>
+<li>调试模式（即<code>debug=True</code>）：使得程序修改及时生效。但对于<code>Flask</code>对象的修改不会及时生效。</li>
+</ul>
+</li>
+<li><p>构建url主要通过 <code>api.route</code> 实现。</p>
+</li>
+</ul>
+<h3 id="1-2-设置请求方法"><a href="#1-2-设置请求方法" class="headerlink" title="1.2. 设置请求方法"></a>1.2. 设置请求方法</h3><ul>
+<li>主要就是在<code>Resource</code>类中新建对应的方法。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@api.route('/my-resource/&lt;id&gt;', endpoint='my-resource')</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyResource</span><span class="params">(Resource)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, id)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, id)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="1-3-设置参数"><a href="#1-3-设置参数" class="headerlink" title="1.3. 设置参数"></a>1.3. 设置参数</h3><ul>
+<li>url参数在 <code>api.route</code> 中定义，可同时设置参数数据类型。<ul>
+<li>参数类型默认是string，还可以设置为<code>int/float/string</code>。</li>
+</ul>
+</li>
+<li>获取输入数据body中的json形式的参数。<ul>
+<li>通过 <code>request</code> 对象获取，即<code>request.json</code>。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@api.route('/&lt;string:source&gt;/&lt;string:category_name&gt;')</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CompareApis</span><span class="params">(Resource)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, source, category_name)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, source, category_name)</span>:</span></span><br><span class="line">        json_data = request.json</span><br><span class="line">        attr1 = json_data.get(<span class="string">'attr1'</span>)</span><br><span class="line">        attr2 = json_data.get(<span class="string">'attr2'</span>)</span><br><span class="line">        attr3 = json_data.get(<span class="string">'attr3'</span>)</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-注解介绍"><a href="#2-注解介绍" class="headerlink" title="2. 注解介绍"></a>2. 注解介绍</h2><ul>
+<li>注解分类：<ul>
+<li>整个swagger页面的注解（<code>2.1. 基本对象 &amp; 2.2. api.model 的使用</code>）</li>
+<li>每一类接口的注解（<code>2.1. 基本对象 &amp; 2.3. 每一类接口的注解</code>）</li>
+<li>每个接口的注解（<code>2.1. 基本对象 &amp; 2.4. 每个接口的注解</code>）</li>
+<li>接口中每个参数的注解（<code>2.5. url参数注解</code>）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-基本对象"><a href="#2-1-基本对象" class="headerlink" title="2.1. 基本对象"></a>2.1. 基本对象</h3><ul>
+<li><p><code>Api</code> 对象</p>
+<ul>
+<li>主要参数<ul>
+<li><code>app</code>：<code>Flask</code> 对象</li>
+<li><code>version</code>：版本，swagger显示内容之一。</li>
+<li><code>title</code>：标题，swagger显示内容之一</li>
+<li><code>description</code>：简单介绍，swagger显示内容之一</li>
+<li><code>contact</code>：联系人，swagger显示内容之一</li>
+<li><code>doc</code>：swagger页面地址，默认为<code>/</code>。</li>
+<li><code>default</code>：默认 <code>namespace</code> 名称。</li>
+</ul>
+</li>
+<li>猜测：是不是应该把 <code>Api</code> 对象也看作一个 <code>namespace</code>？</li>
+<li>初始化定义以及对应注释<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">The main entry point for the application.</span></span><br><span class="line"><span class="string">You need to initialize it with a Flask Application: ::</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"><span class="meta">&gt;&gt;&gt; </span>app = Flask(__name__)</span></span><br><span class="line"><span class="string"><span class="meta">&gt;&gt;&gt; </span>api = Api(app)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Alternatively, you can use :meth:`init_app` to set the Flask application</span></span><br><span class="line"><span class="string">after it has been constructed.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The endpoint parameter prefix all views and resources:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    - The API root/documentation will be ``&#123;endpoint&#125;.root``</span></span><br><span class="line"><span class="string">    - A resource registered as 'resource' will be available as ``&#123;endpoint&#125;.resource``</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">:param flask.Flask|flask.Blueprint app: the Flask application object or a Blueprint</span></span><br><span class="line"><span class="string">:param str version: The API version (used in Swagger documentation)</span></span><br><span class="line"><span class="string">:param str title: The API title (used in Swagger documentation)</span></span><br><span class="line"><span class="string">:param str description: The API description (used in Swagger documentation)</span></span><br><span class="line"><span class="string">:param str terms_url: The API terms page URL (used in Swagger documentation)</span></span><br><span class="line"><span class="string">:param str contact: A contact email for the API (used in Swagger documentation)</span></span><br><span class="line"><span class="string">:param str license: The license associated to the API (used in Swagger documentation)</span></span><br><span class="line"><span class="string">:param str license_url: The license page URL (used in Swagger documentation)</span></span><br><span class="line"><span class="string">:param str endpoint: The API base endpoint (default to 'api).</span></span><br><span class="line"><span class="string">:param str default: The default namespace base name (default to 'default')</span></span><br><span class="line"><span class="string">:param str default_label: The default namespace label (used in Swagger documentation)</span></span><br><span class="line"><span class="string">:param str default_mediatype: The default media type to return</span></span><br><span class="line"><span class="string">:param bool validate: Whether or not the API should perform input payload validation.</span></span><br><span class="line"><span class="string">:param bool ordered: Whether or not preserve order models and marshalling.</span></span><br><span class="line"><span class="string">:param str doc: The documentation path. If set to a false value, documentation is disabled.</span></span><br><span class="line"><span class="string">            (Default to '/')</span></span><br><span class="line"><span class="string">:param list decorators: Decorators to attach to every resource</span></span><br><span class="line"><span class="string">:param bool catch_all_404s: Use :meth:`handle_error`</span></span><br><span class="line"><span class="string">    to handle 404 errors throughout your app</span></span><br><span class="line"><span class="string">:param dict authorizations: A Swagger Authorizations declaration as dictionary</span></span><br><span class="line"><span class="string">:param bool serve_challenge_on_401: Serve basic authentication challenge with 401</span></span><br><span class="line"><span class="string">    responses (default 'False')</span></span><br><span class="line"><span class="string">:param FormatChecker format_checker: A jsonschema.FormatChecker object that is hooked into</span></span><br><span class="line"><span class="string">    the Model validator. A default or a custom FormatChecker can be provided (e.g., with custom</span></span><br><span class="line"><span class="string">    checkers), otherwise the default action is to not enforce any format validation.</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, </span></span></span><br><span class="line"><span class="function"><span class="params">        app=None,</span></span></span><br><span class="line"><span class="function"><span class="params">        version=<span class="string">'1.0'</span>, title=None, description=None,</span></span></span><br><span class="line"><span class="function"><span class="params">        terms_url=None, license=None, license_url=None,</span></span></span><br><span class="line"><span class="function"><span class="params">        contact=None, contact_url=None, contact_email=None,</span></span></span><br><span class="line"><span class="function"><span class="params">        authorizations=None, security=None, doc=<span class="string">'/'</span>, default_id=default_id,</span></span></span><br><span class="line"><span class="function"><span class="params">        default=<span class="string">'default'</span>, default_label=<span class="string">'Default namespace'</span>, validate=None,</span></span></span><br><span class="line"><span class="function"><span class="params">        tags=None, prefix=<span class="string">''</span>, ordered=False,</span></span></span><br><span class="line"><span class="function"><span class="params">        default_mediatype=<span class="string">'application/json'</span>, decorators=None,</span></span></span><br><span class="line"><span class="function"><span class="params">        catch_all_404s=False, serve_challenge_on_401=False, format_checker=None,</span></span></span><br><span class="line"><span class="function"><span class="params">        **kwargs)</span>:</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>namespace</code> 对象</p>
+<ul>
+<li>构建方法：<code>api.namespace()</code></li>
+<li>主要功能：<code>Group resources together</code>，我的理解就是奖若干个接口放到一个组里一起显示。</li>
+<li>主要参数：<ul>
+<li><code>name</code>：名称</li>
+<li><code>description</code>：swagger注解，每一类接口的简单说明。</li>
+<li><code>path</code>：相关接口URL统一前缀，默认情况下为<code>/{name}</code>，其中<code>{name}</code>就是第一个参数。</li>
+</ul>
+</li>
+<li>对应初始化函数以及对应注释。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Group resources together.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Namespace is to API what :class:`flask:flask.Blueprint` is for :class:`flask:flask.Flask`.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">:param str name: The namespace name</span></span><br><span class="line"><span class="string">:param str description: An optionale short description</span></span><br><span class="line"><span class="string">:param str path: An optional prefix path. If not provided, prefix is ``/+name``</span></span><br><span class="line"><span class="string">:param list decorators: A list of decorators to apply to each resources</span></span><br><span class="line"><span class="string">:param bool validate: Whether or not to perform validation on this namespace</span></span><br><span class="line"><span class="string">:param bool ordered: Whether or not to preserve order on models and marshalling</span></span><br><span class="line"><span class="string">:param Api api: an optional API to attache to the namespace</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, description=None, path=None, decorators=None, validate=None,</span></span></span><br><span class="line"><span class="function"><span class="params">        authorizations=None, ordered=False, **kwargs)</span>:</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-api-model-的使用"><a href="#2-2-api-model-的使用" class="headerlink" title="2.2. api.model 的使用"></a>2.2. api.model 的使用</h3><ul>
+<li><p>对应文档：</p>
+<ul>
+<li><a href="https://flask-restplus.readthedocs.io/en/stable/marshalling.html" target="_blank" rel="noopener">官方文档：Response marshalling</a></li>
+<li><a href="https://www.cnblogs.com/leejack/p/9163568.html" target="_blank" rel="noopener">中文翻译</a></li>
+</ul>
+</li>
+<li><p>作用：</p>
+<ul>
+<li>构建接口输出的形式。</li>
+<li>构建接口输入的形式。</li>
+</ul>
+</li>
+<li><p>整体思路：每个model拥有一个名称以及一个字典。</p>
+<ul>
+<li>字典表示该model中属性的名称（key）以及对应的特征（value）。</li>
+<li>model可以嵌套使用。</li>
+</ul>
+</li>
+<li><p>构建注意事项：</p>
+<ul>
+<li>构建方法：<code>api.model</code></li>
+<li>主要通过 <code>flask_restplus.fields</code> 中各各类实现。</li>
+<li><code>fields.Raw</code> 是所有类型对象的基类，包括的主要参数有：<ul>
+<li><code>attribute</code>：重命名属性</li>
+<li><code>default</code>：默认值</li>
+<li><code>title</code>：用于文档注解。</li>
+<li><code>description</code>：说明，用于文档注解。</li>
+<li><code>required</code>：bool，用于文档注解。</li>
+<li><code>readonly</code>：bool，用于文档注解。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>如何用于接口输入、输出的描述：</p>
+<ul>
+<li><code>api.marshal_with(my_model, as_list=False)</code>：用于描述接口输出。可以设置 <code>as_list</code> 来表示输出的是一个序列。</li>
+<li><code>api.expect()</code>：用于描述接口的输入。如果要设置输入的为序列，则可以使用 <code>@api.expect[my_model]</code>。</li>
+</ul>
+</li>
+<li><p>举例（仅关键代码）</p>
+<ul>
+<li>构建了model。</li>
+<li>将该模型作为输出、输出模型。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">person = api.model(<span class="string">'Person'</span>, &#123;</span><br><span class="line">    <span class="string">'name'</span>: fields.String(</span><br><span class="line">        attribute=<span class="string">"private_name"</span>,</span><br><span class="line">        default=<span class="string">"John"</span>,</span><br><span class="line">        required=<span class="literal">True</span>,</span><br><span class="line">        readonly=<span class="literal">True</span>,</span><br><span class="line">        title=<span class="string">"person_title"</span>,</span><br><span class="line">        description=<span class="string">"person_description"</span>,</span><br><span class="line">    ),</span><br><span class="line">    <span class="string">'age'</span>: fields.Integer,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">school = api.model(<span class="string">'School'</span>, &#123;</span><br><span class="line">    <span class="string">'name'</span>: fields.String,</span><br><span class="line">    <span class="string">'students'</span>: fields.List(fields.Nested(person)),</span><br><span class="line">    <span class="string">'teachers'</span>: fields.List(fields.Nested(person)),</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="meta">@api.route('/my-resource/&lt;id&gt;', endpoint='my-resource')</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyResource</span><span class="params">(Resource)</span>:</span></span><br><span class="line"><span class="meta">    @api.marshal_with(school, as_list=True) # 作为输出model</span></span><br><span class="line"><span class="meta">    @api.expect(school) # 作为输入model</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, id)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>上述实例对应的文档图片。</p>
+<ul>
+<li>从图片上看，好像设置的那些参数，如<code>required</code>, <code>default</code> 等都不是特别清晰。</li>
+<li><img src="http://static.zybuluo.com/irving512/bt7qvkocodmjjmqboos4d9ek/image_1dmv0fparp4s1iifna1i91elc1t.png" alt="image_1dmv0fparp4s1iifna1i91elc1t.png-49.4kB"></li>
+<li><img src="http://static.zybuluo.com/irving512/noj1ar1mfpw9srh6rzkjp36d/image_1dmv0i67v1aqcorr1lj71b0d1v7v2q.png" alt="image_1dmv0i67v1aqcorr1lj71b0d1v7v2q.png-23.6kB"></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-整个swagger页面的注解"><a href="#2-2-整个swagger页面的注解" class="headerlink" title="2.2. 整个swagger页面的注解"></a>2.2. 整个swagger页面的注解</h3><ul>
+<li>在初始化 <code>Api</code> 对象时构建，具体查看 <code>2.1.</code> 对应内容。</li>
+<li>效果如下图。<br><img src="http://static.zybuluo.com/irving512/u8jqpg6azm33jwr04t6k5xbu/image_1dmunsmsq1fgcmcj1orihgeb4n9.png" alt="image_1dmunsmsq1fgcmcj1orihgeb4n9.png-32.6kB"></li>
+</ul>
+<h3 id="2-3-每一类接口的注解"><a href="#2-3-每一类接口的注解" class="headerlink" title="2.3. 每一类接口的注解"></a>2.3. 每一类接口的注解</h3><ul>
+<li>在初始化 <code>namespace</code> 对象时构建。<ul>
+<li>大概形式就是 <code>api.namespace(name=&#39;&#39;, description=&quot;type in here&quot;)</code></li>
+</ul>
+</li>
+<li>效果如下图。<br><img src="http://static.zybuluo.com/irving512/qx6ul0e5lm0nlxqgjloy8e2s/image_1dmunu6lm5fuf5u4th1r63md2m.png" alt="image_1dmunu6lm5fuf5u4th1r63md2m.png-60.7kB"></li>
+</ul>
+<h3 id="2-4-每个接口的注解"><a href="#2-4-每个接口的注解" class="headerlink" title="2.4. 每个接口的注解"></a>2.4. 每个接口的注解</h3><ul>
+<li>在定义URL的<code>route</code>方法中构建。<ul>
+<li>大概形式就是<code>@api.route(&#39;&#39;, doc={&quot;description&quot;: &quot;type in here&quot;})</code></li>
+</ul>
+</li>
+<li>效果如下图。<br><img src="http://static.zybuluo.com/irving512/0u77o21rg6hjqmshcewp1156/image_1dmuo56a71md01d3fovu1opl105l13.png" alt="image_1dmuo56a71md01d3fovu1opl105l13.png-95.8kB"></li>
+</ul>
+<h3 id="2-5-url参数注解"><a href="#2-5-url参数注解" class="headerlink" title="2.5. url参数注解"></a>2.5. url参数注解</h3><ul>
+<li>可使用 <code>@api.doc(params={&quot;id&quot;: &quot;An ID&quot;, description=&quot;My resource&quot;})</code> 注解对应class。</li>
+<li>可使用多个 <code>@api.param(&#39;id&#39;, &#39;An ID&#39;)</code> 注解对应class。</li>
+<li>效果如下图。<br><img src="http://static.zybuluo.com/irving512/idjtcvw94xu88440f599xui2/image_1dmv0nbma19t61mnf1o9ufqdvoe37.png" alt="image_1dmv0nbma19t61mnf1o9ufqdvoe37.png-69.6kB"></li>
+</ul>
+<h2 id="3-举例"><a href="#3-举例" class="headerlink" title="3. 举例"></a>3. 举例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> getopt</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"><span class="keyword">from</span> flask_restplus <span class="keyword">import</span> Api, Resource</span><br><span class="line"><span class="keyword">from</span> server.apis <span class="keyword">import</span> category_api, category_models, category_api_text, \</span><br><span class="line">    compare_models, compare_api, compare_api_text</span><br><span class="line"></span><br><span class="line">app = Flask(__name__, static_folder=<span class="string">"/root/street-score"</span>)</span><br><span class="line">api = Api(app,</span><br><span class="line">          version=<span class="string">"0.1"</span>,</span><br><span class="line">          title=<span class="string">"街景图像研究"</span>,</span><br><span class="line">          description=<span class="string">"基于街景图像的安全感评估模型前端展示API"</span>,</span><br><span class="line">          doc=<span class="string">'/swagger-ui.html'</span>)</span><br><span class="line">category_models.get_category_models(api)</span><br><span class="line">compare_models.get_compare_models(api)</span><br><span class="line"></span><br><span class="line">port = <span class="number">8080</span></span><br><span class="line">nodes_pre = <span class="string">''</span></span><br><span class="line">compare_pre = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pre_np</span><span class="params">(pre, default)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> default <span class="keyword">if</span> pre == <span class="string">''</span> <span class="keyword">else</span> <span class="string">'&#123;&#125;/&#123;&#125;'</span>.format(pre, default)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">argv = sys.argv</span><br><span class="line">opts, args = getopt.getopt(</span><br><span class="line">    argv[<span class="number">1</span>:], <span class="string">'-h-c:-n:-p:'</span>, [<span class="string">'help'</span>, <span class="string">'compare='</span>, <span class="string">'nodes='</span>, <span class="string">'port='</span>])</span><br><span class="line"><span class="keyword">for</span> opt_name, opt_value <span class="keyword">in</span> opts:</span><br><span class="line">    <span class="keyword">if</span> opt_name <span class="keyword">in</span> (<span class="string">'-c'</span>):</span><br><span class="line">        compare_pre = opt_value</span><br><span class="line">    <span class="keyword">if</span> opt_name <span class="keyword">in</span> (<span class="string">'-n'</span>):</span><br><span class="line">        nodes_pre = opt_value</span><br><span class="line">    <span class="keyword">if</span> opt_name <span class="keyword">in</span> (<span class="string">'-p'</span>):</span><br><span class="line">        port = int(opt_value)</span><br><span class="line"></span><br><span class="line">nodes = pre_np(nodes_pre, <span class="string">'nodes'</span>)</span><br><span class="line">print(<span class="string">'nodes api start at: &#123;&#125;'</span>.format(nodes))</span><br><span class="line"></span><br><span class="line">nodes_np = api.namespace(nodes,</span><br><span class="line">                         description=<span class="string">'获取地图上点坐标以及对应得分'</span>)</span><br><span class="line"></span><br><span class="line">compare = pre_np(compare_pre, <span class="string">'compare'</span>)</span><br><span class="line">print(<span class="string">'compare api start at: &#123;&#125;'</span>.format(compare))</span><br><span class="line">compare_np = api.namespace(compare, description=<span class="string">'街景对比数据采集'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@nodes_np.route('/',</span></span><br><span class="line">                doc=&#123;<span class="string">'description'</span>:</span><br><span class="line">                     category_api_text.api_all_categories_text()&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AllCategories</span><span class="params">(Resource)</span>:</span></span><br><span class="line"><span class="meta">    @nodes_np.marshal_with(category_models.all_categories_http, mask=None)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> category_api.get_category_results(<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@nodes_np.route('/&lt;string:category_name&gt;',</span></span><br><span class="line">                doc=&#123;<span class="string">'description'</span>:</span><br><span class="line">                     category_api_text.api_single_category_text()&#125;)</span><br><span class="line"><span class="meta">@nodes_np.param('category_name',</span></span><br><span class="line">                category_api_text.param_category_name_text())</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleCategory</span><span class="params">(Resource)</span>:</span></span><br><span class="line"><span class="meta">    @api.marshal_with(category_models.single_category_http, mask=None)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, category_name)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> category_api.get_category_results(category_name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@nodes_np.route('/&lt;string:category_name&gt;/&lt;int:score_type&gt;',</span></span><br><span class="line">                doc=&#123;<span class="string">'description'</span>:</span><br><span class="line">                     category_api_text.api_single_score_type_text()&#125;)</span><br><span class="line"><span class="meta">@nodes_np.param('category_name',</span></span><br><span class="line">                category_api_text.param_category_name_text())</span><br><span class="line"><span class="meta">@nodes_np.param('score_type',</span></span><br><span class="line">                category_api_text.param_score_type_text())</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingleScoreTypeCategory</span><span class="params">(Resource)</span>:</span></span><br><span class="line"><span class="meta">    @nodes_np.marshal_with(category_models.single_category_http, mask=None)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, category_name, score_type)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> category_api.get_category_results(category_name,</span><br><span class="line">                                                 score_type)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@compare_np.route('/&lt;string:source&gt;/&lt;string:category_name&gt;')</span></span><br><span class="line"><span class="meta">@compare_np.param('source', compare_api_text.param_source_text())</span></span><br><span class="line"><span class="meta">@compare_np.param('category_name', compare_api_text.param_category_text())</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CompareApis</span><span class="params">(Resource)</span>:</span></span><br><span class="line"><span class="meta">    @compare_np.doc(description=compare_api_text.api_random_compare_text())</span></span><br><span class="line"><span class="meta">    @compare_np.marshal_with(compare_models.random_compare_http, mask=None)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, source, category_name)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> compare_api.get_random_pair(source, category_name)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @compare_np.doc(description=compare_api_text.api_compare_result_text())</span></span><br><span class="line"><span class="meta">    @compare_np.marshal_with(compare_models.random_compare_http, mask=None)</span></span><br><span class="line"><span class="meta">    @compare_np.expect(compare_models.compre_result_input)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self, source, category_name)</span>:</span></span><br><span class="line">        json_data = request.json</span><br><span class="line">        <span class="keyword">return</span> compare_api.insert_pair(</span><br><span class="line">            source, category_name,</span><br><span class="line">            json_data.get(<span class="string">'img1'</span>), json_data.get(<span class="string">'img2'</span>),</span><br><span class="line">            json_data.get(<span class="string">'result'</span>), json_data.get(<span class="string">'user'</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv=None)</span>:</span></span><br><span class="line">    app.run(host=<span class="string">'0.0.0.0'</span>,</span><br><span class="line">            port=port,)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    sys.exit(main())</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/12/python/manual/python-manual-8/" rel="next" title="Python手册(8) MySQL">
+                <i class="fa fa-chevron-left"></i> Python手册(8) MySQL
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本功能"><span class="nav-text">1. 基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-最简单的实例"><span class="nav-text">1.1. 最简单的实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-设置请求方法"><span class="nav-text">1.2. 设置请求方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-设置参数"><span class="nav-text">1.3. 设置参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-注解介绍"><span class="nav-text">2. 注解介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本对象"><span class="nav-text">2.1. 基本对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-api-model-的使用"><span class="nav-text">2.2. api.model 的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-整个swagger页面的注解"><span class="nav-text">2.2. 整个swagger页面的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-每一类接口的注解"><span class="nav-text">2.3. 每一类接口的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-每个接口的注解"><span class="nav-text">2.4. 每个接口的注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-url参数注解"><span class="nav-text">2.5. url参数注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-举例"><span class="nav-text">3. 举例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
