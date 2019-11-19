@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  897
+                  946
                 </span>
               
 
@@ -412,6 +412,7 @@
 
       
         <a id="more"></a>
+
 <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
 <li>目标：总结VSC的其他常用功能。</li>
 <li>PS：有用到的时候在继续补充其他内容吧。</li>
@@ -530,7 +531,17 @@
 <li>可以参考<a href="https://code.visualstudio.com/docs/languages/python" target="_blank" rel="noopener">官方文档</a>，有基本使用。</li>
 </ul>
 </li>
-<li>Visual Studio IntelliCode：上面插件提供的代码补全完全不够用，比如不能调用<code>np</code>等库的函数，使用这个插件可以解决问题。</li>
+</ul>
+</li>
+<li>自动补全 TensorFlow 2.0：<ul>
+<li>建议解决方案请参考<a href="https://github.com/tensorflow/tensorflow/issues/32982#issuecomment-545414061" target="_blank" rel="noopener">这里</a></li>
+<li>主要思路就是建立软连接，将<code>tensorflow_core</code>软连到其他叫做 <code>tensorflow</code> 的文件夹中，并在vscode中添加 <code>python.autoComplete.extraPaths</code>。</li>
+<li>具体步骤：<ul>
+<li><code>mkdir /path/to/virtual-site-packages</code></li>
+<li><code>ln -s /pato/to/tensorflow_core /pato/tovirtual-site-packages/tensorflow</code></li>
+<li>在 <code>.vscode/settingts.json</code> 中添加 <code>&quot;python.autoComplete.extraPaths&quot;: [&quot;/path/to/virtual-site-packages&quot;]</code>。 </li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -560,17 +571,17 @@
 </li>
 </ul>
 <h2 id="5-同步"><a href="#5-同步" class="headerlink" title="5. 同步"></a>5. 同步</h2><ul>
-<li>需求：将本地文件夹和服务器中文件夹进行文件同步。</li>
-<li>插件：stfp。<ul>
+<li><p>需求：将本地文件夹和服务器中文件夹进行文件同步。</p>
+</li>
+<li><p>插件：stfp。</p>
+<ul>
 <li>使用可以参考<a href="https://blog.csdn.net/qq_41359051/article/details/89226060" target="_blank" rel="noopener">这篇博客</a></li>
 <li>使用思路：在<code>.vscode</code>中新建文件<code>sftp.json</code>（也可以通过<code>SFTP: config</code>来新建配置文件）。</li>
-<li>然后通过 download/upload 命令进行同步。</li>
 <li>配置文件举例：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"name"</span>,</span><br><span class="line">    <span class="attr">"host"</span>: <span class="string">"10.10.10.10"</span>,</span><br><span class="line">    <span class="attr">"protocol"</span>: <span class="string">"sftp"</span>,</span><br><span class="line">    <span class="attr">"port"</span>: <span class="number">22</span>,</span><br><span class="line">    <span class="attr">"username"</span>: <span class="string">"ubuntu"</span>,</span><br><span class="line">    <span class="attr">"password"</span>: <span class="string">"123.com"</span>,</span><br><span class="line">    <span class="attr">"remotePath"</span>: <span class="string">"/ssd/zhangyiyang/TF-Semantic-Segmentation"</span>,</span><br><span class="line">    <span class="attr">"uploadOnSave"</span>: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ul>
+</li>
+<li><p>然后通过 download/upload 命令进行同步。</p>
 </li>
 </ul>
 
