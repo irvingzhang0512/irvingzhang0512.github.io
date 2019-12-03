@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="C++,">
+  <meta name="keywords" content="小白填坑,">
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="OpenCV C++ API 简介">
-<meta name="keywords" content="C++">
+<meta name="description" content="Anchors Kmeans 聚类">
+<meta name="keywords" content="小白填坑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++手册(1) OpenCV">
-<meta property="og:url" content="http://yoursite.com/2019/09/26/cpp/manual/cpp-manual-1/index.html">
+<meta property="og:title" content="小白填坑系列(2) anchors 聚类">
+<meta property="og:url" content="http://yoursite.com/2019/12/04/dl/rookie/rookie-2/index.html">
 <meta property="og:site_name" content="清欢小屋">
-<meta property="og:description" content="OpenCV C++ API 简介">
+<meta property="og:description" content="Anchors Kmeans 聚类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-26T15:15:24.000Z">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/z1fppm7qfokeizq31d8fb4rg/image_1dr6a0um21idoqpr1cq6140217hd9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/dywx9hf3x0syyjyr1e9ms9fp/image_1dr6aqnjqlbd1fl9104c1e4r7j5m.png">
+<meta property="og:updated_time" content="2019-12-03T17:23:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++手册(1) OpenCV">
-<meta name="twitter:description" content="OpenCV C++ API 简介">
+<meta name="twitter:title" content="小白填坑系列(2) anchors 聚类">
+<meta name="twitter:description" content="Anchors Kmeans 聚类">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/z1fppm7qfokeizq31d8fb4rg/image_1dr6a0um21idoqpr1cq6140217hd9.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/09/26/cpp/manual/cpp-manual-1/">
+  <link rel="canonical" href="http://yoursite.com/2019/12/04/dl/rookie/rookie-2/">
 
 
 
 
 
-  <title>C++手册(1) OpenCV | 清欢小屋</title>
+  <title>小白填坑系列(2) anchors 聚类 | 清欢小屋</title>
   
 
 
@@ -273,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/cpp/manual/cpp-manual-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/dl/rookie/rookie-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Irving">
@@ -290,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">C++手册(1) OpenCV</h1>
+          <h1 class="post-title" itemprop="name headline">小白填坑系列(2) anchors 聚类</h1>
         
 
         <div class="post-meta">
@@ -303,8 +306,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T23:15:24+08:00">
-                2019-09-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-04T01:23:05+08:00">
+                2019-12-04
               </time>
             
 
@@ -326,8 +329,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
                   </a>
                 </span>
 
@@ -337,8 +340,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/手册/" itemprop="url" rel="index">
-                    <span itemprop="name">手册</span>
+                  <a href="/categories/深度学习/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/基础/小白填坑/" itemprop="url" rel="index">
+                    <span itemprop="name">小白填坑</span>
                   </a>
                 </span>
 
@@ -368,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  557
+                  564
                 </span>
               
 
@@ -392,7 +406,7 @@
 
           
               <div class="post-description">
-                  OpenCV C++ API 简介
+                  Anchors Kmeans 聚类
               </div>
           
 
@@ -413,92 +427,60 @@
 
 
 <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>在学习《Learning OpenCV 3》过程中的一些记录。</li>
+<li>来自 Yolo v2 的 Better 章节。</li>
+<li><a href="https://github.com/lars76/kmeans-anchor-boxes" target="_blank" rel="noopener">lars76/kmeans-anchor-boxes</a></li>
 </ul>
-<h2 id="1-展示窗口"><a href="#1-展示窗口" class="headerlink" title="1. 展示窗口"></a>1. 展示窗口</h2><h3 id="1-1-流水账"><a href="#1-1-流水账" class="headerlink" title="1.1. 流水账"></a>1.1. 流水账</h3><ul>
-<li><code>cv::namedWindow(&quot;Example1&quot;, cv::WINDOW_AUTOSIZE)</code><ul>
-<li>构建窗口。</li>
-<li>第一个参数是框的名称，第二个用于尺寸参数。</li>
-</ul>
-</li>
-<li><code>cv::imshow(&quot;Example1&quot;, img)</code><ul>
-<li>在窗口中展示图片。</li>
-<li>第一个参数用于选择定义过的 <code>cv::namedWindow</code>，第二个参数是图像对象，即<code>cv::Mat</code>对象。</li>
-</ul>
-</li>
-<li><code>cv::waitKey(0)</code><ul>
-<li>停留在当前画面的时间。</li>
-<li>如果是0，则无限停留；如果是数字，则停留对应的毫秒。</li>
-<li>返回值是按下按钮的ASCII码。</li>
-</ul>
-</li>
-<li><code>cv::destroyWindow(&quot;Example1&quot;)</code><ul>
-<li>关闭窗口。</li>
-<li>参数是窗口名称。</li>
+<h2 id="1-论文内容总结"><a href="#1-论文内容总结" class="headerlink" title="1. 论文内容总结"></a>1. 论文内容总结</h2><h3 id="1-1-引入"><a href="#1-1-引入" class="headerlink" title="1.1. 引入"></a>1.1. 引入</h3><ul>
+<li>在Yolo v2中借鉴了Faster R-CNN，引入了anchors的概念。</li>
+<li>引入Anchors是为了更好的预测bbox的定位信息，即<code>x, y, w, h</code>。</li>
+<li>但对于anchors的选择，Yolo v2选择了与Faster R-CNN不同的方法：<ul>
+<li>Faster R-CNN中，anchors根据边长、长宽比例选择了，论文中认为这是“手动选择”。</li>
+<li>Yolo v2认为可以选择更好的先验bbox，即使用 kmeans 选择。</li>
 </ul>
 </li>
 </ul>
-<h3 id="1-2-应用"><a href="#1-2-应用" class="headerlink" title="1.2. 应用"></a>1.2. 应用</h3><ul>
-<li>创建窗口，显示图片，按键结束，销毁窗口。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">namedWindow(<span class="string">"Example"</span>, cv::WINDOW_AUTOSIZE);</span><br><span class="line">imshow(<span class="string">"Example"</span>, img);</span><br><span class="line">waitKey(<span class="number">0</span>);</span><br><span class="line">destroyWindow(<span class="string">"Example2-2"</span>);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="2-图像-amp-视频"><a href="#2-图像-amp-视频" class="headerlink" title="2. 图像 &amp; 视频"></a>2. 图像 &amp; 视频</h2><h3 id="2-1-基本对象"><a href="#2-1-基本对象" class="headerlink" title="2.1. 基本对象"></a>2.1. 基本对象</h3><ul>
-<li><code>cv::Mat</code><ul>
-<li>用于保存图片。</li>
+<h3 id="1-2-论文配图"><a href="#1-2-论文配图" class="headerlink" title="1.2. 论文配图"></a>1.2. 论文配图</h3><ul>
+<li>左边的图：<ul>
+<li>当选择k个先验框时，数据集中所有bbox的平均IOU。</li>
+<li>横坐标表示要选择的anchors数量，纵坐标表示平均IOU。</li>
+<li>蓝色的是COCO，黑色的是VOC2007。</li>
+<li>选择k值为5，这是性能与模型复杂度之间平衡的结果。</li>
 </ul>
 </li>
-<li><code>cv::VideoCapture</code><ul>
-<li>用于保存视频。</li>
-</ul>
-</li>
-<li><code>cv::imread(&quot;/path/to/img&quot;, -1)</code><ul>
-<li>读取图片。</li>
-<li>读一个参数是图片地址，第二个参数是图像颜色选择。</li>
-</ul>
-</li>
-<li>视频对应的参数：<ul>
-<li><code>cv::CAP_PROP_POS_FRAMES</code>：当前位置（在第几帧）。</li>
-<li><code>cv::CAP_PROP_FRAME_WIDTH</code>：图像宽度。</li>
-<li><code>cv::CAP_PROP_FRAME_HEIGHT</code>：图像高度。</li>
-<li><code>cv::CAP_PROP_FRAME_COUNT</code>：总帧数。</li>
-<li><code>cv::cv::CAP_PROP_FPS</code>：FPS。</li>
+<li>右边的图：<ul>
+<li>kmeans 选出的候选框。<br><img src="http://static.zybuluo.com/irving512/z1fppm7qfokeizq31d8fb4rg/image_1dr6a0um21idoqpr1cq6140217hd9.png" alt="image_1dr6a0um21idoqpr1cq6140217hd9.png-142kB"></li>
 </ul>
 </li>
 </ul>
-<h3 id="2-2-数字图像处理"><a href="#2-2-数字图像处理" class="headerlink" title="2.2. 数字图像处理"></a>2.2. 数字图像处理</h3><ul>
-<li><code>cv::GaussianBlur</code><ul>
-<li>高斯滤波。</li>
+<h3 id="1-3-效果"><a href="#1-3-效果" class="headerlink" title="1.3. 效果"></a>1.3. 效果</h3><ul>
+<li>表中的四行分别代表：<ul>
+<li>Cluster SSE：<strong>猜测</strong>使用欧几里德距离的聚类。</li>
+<li>Cluster IOU：使用IOU作为距离的聚类。</li>
+<li>Anchor Boxes：普通Anchors。</li>
 </ul>
 </li>
-<li><code>cv::pyrDown()</code> <code>cv::pryUp()</code><ul>
-<li>图像金字塔，其实就是按比例缩小变大。</li>
+<li>结果解释：<ul>
+<li>5个聚类选出的候选框效果与9个手动选择的候选框效果差不多。</li>
+<li>9个聚类选出的候选框效果远远好于9个手动选择的候选框。<br><img src="http://static.zybuluo.com/irving512/dywx9hf3x0syyjyr1e9ms9fp/image_1dr6aqnjqlbd1fl9104c1e4r7j5m.png" alt="image_1dr6aqnjqlbd1fl9104c1e4r7j5m.png-95.3kB"></li>
 </ul>
 </li>
-<li><code>cv::cvtColor(img_rgb, img_gry, cv::COLOR_BGR2GRAY)</code><ul>
-<li>改变图像的color map。</li>
-<li>第一个参数是输入图像，第二个参数是输出图像，第三个参数是颜色变换目标。</li>
-<li>第一第二个参数都是<code>cv::Mat</code>对象。</li>
+</ul>
+<h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2. 实现"></a>2. 实现</h2><h3 id="2-1-基本概念"><a href="#2-1-基本概念" class="headerlink" title="2.1. 基本概念"></a>2.1. 基本概念</h3><ul>
+<li>聚类要获取的是bbox的长与宽两个参数。</li>
+<li>距离：<ul>
+<li>两个bbox的距离，先计算两个bbox的IOU，在通过<code>1-IOU</code>作为距离。</li>
+<li>可以这么想象：假设两个bbox的一个叫对齐，然后计算IOU。</li>
 </ul>
 </li>
-<li><code>cv::Canny</code><ul>
-<li>边缘检测的一种算法。</li>
+<li>代码参考 <a href="https://github.com/lars76/kmeans-anchor-boxes/blob/master/kmeans.py" target="_blank" rel="noopener">这里</a></li>
 </ul>
-</li>
-<li><code>cv::logPolar</code></li>
-<li><code>cv::Point2f</code></li>
-</ul>
-<h3 id="2-3-应用"><a href="#2-3-应用" class="headerlink" title="2.3. 应用"></a>2.3. 应用</h3><ul>
-<li><p>读取视频</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cv::VideoCapture cap;</span><br><span class="line">cap.open(<span class="built_in">std</span>::<span class="built_in">string</span>(argv[<span class="number">1</span>]));</span><br><span class="line"></span><br><span class="line">cv::Mat frame;</span><br><span class="line"><span class="keyword">for</span>(;;) &#123;</span><br><span class="line">	cap &gt;&gt; frame;</span><br><span class="line">	<span class="keyword">if</span>(frame.empty()) <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>获取/设置图像中某一位置的像素值</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x = <span class="number">16</span>, y = <span class="number">32</span>;</span><br><span class="line">cv::Mat img;</span><br><span class="line">img = cv::imread(argv[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line"># 设置某一位置的像素值</span><br><span class="line">img.at&lt;uchar&gt;(x, y) = <span class="number">128</span>;</span><br><span class="line"></span><br><span class="line"># 获取某一位置的像素值</span><br><span class="line">cv::Vec3b intensity = img.at&lt;cv::Vec3b&gt;(y, x);</span><br><span class="line">uchar blue = intensity[<span class="number">0</span>];	</span><br><span class="line">uchar green = intensity[<span class="number">1</span>];</span><br><span class="line">uchar red = intensity[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新建视频文件</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> fps = capture.get(cv::CAP_PROP_FPS);</span><br><span class="line">cv::<span class="function">Size <span class="title">size</span><span class="params">((<span class="keyword">int</span>)capture.get(cv::CAP_PROP_FRAME_WIDTH),</span></span></span><br><span class="line"><span class="function"><span class="params">		(<span class="keyword">int</span>)capture.get(cv::CAP_PROP_FRAME_HEIGHT))</span></span>;</span><br><span class="line">cv::VideoWriter writer;</span><br><span class="line">writer.open(argv[<span class="number">2</span>], CV_FOURCC(<span class="string">'M'</span>, <span class="string">'J'</span>, <span class="string">'P'</span>, <span class="string">'G'</span>), fps, size);</span><br><span class="line"><span class="keyword">while</span> True:</span><br><span class="line">    ...</span><br><span class="line">	writer &lt;&lt; frame;</span><br></pre></td></tr></table></figure>
-
-</li>
+<h3 id="2-2-总体流程"><a href="#2-2-总体流程" class="headerlink" title="2.2. 总体流程"></a>2.2. 总体流程</h3><ul>
+<li>第一步：获取数据集中所有bbox的长与宽。</li>
+<li>第二步：从数据集的bbox中随机选择k个作为初始<code>中心bbox</code>。</li>
+<li>第三步：计算<code>其他bbox</code>与<code>中心bbox</code>之间的距离，即 <code>1-IOU</code>。</li>
+<li>第四步：根据上述距离进行聚类，即将<code>其他bbox</code>归类到与其距离最小的<code>中心bbox</code>中。换句话说，将所有bbox分为k类。</li>
+<li>第五步：对于每一类bbox，计算通过平均数/中位数获取k个bbox，作为新一轮的<code>中心bbox</code>。</li>
+<li>第六步：重复第三到第五步，直到前后两次获取的<code>中心bbox</code>完全相同为止。</li>
 </ul>
 
       
@@ -517,7 +499,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"># C++</a>
+            <a href="/tags/小白填坑/" rel="tag"># 小白填坑</a>
           
         </div>
       
@@ -530,8 +512,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/25/contents/" rel="next" title="博客目录">
-                <i class="fa fa-chevron-left"></i> 博客目录
+              <a href="/2019/11/23/dl/rookie/rookie-1/" rel="next" title="小白填坑系列(1) 线性插值、双线性插值">
+                <i class="fa fa-chevron-left"></i> 小白填坑系列(1) 线性插值、双线性插值
               </a>
             
           </div>
@@ -540,8 +522,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/26/python/manual/python-manual-6/" rel="prev" title="Python手册(6) cv2">
-                Python手册(6) cv2 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/12/04/python/manual/python-manual-10/" rel="prev" title="Python手册(10) Jupyter Notebook">
+                Python手册(10) Jupyter Notebook <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -692,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-展示窗口"><span class="nav-text">1. 展示窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-流水账"><span class="nav-text">1.1. 流水账</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-应用"><span class="nav-text">1.2. 应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-图像-amp-视频"><span class="nav-text">2. 图像 &amp; 视频</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本对象"><span class="nav-text">2.1. 基本对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-数字图像处理"><span class="nav-text">2.2. 数字图像处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-应用"><span class="nav-text">2.3. 应用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-论文内容总结"><span class="nav-text">1. 论文内容总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-引入"><span class="nav-text">1.1. 引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-论文配图"><span class="nav-text">1.2. 论文配图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-效果"><span class="nav-text">1.3. 效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-实现"><span class="nav-text">2. 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本概念"><span class="nav-text">2.1. 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-总体流程"><span class="nav-text">2.2. 总体流程</span></a></li></ol></li></ol></div>
             
 
           </div>
