@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="小白填坑,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器学习中常用的性能指标">
+<meta name="keywords" content="小白填坑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小白填坑系列(3) TP&#x2F;FP&#x2F;TN&#x2F;FN、accuracy&#x2F;precision&#x2F;recall、IOU、mAP">
+<meta property="og:url" content="http://yoursite.com/2019/12/04/dl/rookie/rookie-3/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="机器学习中常用的性能指标">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/10sysh6xc3iw0fhtndp3cdzd/image_1dr7g4lgdu9fr8a1dt216081v329.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/zjpw5a1cbpw8mr7hjgxhc8kn/image_1dr7iqk6kkl51ght10b035g1dpnm.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/tusmfk57i6lx91jlgztmvbqv/image_1dr7l5vqj8qqlvuj6u1kso1ln213.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/q2i1rus7w7ien7iscyav4qf0/image_1dr7pfr2fqt8devfbf57if721g.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/7rzuy94cg9a6oa112bizq6ru/image_1dr7phgs01c1av1iefjukkufm1t.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/vnswc923gsctutzxmmbz3nrc/image_1dr7pls596n2mcaf5h14lge2i2a.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/ek7i7k7dveeyn62lhuk32htj/image_1dr7ptfaj1nln7ubq401rtummh2n.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/tqk576j09nbtv5fxm5extoah/image_1dr7q0jt81if7fo92eon1712v534.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/5cqpbskh3kjprs38atqf8v8l/image_1dr7q751p1vvkbuv1khs4b1ds55h.png">
+<meta property="og:updated_time" content="2019-12-04T13:20:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小白填坑系列(3) TP&#x2F;FP&#x2F;TN&#x2F;FN、accuracy&#x2F;precision&#x2F;recall、IOU、mAP">
+<meta name="twitter:description" content="机器学习中常用的性能指标">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/10sysh6xc3iw0fhtndp3cdzd/image_1dr7g4lgdu9fr8a1dt216081v329.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/04/dl/rookie/rookie-3/">
+
+
+
+
+
+  <title>小白填坑系列(3) TP/FP/TN/FN、accuracy/precision/recall、IOU、mAP | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/dl/rookie/rookie-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小白填坑系列(3) TP/FP/TN/FN、accuracy/precision/recall、IOU、mAP</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-04T21:20:24+08:00">
+                2019-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/基础/小白填坑/" itemprop="url" rel="index">
+                    <span itemprop="name">小白填坑</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  机器学习中常用的性能指标
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>引入<ul>
+<li>在目标检测中，mAP是常用的性能指标，但一直没有完全搞清楚。</li>
+<li>好像对于不同的数据集/任务，使用的mAP也有不同，比如Pascal VOC和COCO的就有所不同。</li>
+<li>在计算mAP的过程中会用到IOU，而IOU的计算又与TP/FP/TN/FN有关联。</li>
+<li>之前一直对 accuracy, recall, precision 没有完全透彻的搞明白。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-TP-FP-TN-FN-与-accuracy-precision-recall"><a href="#1-TP-FP-TN-FN-与-accuracy-precision-recall" class="headerlink" title="1. TP/FP/TN/FN 与 accuracy/precision/recall"></a>1. TP/FP/TN/FN 与 accuracy/precision/recall</h2><ul>
+<li>这些概念应该属于机器学习入门知识，现在才完全搞明白，这就体现出我的基础到底有多烂。</li>
+<li>参考资料：<ul>
+<li><a href="https://www.zhihu.com/question/30643044" target="_blank" rel="noopener">知乎讨论：精确率、召回率、F1 值、ROC、AUC 各自的优缺点是什么？</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-TP-FP-TN-FN"><a href="#1-1-TP-FP-TN-FN" class="headerlink" title="1.1. TP/FP/TN/FN"></a>1.1. TP/FP/TN/FN</h3><ul>
+<li>混淆矩阵中的四个分量，对应下面图片。<ul>
+<li>True Positive, TP；False Positive, FP；True Negative, TN；False Negative, FN</li>
+<li>Positive/Negative用来表示预测的结果，预测是1则就是Positive，预测是0则表示Negative。</li>
+<li>True/False 用来表示预测结果是否正确，正确则为True，错误则为False。</li>
+</ul>
+</li>
+<li><img src="http://static.zybuluo.com/irving512/10sysh6xc3iw0fhtndp3cdzd/image_1dr7g4lgdu9fr8a1dt216081v329.png" alt="image_1dr7g4lgdu9fr8a1dt216081v329.png-26.6kB"></li>
+</ul>
+<h3 id="1-2-accuracy-precision-recall"><a href="#1-2-accuracy-precision-recall" class="headerlink" title="1.2. accuracy/precision/recall"></a>1.2. accuracy/precision/recall</h3><ul>
+<li>机器学习常用的几个性能指标。</li>
+<li>accuracy，准确率，是预测正确的样本数除以所有样本数，即 $accuracy = \frac{TP+TN}{TP + FP + TN + FN}$</li>
+<li>recall：<ul>
+<li>召回率，在所有正样本中，预测为正的样本概率，即 $recall = \frac{TP}{TP+FN}$</li>
+<li>理解：recall越高，<code>所有真实正样本中被预测为正样本的概率</code>越高，即“宁可错杀一万不可放过一个”。</li>
+<li>场景：如果正样本没有被预测出来则会导致很坏结果，如判断病人有没有生病，导弹预测。</li>
+<li><strong>召回</strong> 两字的理解：在所有正样本中，召回（预测）了多少正样本。</li>
+</ul>
+</li>
+<li>precision：<ul>
+<li>即精确率，所有预测为为正的杨根本中，真正属于正样本的概率，即 $precision = \frac{TP}{TP  + FP}$</li>
+<li>precision越高，则<code>所有预测为正的样本中的确为正样本的概率</code>越高，</li>
+<li>场景：如果预测为正的样本中存在负样本会导致很坏的结果，如嫌犯定罪。</li>
+</ul>
+</li>
+<li>下面图片帮助理解：<ul>
+<li><img src="http://static.zybuluo.com/irving512/zjpw5a1cbpw8mr7hjgxhc8kn/image_1dr7iqk6kkl51ght10b035g1dpnm.png" alt="image_1dr7iqk6kkl51ght10b035g1dpnm.png-141.6kB"></li>
+</ul>
+</li>
+<li>recall/precision 属于鱼和熊掌，不可兼得。</li>
+</ul>
+<h2 id="2-IOU"><a href="#2-IOU" class="headerlink" title="2. IOU"></a>2. IOU</h2><ul>
+<li>参考资料：<a href="https://zhuanlan.zhihu.com/p/47189358" target="_blank" rel="noopener">目标检测番外篇(1)_IoU</a></li>
+<li>基本理解：上面的参考文献中给出了配图<ul>
+<li><img src="http://static.zybuluo.com/irving512/tusmfk57i6lx91jlgztmvbqv/image_1dr7l5vqj8qqlvuj6u1kso1ln213.png" alt="image_1dr7l5vqj8qqlvuj6u1kso1ln213.png-22.1kB"></li>
+</ul>
+</li>
+<li>实现思路：<ul>
+<li>一般输入是两个bbox的信息，即两组 <code>xmin, ymin, xmax, ymax</code>。</li>
+<li>IOU实现的重点就是两个bbox<code>交</code>的面积<ul>
+<li>计算IOU就是要计算两个bbox的<code>交</code>与<code>并</code>的面积。</li>
+<li>bbox<code>并</code>的面积，其实就是两个bbox的面积减去bbox<code>交</code>的面积。</li>
+<li>所以，难点就是计算两个bbox的<code>交</code>。</li>
+</ul>
+</li>
+<li>需要考虑的情况有很多：<ul>
+<li>两个bbox没有相交部分。</li>
+<li>一个bbox在另一个bbox中。</li>
+<li>其他普通情况</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>下面代码来自上面的参考文献，很清楚了，就不多说了。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_IoU</span><span class="params">(pred_bbox, gt_bbox)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    return iou score between pred / gt bboxes</span></span><br><span class="line"><span class="string">    :param pred_bbox: predict bbox coordinate</span></span><br><span class="line"><span class="string">    :param gt_bbox: ground truth bbox coordinate</span></span><br><span class="line"><span class="string">    :return: iou score</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># bbox should be valid, actually we should add more judgements, just ignore here...</span></span><br><span class="line">    <span class="keyword">assert</span> ((abs(pred_bbox[<span class="number">2</span>] - pred_bbox[<span class="number">0</span>]) &gt; <span class="number">0</span>) <span class="keyword">and</span></span><br><span class="line">         (abs(pred_bbox[<span class="number">3</span>] - pred_bbox[<span class="number">1</span>]) &gt; <span class="number">0</span>))</span><br><span class="line">    <span class="keyword">assert</span> ((abs(gt_bbox[<span class="number">2</span>] - gt_bbox[<span class="number">0</span>]) &gt; <span class="number">0</span>) <span class="keyword">and</span></span><br><span class="line">         (abs(gt_bbox[<span class="number">3</span>] - gt_bbox[<span class="number">1</span>]) &gt; <span class="number">0</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算 交 的面积</span></span><br><span class="line">    ixmin = max(pred_bbox[<span class="number">0</span>], gt_bbox[<span class="number">0</span>])</span><br><span class="line">    iymin = max(pred_bbox[<span class="number">1</span>], gt_bbox[<span class="number">1</span>])</span><br><span class="line">    ixmax = min(pred_bbox[<span class="number">2</span>], gt_bbox[<span class="number">2</span>])</span><br><span class="line">    iymax = min(pred_bbox[<span class="number">3</span>], gt_bbox[<span class="number">3</span>])</span><br><span class="line">    iw = np.maximum(ixmax - ixmin + <span class="number">1.</span>, <span class="number">0.</span>)</span><br><span class="line">    ih = np.maximum(iymax - iymin + <span class="number">1.</span>, <span class="number">0.</span>)</span><br><span class="line">    inters = iw * ih</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算 并 的面积，即 S1 + S2 - inters</span></span><br><span class="line">    uni = ((pred_bbox[<span class="number">2</span>] - pred_bbox[<span class="number">0</span>] + <span class="number">1.</span>) * (pred_bbox[<span class="number">3</span>] - pred_bbox[<span class="number">1</span>] + <span class="number">1.</span>) +</span><br><span class="line">           (gt_bbox[<span class="number">2</span>] - gt_bbox[<span class="number">0</span>] + <span class="number">1.</span>) * (gt_bbox[<span class="number">3</span>] - gt_bbox[<span class="number">1</span>] + <span class="number">1.</span>) -</span><br><span class="line">           inters)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获得iou</span></span><br><span class="line">    overlaps = inters / uni</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> overlaps</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="3-mAP"><a href="#3-mAP" class="headerlink" title="3. mAP"></a>3. mAP</h2><ul>
+<li>参考资料：<ul>
+<li><a href="https://www.zhihu.com/question/53405779" target="_blank" rel="noopener">知乎讨论：目标检测中的mAP是什么含义？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/60834912" target="_blank" rel="noopener">白话mAP</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/48992451" target="_blank" rel="noopener">目标检测番外篇(2)_mAP</a></li>
+<li><a href="https://github.com/dmlc/gluon-cv/blob/master/gluoncv/utils/metrics/voc_detection.py" target="_blank" rel="noopener">Github: dmlc/gluon-cv - voc_detection.py 源码</a></li>
+<li><a href="https://github.com/rafaelpadilla/Object-Detection-Metrics" target="_blank" rel="noopener">Github: rafaelpadilla/Object-Detection-Metrics</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-基本思路"><a href="#3-1-基本思路" class="headerlink" title="3.1. 基本思路"></a>3.1. 基本思路</h3><ul>
+<li>mAP的计算会用到precision/recall以及IOU。</li>
+<li>计算precision/recall：<ul>
+<li>检测结束后，每张图获取若干最终结果pred bboxes。</li>
+<li>每张图片本身有gt bboxes。</li>
+<li>依次计算每张图片、每类物体的 pred bboxes 与 gt bboxes 之间的IOU。</li>
+<li>IOU大于一定阈值（如0.5）且对应gt bbox未与其他pred bbox对应的记作TP。</li>
+<li>IOU小于阈值，或IOU大于阈值但gt bbox与其他pred bbox，对应则记为FP。</li>
+<li>没有对应pred bbox 的 gt bbox 被看过只FN。</li>
+<li>统计数据集中所有图片的TP/FP/FN，，就可以计算 precision 和  recall。</li>
+<li>另外，检测结果（即 pred bboxes）的确认，是通过置信度大小来设置的，即可以通过置信度来控制预测bbox的Positive/Negative。</li>
+</ul>
+</li>
+<li>mAP，其实就是 mean AP，即对每一类物体计算AP，然后再求所有类的平均。<ul>
+<li>AP，就是 average precision，就是在若干固定recall的情况下计算precision，然后求precision的平均数。</li>
+</ul>
+</li>
+<li>总结一下相关概念：<ul>
+<li>mAP：mean average precision</li>
+<li>AP: average precision，PR曲线下的面积</li>
+<li>Presicion = TP / (TP + FP)</li>
+<li>Recall = TP/ (TP + FN)</li>
+<li>TP: IOU 大于阈值的bbox数量（每个gt bbox只有一个对应的 pred bbox）</li>
+<li>FP: IOU 小于阈值或同意gt bbox多余的bbox的数量。</li>
+<li>FN：没有检测到的gt bbox数量。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-实例"><a href="#3-2-实例" class="headerlink" title="3.2. 实例"></a>3.2. 实例</h3><ul>
+<li>下面的例子来自 <a href="https://zhuanlan.zhihu.com/p/60834912" target="_blank" rel="noopener">这里</a>，不了解原始出处。</li>
+<li>对于一次物体检测任务，得到以下结果：<ul>
+<li>绿色的是gt bboxes，红色的是pred bboxes。</li>
+<li><img src="http://static.zybuluo.com/irving512/q2i1rus7w7ien7iscyav4qf0/image_1dr7pfr2fqt8devfbf57if721g.png" alt="image_1dr7pfr2fqt8devfbf57if721g.png-211.7kB"></li>
+</ul>
+</li>
+<li>对于所有pred bboxes，根据置信度排序(confidences)得到以下表格<ul>
+<li>Confidences 表示置信度，TP 表示该 pred bbox 是否与某个gt bbox对应，即IOU是否大于阈值。</li>
+<li>Acc TP 表示累计 TP数量，Acc FP表示累计FP数量。</li>
+<li>Precision与Recall分别代表当前点的累计准确率与召回率，可以看做是置信度阈值为X（即对应行Confidences的取值）时的recall与precision。</li>
+<li><img src="http://static.zybuluo.com/irving512/7rzuy94cg9a6oa112bizq6ru/image_1dr7phgs01c1av1iefjukkufm1t.png" alt="image_1dr7phgs01c1av1iefjukkufm1t.png-499.1kB"></li>
+</ul>
+</li>
+<li>根据上面的表格，可以获得以下PR曲线：<ul>
+<li>注意，从上面的表格从上到下，置信度（confidences）逐渐减小，recall肯定是增加的（因为肯定会有越来越多的TP被包含其中）。</li>
+<li>从表格上看，当新增一个TP时，PR曲线会向右上方移动。当新增一个FP时，PR曲线会向正下方移动。</li>
+<li><img src="http://static.zybuluo.com/irving512/vnswc923gsctutzxmmbz3nrc/image_1dr7pls596n2mcaf5h14lge2i2a.png" alt="image_1dr7pls596n2mcaf5h14lge2i2a.png-170.1kB"></li>
+</ul>
+</li>
+<li>Pascal VOC 2008：<ul>
+<li>Interpolated AP，即进行差值计算AP。</li>
+<li>具体方法：对每一个Precision值，使用其右边最大的Precision值替代。</li>
+<li>如下图，就是利用红色虚线取代蓝色曲线。</li>
+<li><img src="http://static.zybuluo.com/irving512/ek7i7k7dveeyn62lhuk32htj/image_1dr7ptfaj1nln7ubq401rtummh2n.png" alt="image_1dr7ptfaj1nln7ubq401rtummh2n.png-103.8kB"></li>
+<li>实际计算方法如下图，就是对平滑后的Precision曲线进行均匀采样出11个点（每个点间隔0.1），然后计算这11个点的平均Precision。</li>
+<li><img src="http://static.zybuluo.com/irving512/tqk576j09nbtv5fxm5extoah/image_1dr7q0jt81if7fo92eon1712v534.png" alt="image_1dr7q0jt81if7fo92eon1712v534.png-89.9kB"></li>
+</ul>
+</li>
+<li>Pascal VOC 2012<ul>
+<li>Area under curve AUC。</li>
+<li>Pascal VOC 2007 的方法由于插值点数量太少，很容易导致结果不准确。</li>
+<li>示意图如下，可以理解为算了无数个点的面积平均，所以结果要准确一些。</li>
+<li><img src="http://static.zybuluo.com/irving512/5cqpbskh3kjprs38atqf8v8l/image_1dr7q751p1vvkbuv1khs4b1ds55h.png" alt="image_1dr7q751p1vvkbuv1khs4b1ds55h.png-108.7kB"></li>
+</ul>
+</li>
+<li>COCO<ul>
+<li>使用101个点的内插mAP（Interpolated AP）。</li>
+<li>使用了不同IOU阈值，不同尺度下的AP平均来作为评测结果，比如AP @ [.5 : .95]对应于IoU的平均AP，从0.5到0.95，步长为0.05。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-TODO：源码分析"><a href="#3-3-TODO：源码分析" class="headerlink" title="3.3. TODO：源码分析"></a>3.3. TODO：源码分析</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/小白填坑/" rel="tag"># 小白填坑</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/04/python/manual/python-manual-10/" rel="next" title="Python手册(10) Jupyter Notebook">
+                <i class="fa fa-chevron-left"></i> Python手册(10) Jupyter Notebook
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-TP-FP-TN-FN-与-accuracy-precision-recall"><span class="nav-text">1. TP/FP/TN/FN 与 accuracy/precision/recall</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-TP-FP-TN-FN"><span class="nav-text">1.1. TP/FP/TN/FN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-accuracy-precision-recall"><span class="nav-text">1.2. accuracy/precision/recall</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-IOU"><span class="nav-text">2. IOU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-mAP"><span class="nav-text">3. mAP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-基本思路"><span class="nav-text">3.1. 基本思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-实例"><span class="nav-text">3.2. 实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-TODO：源码分析"><span class="nav-text">3.3. TODO：源码分析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
