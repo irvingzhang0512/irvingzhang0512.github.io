@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,目标检测,深度学习应用,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Yolo 论文读书笔记与Darknet的使用">
+<meta name="keywords" content="深度学习,目标检测,深度学习应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yolo系列 &amp; Darknet">
+<meta property="og:url" content="http://yoursite.com/2019/12/13/dl/object_detection/darknet/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="Yolo 论文读书笔记与Darknet的使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/ncy6ag2s21lq6dygihsru9pl/image_1dr2tobdl112msd41k6v7s315e15f.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/rfvsx2t4ub4c9b701i50ueff/image_1dr2s6sp1rb21pkh76jl0o5c1o.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/j45biz6ja4515gzjtgpjzold/image_1dr2seome120gl4h8dth3q1kdj45.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/srn233iyx0f2gbmc0g2bbr5r/image_1dr2sfvhc56q1e6jq6jdfhc3552.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/qd3cb528epvdg3j9bs0k5h8t/image_1drggsd02ruu1srg17qj1c8g1pp29.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/rds61ls2vxyz807h1fwdckcg/image_1drgi26861mkl1ue39iqmr3o8nm.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/ysbjhc4bt6u7dtbyu287k8dq/image_1drgii8eqouu1tutk6ts96no113.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/mmuw19f46gj5dshvsx77tgyr/image_1drgivjmr3ss13o6oqd1o3f1p821t.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/32l0vygejh307nrfj2qf8bw9/image_1drgiv8bqs39rvo2rtf446v11g.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/v863ee5kj9584c2nw4rzvom7/image_1drih84r9gm811dn1lre43r1sgu9.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/iy9jaj6bwbl7umy2555lak9h/image_1drihd5cm3vldjj1mud1lbtr4sm.png">
+<meta property="og:updated_time" content="2019-12-13T14:25:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yolo系列 &amp; Darknet">
+<meta name="twitter:description" content="Yolo 论文读书笔记与Darknet的使用">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/ncy6ag2s21lq6dygihsru9pl/image_1dr2tobdl112msd41k6v7s315e15f.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/13/dl/object_detection/darknet/">
+
+
+
+
+
+  <title>Yolo系列 & Darknet | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/13/dl/object_detection/darknet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Yolo系列 & Darknet</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-13T22:25:57+08:00">
+                2019-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/目标检测/" itemprop="url" rel="index">
+                    <span itemprop="name">目标检测</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  Yolo 论文读书笔记与Darknet的使用
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>本文主要包括两部分内容：<ul>
+<li>第一部分：介绍Yolo v1/v2/v3 三篇论文的主要内容。</li>
+<li>第二部分：介绍DarkNet的使用。</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-论文笔记"><a href="#1-论文笔记" class="headerlink" title="1. 论文笔记"></a>1. 论文笔记</h2><ul>
+<li>论文：<ul>
+<li><a href="https://arxiv.org/abs/1506.02640" target="_blank" rel="noopener">You Only Look Once: Unified, Real-Time Object Detection</a></li>
+<li><a href="https://arxiv.org/abs/1612.08242" target="_blank" rel="noopener">YOLO9000: Better, Faster, Stronger</a></li>
+<li><a href="https://arxiv.org/abs/1804.02767" target="_blank" rel="noopener">YOLOv3: An Incremental Improvement</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-Yolo-v1"><a href="#1-1-Yolo-v1" class="headerlink" title="1.1. Yolo v1"></a>1.1. Yolo v1</h3><ul>
+<li>参考资料：<ul>
+<li><a href="https://arxiv.org/abs/1506.02640" target="_blank" rel="noopener">You Only Look Once: Unified, Real-Time Object Detection</a></li>
+</ul>
+</li>
+<li>素质四连<ul>
+<li>要解决什么问题？<ul>
+<li>对于物体检测任务，快速算法的性能低；性能高的算法（如R-CNN系）不能达到实时性的要求。</li>
+<li>之前物体检测任务主要分为两个步骤，第一步获取候选区域，第二步队每个分区进行分类。这种方法的性能不能达到实时性要求。</li>
+</ul>
+</li>
+<li>用了什么方法解决？<ul>
+<li>提出了一种使用回归方式获取候选去的方法，将所有物体检测任务都结合到一个神经网络中。</li>
+</ul>
+</li>
+<li>效果如何？<ul>
+<li>运行速度大大提高，可以达到45fps。</li>
+<li>相比于其他快速物体检测模型，检测结果的准确率有了很大提高。</li>
+<li>相比于R-CNN，对于背景的分类结果好了很多。</li>
+</ul>
+</li>
+<li>还存在什么问题？<ul>
+<li>模型准确率距离其他模型（如Fast R-CNN）还有一定的距离。</li>
+<li>在候选边框预测方面（与R-CNN系方法相比），误差较大且对于新数据集的泛化能力较弱。</li>
+<li>对于空间聚集较密的数据的预测结果不好。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Yolo 系统结构如下：<ul>
+<li>第一步，resize图片。</li>
+<li>第二步，进行图像检测，获取若干候选框以及对应的类别。</li>
+<li>第三步，通过NMS筛选第二步得到的候选框。</li>
+<li><img src="http://static.zybuluo.com/irving512/ncy6ag2s21lq6dygihsru9pl/image_1dr2tobdl112msd41k6v7s315e15f.png" alt="image_1dr2tobdl112msd41k6v7s315e15f.png-562.9kB"></li>
+</ul>
+</li>
+<li>Yolo 模型思路如下图：<ul>
+<li>第一步：将图片分为S<em>S个区域，其实就是经过backbone获取S</em>S的特征图。</li>
+<li>第二步：通过全连接、卷积等操作，获取 <code>S*S</code> 特征图中每个点的图像检测信息。每个点一共分类依稀和预测 <code>B</code> 个bbox，分类信息是个长度为 <code>C</code> 的向量，每个bbox预测长度为5的向量，所以预测每个点要预测的向量长度为 <code>S*S*(B*5+C)</code>。</li>
+<li>第三步：进行 post-processing 筛选获取的bbox。</li>
+<li><img src="http://static.zybuluo.com/irving512/rfvsx2t4ub4c9b701i50ueff/image_1dr2s6sp1rb21pkh76jl0o5c1o.png" alt="image_1dr2s6sp1rb21pkh76jl0o5c1o.png-547.8kB"></li>
+</ul>
+</li>
+<li>Yolo 网络结构如下图：<ul>
+<li>网络结构没什么好说的，就提一下中间有<strong>全连接层</strong>……</li>
+<li><img src="http://static.zybuluo.com/irving512/j45biz6ja4515gzjtgpjzold/image_1dr2seome120gl4h8dth3q1kdj45.png" alt="image_1dr2seome120gl4h8dth3q1kdj45.png-200.7kB"></li>
+</ul>
+</li>
+<li>Yolo 损失函数如下图：<ul>
+<li>TODO：参考 <a href="https://github.com/hizhangp/yolo_tensorflow/blob/master/yolo/yolo_net.py" target="_blank" rel="noopener">源码</a> 进一步理解Yolo loss。</li>
+<li>首先，对于Yolo中所有损失函数都是以平方差的形式存在。</li>
+<li>几个解释：<ul>
+<li>$1_i^{obj}$ 代表网格中存在对象，但不确定是哪个bbox。</li>
+<li>$1_{ij}^{obj}$ 代表网格i中第j个bbox存在对象。</li>
+<li>$1_{ij}^{noobj}$ 代表网格i中的j个bbox不存在对象。</li>
+<li>几个 $\lambda$ 都是为了平衡大小。</li>
+</ul>
+</li>
+<li>猜测上述内容的计算流程：<ul>
+<li>第一步：根据gt获取所有有物体的bbox对应的中心点，即选择S*S中的某一个点。</li>
+<li>第二步：分别计算GT bbox与选中点中B个候选bbox之间的IOU。</li>
+<li>第三步：选择IOU较大的候选bbox作为 $1_{ij}^{obj}$。</li>
+<li>第四步：遍历所有GT bbox，除了选中的候选bbox外，其他的均作为 $1_{ij}^{noobj}$。</li>
+</ul>
+</li>
+<li>损失函数分为三个部分：<ul>
+<li>通过confidence计算损失函数（判断是否有物体）<ul>
+<li>对应下图中第三行与第四行。</li>
+<li>对所有候选bbox都进行计算。</li>
+</ul>
+</li>
+<li>分类误差（确定有物体，判断物体类别）<ul>
+<li>对应下图中第五行。</li>
+<li>只对确定有物体的bbox进行计算。</li>
+</ul>
+</li>
+<li>物体bbox误差（确定有物体，计算x, y, w, h的误差）<ul>
+<li>对应下图中第一行与第二行。</li>
+<li>只对确定有物体的bbox进行计算。</li>
+</ul>
+</li>
+<li><img src="http://static.zybuluo.com/irving512/srn233iyx0f2gbmc0g2bbr5r/image_1dr2sfvhc56q1e6jq6jdfhc3552.png" alt="image_1dr2sfvhc56q1e6jq6jdfhc3552.png-94.8kB"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-Yolo-v2"><a href="#1-2-Yolo-v2" class="headerlink" title="1.2. Yolo v2"></a>1.2. Yolo v2</h3><ul>
+<li>参考资料：<ul>
+<li><a href="https://arxiv.org/abs/1612.08242" target="_blank" rel="noopener">YOLO9000: Better, Faster, Stronger</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/35325884" target="_blank" rel="noopener">目标检测|YOLOv2原理与实现(附YOLOv3)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/47575929" target="_blank" rel="noopener">&lt;机器爱学习&gt;YOLOv2 / YOLO9000 深入理解</a></li>
+</ul>
+</li>
+<li>素质四连<ul>
+<li>要解决什么问题？<ul>
+<li>YOLO v1性能不好，与Faster RCNN的主要区别在于定位误差大，且召回率低。</li>
+<li>图像分类数据集较容易获取，数据量多，分类种类也多；物体检测数据集获取难度较大，分类种类太少，无法像数据分类数据集那么丰富。</li>
+<li>大多数检测模型只能用于某个特定数据集。 most detection methods are still constrained to a small set of objections.</li>
+</ul>
+</li>
+<li>用了什么方法解决？<ul>
+<li>从 Better, Faster, Stronger 三个角度对原有的YOLO模型进行优化。详细内容下文再说。</li>
+</ul>
+</li>
+<li>效果如何？<ul>
+<li>在VOC COCO上达到了state-of-the-art的检测结果。</li>
+<li>训练了YOLO9000模型可用于检测超过9000类物体。</li>
+<li>达到实时性要求。</li>
+</ul>
+</li>
+<li>还存在什么问题？<ul>
+<li>这一系列的方法（YOLO SSD YOLO v2）都对小物体、聚集在一起的多个物体的检测结果不佳。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Better（基于v1提高模型性能）<ul>
+<li>Batch Normolization: 在网络中添加BN。</li>
+<li>High Resolution Classifier: 提高输入图片的尺寸：v1是224<em>224，v2中用448</em>448。<ul>
+<li>PS：训练的时候，先用448*448的模型在ImageNet上训练10个epochs，然后再用于目标检测训练。</li>
+</ul>
+</li>
+<li>Convolutional with Anchor Boxes &amp; Dimension Clusters: 引入anchors，且利用聚类获取先验边框信息。</li>
+<li>Direct location prediction: Faster RCNN中bbox的预测形式会导致预测不稳定，所以使用了类似yolov1的bbox表现形式。<ul>
+<li><img src="http://static.zybuluo.com/irving512/qd3cb528epvdg3j9bs0k5h8t/image_1drggsd02ruu1srg17qj1c8g1pp29.png" alt="image_1drggsd02ruu1srg17qj1c8g1pp29.png-87.9kB"></li>
+</ul>
+</li>
+<li>Fine-Grained Features: 13<em>13的特征图对于小物体来说太小了，所以需要增加特征图信息。这里通过passthrough来实现，即将最后一个pooling前26</em>26<em>512的特征图转换为13</em>13*2048的特征图，然后再与pooling后的特征吃concat，作为后续检测的输入。转换方式如下图。<ul>
+<li><img src="http://static.zybuluo.com/irving512/rds61ls2vxyz807h1fwdckcg/image_1drgi26861mkl1ue39iqmr3o8nm.png" alt="image_1drgi26861mkl1ue39iqmr3o8nm.png-40.8kB"></li>
+</ul>
+</li>
+<li>多尺寸训练</li>
+</ul>
+</li>
+<li>Faster<ul>
+<li>Darknet-19: vgg很好，但太复杂了，所以设计了Darknet-19。<ul>
+<li><img src="http://static.zybuluo.com/irving512/ysbjhc4bt6u7dtbyu287k8dq/image_1drgii8eqouu1tutk6ts96no113.png" alt="image_1drgii8eqouu1tutk6ts96no113.png-146.3kB"></li>
+</ul>
+</li>
+<li>训练过程：<ul>
+<li>先用224<em>224在ImageNet上训练分类模型，在用448</em>448fine-tune已经获取的模型。</li>
+<li>训练检测模型的时候，channels是 num_priors<em>(5</em>num_classes)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Stronger：主要就是介绍如何一次分类9000类，不太感兴趣。</li>
+<li>损失函数就放上参考文献中的截图：<ul>
+<li><img src="http://static.zybuluo.com/irving512/mmuw19f46gj5dshvsx77tgyr/image_1drgivjmr3ss13o6oqd1o3f1p821t.png" alt="image_1drgivjmr3ss13o6oqd1o3f1p821t.png-89.5kB"></li>
+<li><img src="http://static.zybuluo.com/irving512/32l0vygejh307nrfj2qf8bw9/image_1drgiv8bqs39rvo2rtf446v11g.png" alt="image_1drgiv8bqs39rvo2rtf446v11g.png-160.4kB"></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-Yolo-v3"><a href="#1-3-Yolo-v3" class="headerlink" title="1.3. Yolo v3"></a>1.3. Yolo v3</h3><ul>
+<li>参考资料：<ul>
+<li><a href="https://arxiv.org/abs/1804.02767" target="_blank" rel="noopener">YOLOv3: An Incremental Improvement</a></li>
+<li><a href="https://blog.csdn.net/leviopku/article/details/82660381" target="_blank" rel="noopener">yolo系列之yolo v3【深度解析】</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/49995236" target="_blank" rel="noopener">史上最详细的Yolov3边框预测分析</a></li>
+</ul>
+</li>
+<li>素质四连<ul>
+<li>要解决什么问题？<ul>
+<li>将一些新的技术添加到yolo中。</li>
+</ul>
+</li>
+<li>用了什么方法解决？<ul>
+<li>在预测标签时，使用binary cross-entropy而不是softmax。这样在预测多标签任务时很有用。</li>
+<li>使用了 Multi-scale predict，类似于SSD，就是在多个尺寸的特征图上都分别检测bbox。</li>
+<li>使用了新的darknet结构。<ul>
+<li><img src="http://static.zybuluo.com/irving512/v863ee5kj9584c2nw4rzvom7/image_1drih84r9gm811dn1lre43r1sgu9.png" alt="image_1drih84r9gm811dn1lre43r1sgu9.png-148.8kB"></li>
+<li><img src="http://static.zybuluo.com/irving512/iy9jaj6bwbl7umy2555lak9h/image_1drihd5cm3vldjj1mud1lbtr4sm.png" alt="image_1drihd5cm3vldjj1mud1lbtr4sm.png-586.2kB"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>效果如何？<ul>
+<li>又快又好。</li>
+</ul>
+</li>
+<li>还存在什么问题？<ul>
+<li>不太清楚，就感觉很好。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-DarkNet实践"><a href="#2-DarkNet实践" class="headerlink" title="2. DarkNet实践"></a>2. DarkNet实践</h2><ul>
+<li>参考资料：<ul>
+<li>官方：<a href="https://arxiv.org/abs/1506.02640" target="_blank" rel="noopener">源码</a>，<a href="https://arxiv.org/abs/1612.08242" target="_blank" rel="noopener">官网</a></li>
+<li>AlexeyAB版：<a href="https://github.com/AlexeyAB/darknet" target="_blank" rel="noopener">源码</a>，<a href="https://www.cnblogs.com/pprp/p/10204480.html" target="_blank" rel="noopener">改进版介绍</a></li>
+</ul>
+</li>
+<li>我使用的是 AlexeyAB版，主要因为这个提供了Python API。</li>
+</ul>
+<h3 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1. 安装"></a>2.1. 安装</h3><ul>
+<li>安装方法：进入 darknet 文件夹后直接输入 <code>make</code> 命令即可。</li>
+<li>默认安装版本是：CPU版，且不使用OpenCV。</li>
+<li>GPU版本：修改 <code>Makefile</code> 文件中的内容 <code>GPU=1</code>。</li>
+<li>OpenCV版本：<ul>
+<li>方法：修改 <code>Makefile</code> 文件中 <code>OPENCV=1</code></li>
+<li>作用：可以使用摄像头，以及所有OpenCV支持的图片、视频文件（本来只支持部分格式）。</li>
+</ul>
+</li>
+<li>采坑：在安装OpenCV版本时老是出现问题。最后重新安装OpenCV解决，但安装时要注意以下几点：<ul>
+<li>注意OpenCV的版本，建议不要使用3.4.1（存在已知错误），其他版本应该可以。我用当前最新的 3.4.7 成功了。</li>
+<li>需要修改OpenCV的安装文件<code>CMakeLists.txt</code>，设置 <code>OCV_OPTION(OPENCV_GENERATE_PKGCONFIG  &quot;Generate .pc file for pkg-config build tool (deprecated)&quot; ON )</code></li>
+<li>在安装成功后可能还需要进一步处理，参考<a href="https://blog.csdn.net/kidcad/article/details/89453333" target="_blank" rel="noopener">这里</a>，即。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 修改 /etc/ld.so.conf 文件</span><br><span class="line"># 即 sudo vim /etc/ld.so.conf</span><br><span class="line"># 添加内容</span><br><span class="line">include /etc/ld.so.conf.d/*.conf</span><br><span class="line">include /usr/local/lib</span><br><span class="line"></span><br><span class="line"># 保存并运行</span><br><span class="line">sudo ldconfig</span><br><span class="line"></span><br><span class="line"># 修改 /etc/bash.bashrc 文件</span><br><span class="line"># 即 sudo vim /etc/bash.bashrc</span><br><span class="line"># 文末添加 </span><br><span class="line">PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig</span><br><span class="line">export PKG_CONFIG_PATH</span><br><span class="line"></span><br><span class="line"># 最后更新配置文件</span><br><span class="line">source /etc/bash.bashrc</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-直接默认命令"><a href="#2-2-直接默认命令" class="headerlink" title="2.2. 直接默认命令"></a>2.2. 直接默认命令</h3><ul>
+<li>方式就是使用 <code>./darknet</code> 来进行目标检测。</li>
+<li>在 <a href="https://arxiv.org/abs/1804.02767" target="_blank" rel="noopener">这里</a> 有详细实例。</li>
+<li>举例：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 摄像头</span><br><span class="line">./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights -c 0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 检测视频</span><br><span class="line">./darknet detector demo cfg/coco.data cfg/yolov3-tiny.cfg yolov3-tiny.weights test.mp4</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 检测结果保存到视频</span><br><span class="line">./darknet detector demo cfg/coco.data cfg/yolov3.cfg yolov3.weights test.mp4 -out_filename out.avi</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="2-3-调用Python接口"><a href="#2-3-调用Python接口" class="headerlink" title="2.3. 调用Python接口"></a>2.3. 调用Python接口</h3><ul>
+<li>主要源码位于 <a href="https://github.com/AlexeyAB/darknet/blob/master/darknet_video.py" target="_blank" rel="noopener">这里</a> 中。</li>
+<li>有几个要点：<ul>
+<li>DarkNet接口中已经进行了NMS，不需要再自己手动处理。</li>
+<li>输入图像是RGB。</li>
+<li>脚本中还提供了在图上画bbox的代码。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-V100-测试-YoloV3"><a href="#2-4-V100-测试-YoloV3" class="headerlink" title="2.4. V100 测试 YoloV3"></a>2.4. V100 测试 YoloV3</h3><table>
+<thead>
+<tr>
+<th>环境</th>
+<th>推理性能(视频读取+图像预处理+检测)</th>
+<th>检测时间(ms)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DarkNet</td>
+<td>71.62fps/14.0ms</td>
+<td>9.3</td>
+</tr>
+<tr>
+<td>TVM + cudnn</td>
+<td>40.88fps/24.5ms</td>
+<td>18.8</td>
+</tr>
+<tr>
+<td>TVM + Auto-tuned</td>
+<td>43.95fps/22.8ms</td>
+<td>17.4</td>
+</tr>
+<tr>
+<td>TensorFlow</td>
+<td>28.03fps/36.8ms</td>
+<td>28.0</td>
+</tr>
+<tr>
+<td>TensorFlow + TensorRT</td>
+<td>28.24fps/35.4ms</td>
+<td>25.6</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/深度学习应用/" rel="tag"># 深度学习应用</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/04/dl/rookie/rookie-3/" rel="next" title="小白填坑系列(3) TP/FP/TN/FN、accuracy/precision/recall、IOU、mAP">
+                <i class="fa fa-chevron-left"></i> 小白填坑系列(3) TP/FP/TN/FN、accuracy/precision/recall、IOU、mAP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-论文笔记"><span class="nav-text">1. 论文笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Yolo-v1"><span class="nav-text">1.1. Yolo v1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Yolo-v2"><span class="nav-text">1.2. Yolo v2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Yolo-v3"><span class="nav-text">1.3. Yolo v3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-DarkNet实践"><span class="nav-text">2. DarkNet实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-安装"><span class="nav-text">2.1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-直接默认命令"><span class="nav-text">2.2. 直接默认命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-调用Python接口"><span class="nav-text">2.3. 调用Python接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-V100-测试-YoloV3"><span class="nav-text">2.4. V100 测试 YoloV3</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
