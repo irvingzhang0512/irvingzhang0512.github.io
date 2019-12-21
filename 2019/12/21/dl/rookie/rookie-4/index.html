@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="小白填坑,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="介绍cocoapi的基本信息">
+<meta name="keywords" content="小白填坑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小白填坑系列(4) cocoapi">
+<meta property="og:url" content="http://yoursite.com/2019/12/21/dl/rookie/rookie-4/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="介绍cocoapi的基本信息">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/fuio0tqyg00y8hq9sjxkhgn1/image_1dsk6pian1osjtic1mq31ru2150r9.png">
+<meta property="og:updated_time" content="2019-12-21T15:19:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小白填坑系列(4) cocoapi">
+<meta name="twitter:description" content="介绍cocoapi的基本信息">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/fuio0tqyg00y8hq9sjxkhgn1/image_1dsk6pian1osjtic1mq31ru2150r9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/12/21/dl/rookie/rookie-4/">
+
+
+
+
+
+  <title>小白填坑系列(4) cocoapi | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/21/dl/rookie/rookie-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小白填坑系列(4) cocoapi</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-21T23:19:59+08:00">
+                2019-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/基础/小白填坑/" itemprop="url" rel="index">
+                    <span itemprop="name">小白填坑</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  介绍cocoapi的基本信息
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
+<li>一直都在用 COCO 数据集，但对这个API了解不够深入。</li>
+<li>现在搞完了，感觉使用已经差不多了。</li>
+<li>如果说还有什么要深入的话，那就是Mask的具体使用，以及COCOEval的基本原理了。</li>
+</ul>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><ul>
+<li>Linux<ul>
+<li><code>pip install cython; pip install &#39;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#39;</code></li>
+</ul>
+</li>
+<li>Windows<ul>
+<li><a href="https://github.com/philferriere/cocoapi" target="_blank" rel="noopener">Gihub: cocoapi windows version</a></li>
+<li>在PythonAPI文件夹中运行 <code>python setup.py build_ext install</code> 即可。</li>
+<li>可能会报错 <code>error: Unable to find vcvarsall.bat</code><ul>
+<li>解决：在<a href="https://devblogs.microsoft.com/python/unable-to-find-vcvarsall-bat/" target="_blank" rel="noopener">这里</a>下载 <code>Visual C++ Build Tools 2015</code> ，在win10下安装。</li>
+<li><img src="http://static.zybuluo.com/irving512/fuio0tqyg00y8hq9sjxkhgn1/image_1dsk6pian1osjtic1mq31ru2150r9.png" alt="image_1dsk6pian1osjtic1mq31ru2150r9.png-31.7kB"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-COCO-类"><a href="#2-COCO-类" class="headerlink" title="2. COCO 类"></a>2. COCO 类</h2><ul>
+<li>位于 <code>coco.py</code> 中。</li>
+<li>作用：整合一系列图像以及对应的标注结果。</li>
+</ul>
+<h3 id="2-1-初始化"><a href="#2-1-初始化" class="headerlink" title="2.1. 初始化"></a>2.1. 初始化</h3><ul>
+<li>初始化该类需要导入配置文件。COCO中配置文件主要分为三类：<ul>
+<li>用于实例分割与物体检测的<code>instances_{}.json</code></li>
+<li>用于关键点识别的<code>person_keypoints_{}.json</code></li>
+<li>提供简单介绍图像的文字<code>captions_{}.json</code></li>
+</ul>
+</li>
+<li>代码基本流程：<ul>
+<li>第一步：读取json文件，作为<code>self.dataset</code>实例。</li>
+<li>第二步：根据<code>self.dataset</code>对象，获取五个成员变量，下面分别介绍<ul>
+<li><code>imgs</code>：key为数字id，value为字典，<code>2.2. 基本方法</code>中会介绍该字典。</li>
+<li><code>cats</code>：key为数字id，value为字典，<code>2.2. 基本方法</code>中会介绍该字典。</li>
+<li><code>anns</code>：key为数字id，value为字典，<code>2.2. 基本方法</code>中会介绍该字典。</li>
+<li><code>imgToAnns</code>：key为数字id，value为list，list中每个元素是个字典，该字典内容与<code>anns</code>一致。</li>
+<li><code>catToImgs</code>：key为数字id，value为list，list中每个元素是个字典，该字典内容与<code>imgs</code>一致。</li>
+<li>这一步主要就是通过 <code>createIndex</code> 方法实现。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-基本方法"><a href="#2-2-基本方法" class="headerlink" title="2.2. 基本方法"></a>2.2. 基本方法</h3><ul>
+<li><p>get系列：获取各种id。</p>
+<ul>
+<li><code>def getCatIds(self, catNms=[], supNms=[], catIds=[])</code><ul>
+<li>通过分类名称、父类名称、分类编号获取分类编号。</li>
+<li>三个条件要同时成立。</li>
+</ul>
+</li>
+<li><code>def getImgIds(self, imgIds=[], catIds=[])</code><ul>
+<li>通过图片编号与分类编号获取图片编号。</li>
+<li>注意，如果有多个类型编号，则要求一张图片中包含所有指定的类型。</li>
+</ul>
+</li>
+<li><code>def getAnnIds(self, imgIds=[], catIds=[], areaRng=[], iscrowd=None)</code><ul>
+<li>通过图片编号、分类编号、面积范围、crowd记号来获取对应的标签。</li>
+<li>所有条件必须同时满足。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>load系列：根据id获取各种实际数据。</p>
+<ul>
+<li>共有 <code>loadCats</code>, <code>loadAnns</code>, <code>loadImgs</code> 三个方法，结果举例如下。</li>
+<li>注意，anno中对应的 <code>segmentation</code> 有两种形式<ul>
+<li>当iscrowd为0时，是polygon形式。</li>
+<li>当iscrowd为1时，是rle形式。</li>
+</ul>
+</li>
+<li>注意，anno中对应的 <code>keypoints</code> 表示17个关键点信息，用以为数组表示。<ul>
+<li>该数组可以转换为 <code>[17, 3]</code>，其中三个数字分别是横坐标、纵坐标、关键点可见性（0或1）。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># instances: loadCats</span></span><br><span class="line">&#123;<span class="string">'supercategory'</span>: <span class="string">'person'</span>, <span class="string">'id'</span>: <span class="number">1</span>, <span class="string">'name'</span>: <span class="string">'person'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># keypoints: loadCats</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">'supercategory'</span>: <span class="string">'person'</span>,</span><br><span class="line">    <span class="string">'id'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'name'</span>: <span class="string">'person'</span>,</span><br><span class="line">    <span class="string">'keypoints'</span>: [</span><br><span class="line">        <span class="string">'nose'</span>,</span><br><span class="line">        <span class="string">'left_eye'</span>,</span><br><span class="line">        <span class="string">'right_eye'</span>,</span><br><span class="line">        <span class="string">'left_ear'</span>,</span><br><span class="line">        <span class="string">'right_ear'</span>,</span><br><span class="line">        <span class="string">'left_shoulder'</span>,</span><br><span class="line">        <span class="string">'right_shoulder'</span>,</span><br><span class="line">        <span class="string">'left_elbow'</span>,</span><br><span class="line">        <span class="string">'right_elbow'</span>,</span><br><span class="line">        <span class="string">'left_wrist'</span>,</span><br><span class="line">        <span class="string">'right_wrist'</span>,</span><br><span class="line">        <span class="string">'left_hip'</span>,</span><br><span class="line">        <span class="string">'right_hip'</span>,</span><br><span class="line">        <span class="string">'left_knee'</span>,</span><br><span class="line">        <span class="string">'right_knee'</span>,</span><br><span class="line">        <span class="string">'left_ankle'</span>,</span><br><span class="line">        <span class="string">'right_ankle'</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">'skeleton'</span>: [...], <span class="comment"># 关键点连接性，编号从1开始</span></span><br><span class="line">  &#125;</span><br><span class="line">​</span><br><span class="line"></span><br><span class="line"><span class="comment"># loadAnns</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">'segmentation'</span>: ...,</span><br><span class="line">    <span class="string">'area'</span>: <span class="number">702.1057499999998</span>,</span><br><span class="line">    <span class="string">'iscrowd'</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="string">'image_id'</span>: <span class="number">289343</span>,</span><br><span class="line">    <span class="string">'bbox'</span>: [<span class="number">473.07</span>, <span class="number">395.93</span>, <span class="number">38.65</span>, <span class="number">28.67</span>],</span><br><span class="line">    <span class="string">'keypoints'</span>: [...],</span><br><span class="line">    <span class="string">'category_id'</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="string">'id'</span>: <span class="number">1768</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># loadImgs</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">'license'</span>: <span class="number">4</span>,</span><br><span class="line">    <span class="string">'file_name'</span>: <span class="string">'000000397133.jpg'</span>,</span><br><span class="line">    <span class="string">'coco_url'</span>: <span class="string">'http://images.cocodataset.org/val2017/000000397133.jpg'</span>,</span><br><span class="line">    <span class="string">'height'</span>: <span class="number">427</span>,</span><br><span class="line">    <span class="string">'width'</span>: <span class="number">640</span>,</span><br><span class="line">    <span class="string">'date_captured'</span>: <span class="string">'2013-11-14 17:02:52'</span>,</span><br><span class="line">    <span class="string">'flickr_url'</span>: <span class="string">'http://farm7.staticflickr.com/6116/6255196340_da26cf2c9e_z.jpg'</span>,</span><br><span class="line">    <span class="string">'id'</span>: <span class="number">397133</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>mask转换方法</p>
+<ul>
+<li><code>annToMask</code>：将<code>ann</code>中的<code>segmentation</code>转换为 binary mask形式。</li>
+<li><code>annToRLE</code>：将<code>ann</code>中的<code>segmentation</code>转换为RLE形式。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-其他方法"><a href="#2-3-其他方法" class="headerlink" title="2.3. 其他方法"></a>2.3. 其他方法</h3><ul>
+<li><p><code>info</code>：输出数据集基本信息，参考结果如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">description: COCO 2017 Dataset</span><br><span class="line">url: http://cocodataset.org</span><br><span class="line">version: 1.0</span><br><span class="line">year: 2017</span><br><span class="line">contributor: COCO Consortium</span><br><span class="line">date_created: 2017/09/01</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>download</code>：下载数据集，我也用不上。</p>
+</li>
+<li><p><code>def showAnns(self, anns)</code></p>
+<ul>
+<li>在plt上展示注释结果，可以用来展示mask和关键点，好像不能用来展示bbox。</li>
+<li>这个需要之前先用 <code>plt.imshow()</code> 展示原始图片。</li>
+<li>调用了 <code>plt.gca()</code> 方法，好像意思是会自动寻找<code>plt.figure</code>。</li>
+</ul>
+</li>
+<li><p><code>loadRes</code></p>
+<ul>
+<li>将JSON形式的结果转换为COCO对象。</li>
+<li>好像可以用在后续的评估方法中。</li>
+</ul>
+</li>
+<li><p><code>loadNumpyAnnotations</code></p>
+<ul>
+<li>将一个 <code>[Nx7]</code> 的 <code>ndarray</code> 对象转换为 <code>list[dict]</code> 形式。</li>
+<li>其中每个字典包括 <code>image_id, bbox, score, category_id</code> 四个属性。</li>
+<li><code>[Nx7]</code> 中每一行的形式为 <code>{imageID,x1,y1,w,h,score,class}</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-注意事项"><a href="#2-4-注意事项" class="headerlink" title="2.4. 注意事项"></a>2.4. 注意事项</h3><ul>
+<li>在源码中会设置 <code>import matplotlib; matplotlib.use(&#39;Agg&#39;)</code>，就算直接只Python源码也没用，可能需要修改源码后重新重新安装才行。</li>
+</ul>
+<h2 id="3-COCOeval"><a href="#3-COCOeval" class="headerlink" title="3. COCOeval"></a>3. COCOeval</h2><ul>
+<li>位于 <code>cocoeval.py</code> 中。</li>
+<li>作用：用于性能指标评估。</li>
+</ul>
+<h3 id="3-1-初始化"><a href="#3-1-初始化" class="headerlink" title="3.1. 初始化"></a>3.1. 初始化</h3><ul>
+<li>函数形式：<code>def __init__(self, cocoGt=None, cocoDt=None, iouType=&#39;segm&#39;)</code></li>
+<li>构造主要通过两个COCO对象以及比较结果来定义<ul>
+<li>两个COCO对象分别表示Ground Truth以及预测结果。</li>
+<li><code>iouType</code> 有三个选择，分别是<code>&#39;segm&#39;, &#39;bbox&#39;, &#39;keypoints&#39;</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-基本使用"><a href="#3-2-基本使用" class="headerlink" title="3.2. 基本使用"></a>3.2. 基本使用</h3><ul>
+<li><p>基本流程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cocoGt=..., cocoDt=...       # load dataset and results</span><br><span class="line">E = CocoEval(cocoGt,cocoDt); # initialize CocoEval object</span><br><span class="line">E.params.recThrs = ...;      # set parameters as desired</span><br><span class="line">E.evaluate();                # run per image evaluation</span><br><span class="line">E.accumulate();              # accumulate per image results</span><br><span class="line">E.summarize();               # display summary metrics of results</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 <code>E.params</code> 中可以设置的参数包括</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># The evaluation parameters are as follows (defaults in brackets):</span><br><span class="line">#  imgIds     - [all] N img ids to use for evaluation</span><br><span class="line">#  catIds     - [all] K cat ids to use for evaluation</span><br><span class="line">#  iouThrs    - [.5:.05:.95] T=10 IoU thresholds for evaluation</span><br><span class="line">#  recThrs    - [0:.01:1] R=101 recall thresholds for evaluation</span><br><span class="line">#  areaRng    - [...] A=4 object area ranges for evaluation</span><br><span class="line">#  maxDets    - [1 10 100] M=3 thresholds on max detections per image</span><br><span class="line">#  iouType    - [&apos;segm&apos;] set iouType to &apos;segm&apos;, &apos;bbox&apos; or &apos;keypoints&apos;</span><br><span class="line">#  iouType replaced the now DEPRECATED useSegm parameter.</span><br><span class="line">#  useCats    - [1] if true use category labels for evaluation</span><br><span class="line"># Note: if useCats=0 category labels are ignored as in proposal scoring.</span><br><span class="line"># Note: multiple areaRngs [Ax2] and maxDets [Mx1] can be specified.</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="4-举例"><a href="#4-举例" class="headerlink" title="4. 举例"></a>4. 举例</h2><ul>
+<li>两个官方实例放出来，也没注释，看看就看懂了。</li>
+</ul>
+<h3 id="4-1-pycocoDemo"><a href="#4-1-pycocoDemo" class="headerlink" title="4.1. pycocoDemo"></a>4.1. pycocoDemo</h3><ul>
+<li>好像也没啥要说的。<ul>
+<li>一般流程是根据catIds获取imgIds，最后获取annIds，然后分别通过load方法导入信息。</li>
+<li>其实可以活用 <code>imgToAnns</code> <code>catToImgs</code> 这两个成员变量。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"># from __future__ import print_function  # 为了在3.6中正常运行，好像需要注释</span><br><span class="line">from pycocotools.coco import COCO</span><br><span class="line">import os, sys, zipfile</span><br><span class="line">import urllib.request</span><br><span class="line">import shutil</span><br><span class="line">import numpy as np</span><br><span class="line">import skimage.io as io</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import pylab</span><br><span class="line">pylab.rcParams[&apos;figure.figsize&apos;] = (8.0, 10.0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Record package versions for reproducibility</span><br><span class="line">print(&quot;os: %s&quot; % os.name)</span><br><span class="line">print(&quot;sys: %s&quot; % sys.version)</span><br><span class="line">print(&quot;numpy: %s, %s&quot; % (np.__version__, np.__file__))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Setup data paths</span><br><span class="line">dataDir = &apos;../..&apos;</span><br><span class="line">dataType = &apos;val2017&apos;</span><br><span class="line">annDir = &apos;&#123;&#125;/annotations&apos;.format(dataDir)</span><br><span class="line">annZipFile = &apos;&#123;&#125;/annotations_train&#123;&#125;.zip&apos;.format(dataDir, dataType)</span><br><span class="line">annFile = &apos;&#123;&#125;/instances_&#123;&#125;.json&apos;.format(annDir, dataType)</span><br><span class="line">annURL = &apos;http://images.cocodataset.org/annotations/annotations_train&#123;&#125;.zip&apos;.format(dataType)</span><br><span class="line">print (annDir)</span><br><span class="line">print (annFile)</span><br><span class="line">print (annZipFile)</span><br><span class="line">print (annURL)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Download data if not available locally</span><br><span class="line">if not os.path.exists(annDir):</span><br><span class="line">    os.makedirs(annDir)</span><br><span class="line">if not os.path.exists(annFile):</span><br><span class="line">    if not os.path.exists(annZipFile):</span><br><span class="line">        print (&quot;Downloading zipped annotations to &quot; + annZipFile + &quot; ...&quot;)</span><br><span class="line">        with urllib.request.urlopen(annURL) as resp, open(annZipFile, &apos;wb&apos;) as out:</span><br><span class="line">            shutil.copyfileobj(resp, out)</span><br><span class="line">        print (&quot;... done downloading.&quot;)</span><br><span class="line">    print (&quot;Unzipping &quot; + annZipFile)</span><br><span class="line">    with zipfile.ZipFile(annZipFile,&quot;r&quot;) as zip_ref:</span><br><span class="line">        zip_ref.extractall(dataDir)</span><br><span class="line">    print (&quot;... done unzipping&quot;)</span><br><span class="line">print (&quot;Will use annotations in &quot; + annFile)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># initialize COCO api for instance annotations</span><br><span class="line">coco=COCO(annFile)</span><br><span class="line"></span><br><span class="line"># display COCO categories and supercategories</span><br><span class="line">cats = coco.loadCats(coco.getCatIds())</span><br><span class="line">nms=[cat[&apos;name&apos;] for cat in cats]</span><br><span class="line">print(&apos;COCO categories: \n&#123;&#125;\n&apos;.format(&apos; &apos;.join(nms)))</span><br><span class="line"></span><br><span class="line">nms = set([cat[&apos;supercategory&apos;] for cat in cats])</span><br><span class="line">print(&apos;COCO supercategories: \n&#123;&#125;&apos;.format(&apos; &apos;.join(nms)))</span><br><span class="line"></span><br><span class="line"># get all images containing given categories, select one at random</span><br><span class="line">catIds = coco.getCatIds(catNms=[&apos;person&apos;,&apos;dog&apos;,&apos;skateboard&apos;]);</span><br><span class="line">imgIds = coco.getImgIds(catIds=catIds );</span><br><span class="line">imgIds = coco.getImgIds(imgIds = [324158])</span><br><span class="line">img = coco.loadImgs(imgIds[np.random.randint(0,len(imgIds))])[0]</span><br><span class="line"></span><br><span class="line"># load and display image</span><br><span class="line">I = io.imread(&apos;%s/images/%s/%s&apos;%(dataDir,dataType,img[&apos;file_name&apos;]))</span><br><span class="line"># use url to load image</span><br><span class="line"># I = io.imread(img[&apos;coco_url&apos;])</span><br><span class="line">plt.axis(&apos;off&apos;)</span><br><span class="line">plt.imshow(I)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"># load and display instance annotations</span><br><span class="line">plt.imshow(I); plt.axis(&apos;off&apos;)</span><br><span class="line">annIds = coco.getAnnIds(imgIds=img[&apos;id&apos;], catIds=catIds, iscrowd=None)</span><br><span class="line">anns = coco.loadAnns(annIds)</span><br><span class="line">coco.showAnns(anns)</span><br><span class="line"></span><br><span class="line"># initialize COCO api for person keypoints annotations</span><br><span class="line">annFile = &apos;&#123;&#125;/annotations/person_keypoints_&#123;&#125;.json&apos;.format(dataDir,dataType)</span><br><span class="line">coco_kps=COCO(annFile)</span><br><span class="line"></span><br><span class="line"># load and display keypoints annotations</span><br><span class="line">plt.imshow(I); plt.axis(&apos;off&apos;)</span><br><span class="line">ax = plt.gca()</span><br><span class="line">annIds = coco_kps.getAnnIds(imgIds=img[&apos;id&apos;], catIds=catIds, iscrowd=None)</span><br><span class="line">anns = coco_kps.loadAnns(annIds)</span><br><span class="line">coco_kps.showAnns(anns)</span><br><span class="line"></span><br><span class="line"># initialize COCO api for caption annotations</span><br><span class="line">annFile = &apos;&#123;&#125;/annotations/captions_&#123;&#125;.json&apos;.format(dataDir,dataType)</span><br><span class="line">coco_caps=COCO(annFile)</span><br><span class="line"></span><br><span class="line"># load and display caption annotations</span><br><span class="line">annIds = coco_caps.getAnnIds(imgIds=img[&apos;id&apos;]);</span><br><span class="line">anns = coco_caps.loadAnns(annIds)</span><br><span class="line">coco_caps.showAnns(anns)</span><br><span class="line">plt.imshow(I); plt.axis(&apos;off&apos;); plt.show()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-pycocoEvalDemo"><a href="#4-2-pycocoEvalDemo" class="headerlink" title="4.2. pycocoEvalDemo"></a>4.2. pycocoEvalDemo</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> pycocotools.coco <span class="keyword">import</span> COCO</span><br><span class="line"><span class="keyword">from</span> pycocotools.cocoeval <span class="keyword">import</span> COCOeval</span><br><span class="line"><span class="keyword">import</span> os, sys, zipfile</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> skimage.io <span class="keyword">as</span> io</span><br><span class="line"><span class="keyword">import</span> pylab</span><br><span class="line">pylab.rcParams[<span class="string">'figure.figsize'</span>] = (<span class="number">10.0</span>, <span class="number">8.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Record package versions for reproducibility</span></span><br><span class="line">print(<span class="string">"os: %s"</span> % os.name)</span><br><span class="line">print(<span class="string">"sys: %s"</span> % sys.version)</span><br><span class="line">print(<span class="string">"numpy: %s, %s"</span> % (np.__version__, np.__file__))</span><br><span class="line"></span><br><span class="line">annType = [<span class="string">'segm'</span>,<span class="string">'bbox'</span>,<span class="string">'keypoints'</span>]</span><br><span class="line">annType = annType[<span class="number">1</span>]      <span class="comment">#specify type here</span></span><br><span class="line">prefix = <span class="string">'person_keypoints'</span> <span class="keyword">if</span> annType==<span class="string">'keypoints'</span> <span class="keyword">else</span> <span class="string">'instances'</span></span><br><span class="line">print(<span class="string">'Running demo for *%s* results.'</span>%(annType))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Setup data paths</span></span><br><span class="line">dataDir = <span class="string">'../..'</span></span><br><span class="line">dataType = <span class="string">'val2014'</span></span><br><span class="line">annDir = <span class="string">'&#123;&#125;/annotations'</span>.format(dataDir)</span><br><span class="line">annZipFile = <span class="string">'&#123;&#125;/annotations_train&#123;&#125;.zip'</span>.format(dataDir, dataType)</span><br><span class="line">annFile = <span class="string">'&#123;&#125;/instances_&#123;&#125;.json'</span>.format(annDir, dataType)</span><br><span class="line">annURL = <span class="string">'http://images.cocodataset.org/annotations/annotations_train&#123;&#125;.zip'</span>.format(dataType)</span><br><span class="line"><span class="keyword">print</span> (annDir)</span><br><span class="line"><span class="keyword">print</span> (annFile)</span><br><span class="line"><span class="keyword">print</span> (annZipFile)</span><br><span class="line"><span class="keyword">print</span> (annURL)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Download data if not available locally</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(annDir):</span><br><span class="line">    os.makedirs(annDir)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(annFile):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(annZipFile):</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">"Downloading zipped annotations to "</span> + annZipFile + <span class="string">" ..."</span>)</span><br><span class="line">        <span class="keyword">with</span> urllib.request.urlopen(annURL) <span class="keyword">as</span> resp, open(annZipFile, <span class="string">'wb'</span>) <span class="keyword">as</span> out:</span><br><span class="line">            shutil.copyfileobj(resp, out)</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">"... done downloading."</span>)</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"Unzipping "</span> + annZipFile)</span><br><span class="line">    <span class="keyword">with</span> zipfile.ZipFile(annZipFile,<span class="string">"r"</span>) <span class="keyword">as</span> zip_ref:</span><br><span class="line">        zip_ref.extractall(dataDir)</span><br><span class="line">    <span class="keyword">print</span> (<span class="string">"... done unzipping"</span>)</span><br><span class="line"><span class="keyword">print</span> (<span class="string">"Will use annotations in "</span> + annFile)</span><br><span class="line"></span><br><span class="line"><span class="comment">#initialize COCO ground truth api</span></span><br><span class="line">cocoGt=COCO(annFile)</span><br><span class="line"></span><br><span class="line"><span class="comment">#initialize COCO detections api</span></span><br><span class="line">resFile=<span class="string">'%s/results/%s_%s_fake%s100_results.json'</span></span><br><span class="line">resFile = resFile%(dataDir, prefix, dataType, annType)</span><br><span class="line">cocoDt=cocoGt.loadRes(resFile)</span><br><span class="line"></span><br><span class="line">imgIds=sorted(cocoGt.getImgIds())</span><br><span class="line">imgIds=imgIds[<span class="number">0</span>:<span class="number">100</span>]</span><br><span class="line">imgId = imgIds[np.random.randint(<span class="number">100</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># running evaluation</span></span><br><span class="line">cocoEval = COCOeval(cocoGt,cocoDt,annType)</span><br><span class="line">cocoEval.params.imgIds  = imgIds</span><br><span class="line">cocoEval.evaluate()</span><br><span class="line">cocoEval.accumulate()</span><br><span class="line">cocoEval.summarize()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/小白填坑/" rel="tag"># 小白填坑</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/13/dl/object_detection/darknet/" rel="next" title="Yolo系列 & Darknet">
+                <i class="fa fa-chevron-left"></i> Yolo系列 & Darknet
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装"><span class="nav-text">1. 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-COCO-类"><span class="nav-text">2. COCO 类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-初始化"><span class="nav-text">2.1. 初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-基本方法"><span class="nav-text">2.2. 基本方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-其他方法"><span class="nav-text">2.3. 其他方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-注意事项"><span class="nav-text">2.4. 注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-COCOeval"><span class="nav-text">3. COCOeval</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-初始化"><span class="nav-text">3.1. 初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-基本使用"><span class="nav-text">3.2. 基本使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-举例"><span class="nav-text">4. 举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-pycocoDemo"><span class="nav-text">4.1. pycocoDemo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-pycocoEvalDemo"><span class="nav-text">4.2. pycocoEvalDemo</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
