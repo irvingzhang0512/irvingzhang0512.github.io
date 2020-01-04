@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Python,">
+  <meta name="keywords" content="小白填坑,">
 
 
 
@@ -79,18 +79,25 @@
 
 
 
-<meta name="description" content="OpenCV-Python 的基本使用">
-<meta name="keywords" content="Python">
+<meta name="description" content="NMS与Soft NMS的简单理解">
+<meta name="keywords" content="小白填坑">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python手册(6) cv2">
-<meta property="og:url" content="http://yoursite.com/2019/09/26/python/manual/python-manual-6/index.html">
+<meta property="og:title" content="小白填坑系列(5) NMS &amp; Soft NMS">
+<meta property="og:url" content="http://yoursite.com/2020/01/04/dl/rookie/rookie-5/index.html">
 <meta property="og:site_name" content="清欢小屋">
-<meta property="og:description" content="OpenCV-Python 的基本使用">
+<meta property="og:description" content="NMS与Soft NMS的简单理解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-26T15:49:45.000Z">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/nqjlvd6ua62kcfzhqz8wqcr6/image_1dqf0qbpou2j10qj11pi1pss16569.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/ljhstfesdnp6dy076ssn422p/image_1dto68fu4erv1gck1v341p1svdm.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/du68sxtancqaq53zcon2tayz/image_1dto6a3ns19prqsc1b1a14t21qno13.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/91dojtk3myh18anrmyyp7ijc/image_1dto6bcc017rfe75f23hjhep21g.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/ewnsiu9769bsjkc9olls0g20/image_1dto6d8mkuran0e10vn17f23eo1t.png">
+<meta property="og:image" content="http://static.zybuluo.com/irving512/pb1hnju1kxojo3p1tdzmt2x3/image_1dto5tiq98sf15e5gjd1i3n1em9.png">
+<meta property="og:updated_time" content="2020-01-04T11:57:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python手册(6) cv2">
-<meta name="twitter:description" content="OpenCV-Python 的基本使用">
+<meta name="twitter:title" content="小白填坑系列(5) NMS &amp; Soft NMS">
+<meta name="twitter:description" content="NMS与Soft NMS的简单理解">
+<meta name="twitter:image" content="http://static.zybuluo.com/irving512/nqjlvd6ua62kcfzhqz8wqcr6/image_1dqf0qbpou2j10qj11pi1pss16569.png">
 
 
 
@@ -120,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/09/26/python/manual/python-manual-6/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/04/dl/rookie/rookie-5/">
 
 
 
 
 
-  <title>Python手册(6) cv2 | 清欢小屋</title>
+  <title>小白填坑系列(5) NMS & Soft NMS | 清欢小屋</title>
   
 
 
@@ -273,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/26/python/manual/python-manual-6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/04/dl/rookie/rookie-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Irving">
@@ -290,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python手册(6) cv2</h1>
+          <h1 class="post-title" itemprop="name headline">小白填坑系列(5) NMS & Soft NMS</h1>
         
 
         <div class="post-meta">
@@ -303,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T23:49:45+08:00">
-                2019-09-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-04T19:57:24+08:00">
+                2020-01-04
               </time>
             
 
@@ -326,8 +333,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/深度学习/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习</span>
                   </a>
                 </span>
 
@@ -337,8 +344,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/手册/" itemprop="url" rel="index">
-                    <span itemprop="name">手册</span>
+                  <a href="/categories/深度学习/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/深度学习/基础/小白填坑/" itemprop="url" rel="index">
+                    <span itemprop="name">小白填坑</span>
                   </a>
                 </span>
 
@@ -368,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  362
+                  1k
                 </span>
               
 
@@ -384,7 +402,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -392,7 +410,7 @@
 
           
               <div class="post-description">
-                  OpenCV-Python 的基本使用
+                  NMS与Soft NMS的简单理解
               </div>
           
 
@@ -412,61 +430,95 @@
         <a id="more"></a>
 
 <h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><ul>
-<li>参考《Learning OpenCV 3》中 C++ API 的内容，整理Python API。</li>
+<li>NMS，全称 non-maximum suppression，中文翻译是非极大值抑制。</li>
 </ul>
-<h2 id="1-展示窗口"><a href="#1-展示窗口" class="headerlink" title="1. 展示窗口"></a>1. 展示窗口</h2><h3 id="1-1-流水账"><a href="#1-1-流水账" class="headerlink" title="1.1. 流水账"></a>1.1. 流水账</h3><ul>
-<li><code>cv2.namedWindow(&#39;Example&#39;, cv2.WINDOW_AUTOSIZE)</code><ul>
-<li>构建窗口。</li>
-<li>第一个参数是框的名称，第二个用于尺寸参数。</li>
-</ul>
-</li>
-<li><code>cv2.imshow(&#39;Example&#39;, img)</code><ul>
-<li>在窗口中展示图片。</li>
-<li>第一个参数用于选择定义过的 <code>cv::namedWindow</code>，第二个参数是图像对象，即<code>ndarray</code>对象。</li>
-</ul>
-</li>
-<li><code>cv2.waitKey(0)</code><ul>
-<li>停留在当前画面的时间。</li>
-<li>如果是0，则无限停留；如果是数字，则停留对应的毫秒。</li>
-<li>返回值是按下按钮的ASCII码。</li>
-</ul>
-</li>
-<li><code>cv2.destroyWindow(&#39;Example&#39;)</code><ul>
-<li>关闭窗口。</li>
-<li>参数是窗口名称。</li>
+<h2 id="1-NMS的引入与基本流程"><a href="#1-NMS的引入与基本流程" class="headerlink" title="1. NMS的引入与基本流程"></a>1. NMS的引入与基本流程</h2><ul>
+<li>参考资料：<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/64423753" target="_blank" rel="noopener">浅谈NMS的多种实现</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/49481833" target="_blank" rel="noopener">目标检测番外篇(3)_NMS</a></li>
 </ul>
 </li>
 </ul>
-<h3 id="1-2-应用"><a href="#1-2-应用" class="headerlink" title="1.2. 应用"></a>1.2. 应用</h3><ul>
-<li>创建窗口，显示图片，按键结束，销毁窗口。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cv2.namedWindow(<span class="string">'Example'</span>, cv2.WINDOW_AUTOSIZE)</span><br><span class="line">cv2.imshow(<span class="string">'Example'</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyWindow(<span class="string">'Example'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="1-1-引入"><a href="#1-1-引入" class="headerlink" title="1.1. 引入"></a>1.1. 引入</h3><ul>
+<li>检测模型获取得到的检测框一般较多，同一物体很可能有多个框选中，所以就需要筛选一些。</li>
+<li>筛选的方法主要有两种，一种是通过增加 score 阈值，另一种就是NMS。</li>
+<li>NMS的总体思路就是 <strong>从一些类似的候选框中选择一个最好的</strong>。<ul>
+<li><strong>类似的候选框</strong>指的是两个bbox的IOU大于某一阈值。</li>
+<li><strong>好的候选框</strong>指的是score高的。</li>
+</ul>
+</li>
+<li>检测的基本流程<ul>
+<li>参考<a href="https://zhuanlan.zhihu.com/p/49481833" target="_blank" rel="noopener">本文</a>的配图（这张图多个博客引用了，我也不知道最开始从哪里引用的）：<ul>
+<li><img src="http://static.zybuluo.com/irving512/nqjlvd6ua62kcfzhqz8wqcr6/image_1dqf0qbpou2j10qj11pi1pss16569.png" alt="image_1dqf0qbpou2j10qj11pi1pss16569.png-467.1kB"></li>
+</ul>
+</li>
+<li>第一步：对每一类型，根据socre降序排列所有候选框。</li>
+<li>第二步：以第一步结果作为输入，依次遍历每个候选框，若后续候选框中有与当前候选框的IOU大于阈值，则剔除对应后续候选框中的对象。重复该操作，直到遍历过所有候选框。</li>
+<li>第三步：剩下的候选框，就是NMS的结果。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-基本实现"><a href="#1-2-基本实现" class="headerlink" title="1.2. 基本实现"></a>1.2. 基本实现</h3><ul>
+<li>参考：<a href="https://github.com/rbgirshick/py-faster-rcnn/tree/master/lib/nms" target="_blank" rel="noopener">rgbirshick/py-faster-rcnn: lib/nms</a>，即RGB大佬的NMS实现</li>
+<li>基本流程<ul>
+<li>第一步：将检测出的bbox按照cls score划分为若干集合。</li>
+<li>第二步：对每个集合，按照cls score排列，得到一个降序的list_k。</li>
+<li>第三步：对每个list_k，从top 1 cls score开始，计算当前bbox_a与其他bbox_b的IOU，若IOU大于阈值则去除bbox_b，且最终保留bbox_a，并从list_k中剔除。</li>
+<li>第四步：从list_k中选择剩余的top 1bbox，按照<code>第三步</code>的方法继续进行筛选。</li>
+<li>第五步：对所有list_k进行相同的操作。</li>
+</ul>
+</li>
+<li>源码<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nms</span><span class="params">(dets, thresh)</span>:</span></span><br><span class="line">    x1 = dets[:, <span class="number">0</span>]</span><br><span class="line">    y1 = dets[:, <span class="number">1</span>]</span><br><span class="line">    x2 = dets[:, <span class="number">2</span>]</span><br><span class="line">    y2 = dets[:, <span class="number">3</span>]</span><br><span class="line">    scores = dets[:, <span class="number">4</span>]</span><br><span class="line">    areas = (x2 - x1 + <span class="number">1</span>) * (y2 - y1 + <span class="number">1</span>)</span><br><span class="line">    order = scores.argsort()[::<span class="number">-1</span>]</span><br><span class="line">    keep = []</span><br><span class="line">    <span class="keyword">while</span> order.size &gt; <span class="number">0</span>:</span><br><span class="line">        i = order[<span class="number">0</span>]</span><br><span class="line">        keep.append(i)</span><br><span class="line">        xx1 = np.maximum(x1[i], x1[order[<span class="number">1</span>:]])</span><br><span class="line">        yy1 = np.maximum(y1[i], y1[order[<span class="number">1</span>:]])</span><br><span class="line">        xx2 = np.minimum(x2[i], x2[order[<span class="number">1</span>:]])</span><br><span class="line">        yy2 = np.minimum(y2[i], y2[order[<span class="number">1</span>:]]）</span><br><span class="line">        w = np.maximum(<span class="number">0.0</span>, xx2 - xx1 + <span class="number">1</span>)</span><br><span class="line">        h = np.maximum(<span class="number">0.0</span>, yy2 - yy1 + <span class="number">1</span>)</span><br><span class="line">        inter = w * h</span><br><span class="line">        ovr = inter / (areas[i] + areas[order[<span class="number">1</span>:]] - inter)</span><br><span class="line">        inds = np.where(ovr &lt;= thresh)[<span class="number">0</span>]</span><br><span class="line">        order = order[inds + <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> keep</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h2 id="2-图像-amp-视频"><a href="#2-图像-amp-视频" class="headerlink" title="2. 图像 &amp; 视频"></a>2. 图像 &amp; 视频</h2><h3 id="2-1-基本对象"><a href="#2-1-基本对象" class="headerlink" title="2.1. 基本对象"></a>2.1. 基本对象</h3><ul>
-<li>使用<code>ndarray</code>保存图片。</li>
-<li>基本参数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cv2.CAP_PROP_FRAME_COUNT // 总帧数</span><br><span class="line">cv2.CAP_PROP_FRAME_WIDTH // 宽度</span><br><span class="line">cv2.CAP_PROP_FRAME_HEIGHT // 高度</span><br><span class="line">cv2.CAP_PROP_POS_FRAMES // 当前位置（在第几帧）</span><br><span class="line">cv2.CAP_PROP_FPS // FPS</span><br></pre></td></tr></table></figure>
-
+<h3 id="1-3-不使用排序实现"><a href="#1-3-不使用排序实现" class="headerlink" title="1.3. 不使用排序实现"></a>1.3. 不使用排序实现</h3><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/64423753" target="_blank" rel="noopener">本文</a>介绍了不使用排序实现NMS的过程。</li>
+<li>其实本质上来说，NMS做的就是去掉重复的候选框。</li>
+<li>基本步骤：<ul>
+<li>第一步：依次遍历所有候选框。<ul>
+<li>第二步：计算当前候选框（记作候选框A）与剩下候选框的IOU，选出IOU大于阈值的候选框集合（记作候选框集合B）。</li>
+<li>第三步：如果候选框A的score比候选框集合B中所有的都大，那就保留候选框A，并去掉所有候选框集合B中元素。</li>
+<li>第四步：若候选框集合B中有元素的score大于候选框A的score，则去除候选框A。</li>
+</ul>
 </li>
 </ul>
-<h3 id="2-2-数字图像处理"><a href="#2-2-数字图像处理" class="headerlink" title="2.2. 数字图像处理"></a>2.2. 数字图像处理</h3><ul>
-<li><code>cv2.GaussianBlur</code></li>
-<li><code>cv2.pyrDown</code>, <code>cv2.pyrUp</code></li>
-<li><code>cv2.cvtColor</code></li>
-<li><code>cv2.Canny</code></li>
-<li><code>cv2.logPolar</code></li>
+</li>
 </ul>
-<h3 id="2-3-应用"><a href="#2-3-应用" class="headerlink" title="2.3. 应用"></a>2.3. 应用</h3><ul>
-<li><p>读取图片</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imread(<span class="string">'/path/to/image'</span>, <span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="2-Soft-NMS"><a href="#2-Soft-NMS" class="headerlink" title="2. Soft NMS"></a>2. Soft NMS</h2><ul>
+<li>参考资料：<ul>
+<li><a href="https://arxiv.org/abs/1704.04503" target="_blank" rel="noopener">arxiv</a></li>
+<li><a href="https://github.com/wushuang01/soft-nms/blob/master/soft-nms.py" target="_blank" rel="noopener">wushuang01/soft-nms: soft-nms/soft-nms.py</a></li>
+<li><a href="https://github.com/bharatsingh430/soft-nms/blob/master/lib/nms/cpu_nms.pyx" target="_blank" rel="noopener">bharatsingh430/soft-nms: soft-nms/lib/nms/cpu_nms.pyx</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/41046620" target="_blank" rel="noopener">知乎文章：Soft-NMS</a></li>
+</ul>
 </li>
-<li><p>读取视频</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cap = cv2.VideoCapture()</span><br><span class="line">cap.open(<span class="string">'/path/to/mp4'</span>)</span><br><span class="line">flag, frame = cap.read()</span><br><span class="line"><span class="keyword">while</span> flag:</span><br><span class="line">    ...</span><br><span class="line">    cv2.imshow(<span class="string">'Example'</span>, frame)</span><br><span class="line">    flag, frame = cap.read()</span><br></pre></td></tr></table></figure>
+</ul>
+<h3 id="2-1-引入与理解"><a href="#2-1-引入与理解" class="headerlink" title="2.1. 引入与理解"></a>2.1. 引入与理解</h3><ul>
+<li>NMS存在一个问题，如果两个同类物体离得太近（即两个同类物体的 gt bbox 本身的IOU就大于阈值），那就只能检测到一个物体。</li>
+<li><img src="http://static.zybuluo.com/irving512/ljhstfesdnp6dy076ssn422p/image_1dto68fu4erv1gck1v341p1svdm.png" alt="image_1dto68fu4erv1gck1v341p1svdm.png-619.2kB"></li>
+<li>理解：<ul>
+<li>普通NMS的做法是，当两个bbox的IOU大于一定阈值，则会过滤掉score较小的bbox。</li>
+<li>Soft NMS的做法是，当两个bbox的IOU大于一定阈值，score较大的bbox的score保持不变，较小的bbox的score会根据一定的方式减少。</li>
+<li>普通NMS可以理解为：<ul>
+<li><img src="http://static.zybuluo.com/irving512/du68sxtancqaq53zcon2tayz/image_1dto6a3ns19prqsc1b1a14t21qno13.png" alt="image_1dto6a3ns19prqsc1b1a14t21qno13.png-14.3kB"></li>
+</ul>
 </li>
-<li><p>新建视频文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">writer = cv2.VideoWriter(<span class="string">'./test.mp4'</span>, cv2.VideoWriter_fourcc(<span class="string">'M'</span>, <span class="string">'J'</span>, <span class="string">'P'</span>, <span class="string">'G'</span>), fps, size)</span><br><span class="line">// writer = cv2.VideoWriter(<span class="string">'./test.mp4'</span>, <span class="number">-1</span>, fps, size)</span><br><span class="line">...</span><br><span class="line"><span class="keyword">while</span> flag:</span><br><span class="line">    ...</span><br><span class="line">    writer.write(frame)</span><br><span class="line">writer.release()</span><br></pre></td></tr></table></figure>
+<li>Soft NMS 可以理解为：<ul>
+<li><img src="http://static.zybuluo.com/irving512/91dojtk3myh18anrmyyp7ijc/image_1dto6bcc017rfe75f23hjhep21g.png" alt="image_1dto6bcc017rfe75f23hjhep21g.png-18.7kB"></li>
+<li>当然，$s_i(1-iou(M, b_i))$ 也可以通过别的方式<ul>
+<li><img src="http://static.zybuluo.com/irving512/ewnsiu9769bsjkc9olls0g20/image_1dto6d8mkuran0e10vn17f23eo1t.png" alt="image_1dto6d8mkuran0e10vn17f23eo1t.png-7.1kB"></li>
+</ul>
 </li>
-<li><p>获取/设置图像中某一位置的像素值：numpy操作，不说了。</p>
+</ul>
 </li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-伪代码"><a href="#2-2-伪代码" class="headerlink" title="2.2. 伪代码"></a>2.2. 伪代码</h3><ul>
+<li>引用了<a href="https://zhuanlan.zhihu.com/p/41046620" target="_blank" rel="noopener">这篇文章</a>中的配图</li>
+<li>注意，我觉得伪代码里少了一步，就是根据socre threshold来筛选bbox（否则感觉并没有筛选bbox，而只是修改了score）</li>
+<li><img src="http://static.zybuluo.com/irving512/pb1hnju1kxojo3p1tdzmt2x3/image_1dto5tiq98sf15e5gjd1i3n1em9.png" alt="image_1dto5tiq98sf15e5gjd1i3n1em9.png-571.5kB"></li>
 </ul>
 
       
@@ -485,7 +537,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"># Python</a>
+            <a href="/tags/小白填坑/" rel="tag"># 小白填坑</a>
           
         </div>
       
@@ -498,8 +550,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/26/cpp/manual/cpp-manual-1/" rel="next" title="C++手册(1) OpenCV">
-                <i class="fa fa-chevron-left"></i> C++手册(1) OpenCV
+              <a href="/2020/01/02/python/manual/python-manual-11/" rel="next" title="Python手册(11) WebSocket">
+                <i class="fa fa-chevron-left"></i> Python手册(11) WebSocket
               </a>
             
           </div>
@@ -507,10 +559,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/11/python/manual/python-manual-7/" rel="prev" title="Python手册(7) 函数&装饰器">
-                Python手册(7) 函数&装饰器 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -660,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-展示窗口"><span class="nav-text">1. 展示窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-流水账"><span class="nav-text">1.1. 流水账</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-应用"><span class="nav-text">1.2. 应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-图像-amp-视频"><span class="nav-text">2. 图像 &amp; 视频</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本对象"><span class="nav-text">2.1. 基本对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-数字图像处理"><span class="nav-text">2.2. 数字图像处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-应用"><span class="nav-text">2.3. 应用</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-NMS的引入与基本流程"><span class="nav-text">1. NMS的引入与基本流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-引入"><span class="nav-text">1.1. 引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-基本实现"><span class="nav-text">1.2. 基本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-不使用排序实现"><span class="nav-text">1.3. 不使用排序实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Soft-NMS"><span class="nav-text">2. Soft NMS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-引入与理解"><span class="nav-text">2.1. 引入与理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-伪代码"><span class="nav-text">2.2. 伪代码</span></a></li></ol></li></ol></div>
             
 
           </div>
