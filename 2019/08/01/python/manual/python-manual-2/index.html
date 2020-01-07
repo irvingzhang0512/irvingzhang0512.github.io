@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  1.6k
                 </span>
               
 
@@ -464,6 +464,8 @@
 </li>
 <li><p>根据行id删除行：<code>df.drop([0, 5])</code></p>
 </li>
+<li><p>删除重复行：<code>df.drop_duplicates([0, 5])</code>，其中选择的是列名，即 <code>df.columns</code> 中内容</p>
+</li>
 </ul>
 <h3 id="2-4-列"><a href="#2-4-列" class="headerlink" title="2.4. 列"></a>2.4. 列</h3><ul>
 <li><p>查列索引/列名称：<code>df.columns</code></p>
@@ -484,6 +486,7 @@
 <li><p>删</p>
 <ul>
 <li>删除列通过<code>del</code>实现，如<code>del frame2[&#39;tes&#39;]</code></li>
+<li>通过 <code>drop</code> 实现，如 <code>df.drop([1, 2], axis=1)</code>，其中选择的是列名，即 <code>df.columns</code> 中内容。</li>
 </ul>
 </li>
 <li><p>列数：<code>df[0].count()</code></p>
@@ -495,8 +498,11 @@
 <li>替换NAN为0：<code>df..fillna(0)</code></li>
 <li>两个DataFrame拼接成一个：<code>df.concat([df1, df2])</code></li>
 </ul>
-<h2 id="3-其他"><a href="#3-其他" class="headerlink" title="3. 其他"></a>3. 其他</h2><h3 id="3-1-读取文件"><a href="#3-1-读取文件" class="headerlink" title="3.1. 读取文件"></a>3.1. 读取文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 普通读取</span><br><span class="line">df = pd.read_csv(FILE_PATH)</span><br><span class="line"></span><br><span class="line"># 分块读取并且遍历，chunksize代表每次读取的行数量</span><br><span class="line">df = pd.read_csv(FILE_PATH, chunksize=1000)</span><br><span class="line">for piece in df:</span><br><span class="line">    # piece 可以作为 DateFrame 操作</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"># 读取开头若干行数据，读取前1000行</span><br><span class="line">df = pd.read_csv(FILE_PATH, nrows=1000)</span><br></pre></td></tr></table></figure>
+<h2 id="3-其他"><a href="#3-其他" class="headerlink" title="3. 其他"></a>3. 其他</h2><h3 id="3-1-读取文件"><a href="#3-1-读取文件" class="headerlink" title="3.1. 读取文件"></a>3.1. 读取文件</h3><ul>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html" target="_blank" rel="noopener">pandas.read_csv 文档</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 普通读取</span><br><span class="line">df = pd.read_csv(FILE_PATH)</span><br><span class="line"></span><br><span class="line"># 默认情况下，认为文件第一行为Header，即列名</span><br><span class="line"># 如果第一行不是列名，则需要设置 header 为None，如下所示</span><br><span class="line">df = pd.read_csv(FILE_PATH, header=None)</span><br><span class="line"></span><br><span class="line"># 默认情况下，文件中没有索引（即行名）</span><br><span class="line"># 如果要设置第一列为行名，可以设置 index_col </span><br><span class="line">df = pd.read_csv(FILE_PATH, index_col=0)</span><br><span class="line"></span><br><span class="line"># 如果第一行不是列名，则需要设置 header 为None，如下所示</span><br><span class="line">df = pd.read_csv(FILE_PATH, header=None)</span><br><span class="line"></span><br><span class="line"># 分块读取并且遍历，chunksize代表每次读取的行数量</span><br><span class="line">df = pd.read_csv(FILE_PATH, chunksize=1000)</span><br><span class="line">for piece in df:</span><br><span class="line">    # piece 可以作为 DateFrame 操作</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"># 读取开头若干行数据，读取前1000行</span><br><span class="line">df = pd.read_csv(FILE_PATH, nrows=1000)</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <h3 id="3-2-写文件"><a href="#3-2-写文件" class="headerlink" title="3.2. 写文件"></a>3.2. 写文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">train_df.to_csv(<span class="string">'/path/to/target.csv'</span>, </span><br><span class="line">                sep=<span class="string">','</span>, <span class="comment"># 分隔符</span></span><br><span class="line">                na_rep=<span class="string">''</span>, <span class="comment"># 缺失数据补全</span></span><br><span class="line">                float_format=<span class="literal">None</span>, <span class="comment"># C语言格式的浮点数格式，如'%10.5'</span></span><br><span class="line">                columns=<span class="literal">None</span>, <span class="comment"># 要保存的列，看到举例使用的是列名</span></span><br><span class="line">                header=<span class="literal">True</span>, <span class="comment"># 列名展示，可以是True/False，也可以输入list来指定列名</span></span><br><span class="line">                index=<span class="literal">True</span>, <span class="comment"># 是否打印行名</span></span><br><span class="line">                encoding=<span class="string">'utf8'</span>, <span class="comment"># 编码</span></span><br><span class="line">               )</span><br><span class="line"><span class="comment"># 如果在指定了 float_format 后部分整数也有小数部分，可以先将对应列转换类型，例如</span></span><br><span class="line">df[[<span class="string">'cycle'</span>, <span class="string">'passs'</span>, <span class="string">'ip'</span>]]=df[[<span class="string">'cycle'</span>, <span class="string">'passs'</span>, <span class="string">'ip'</span>]].astype(int64)</span><br></pre></td></tr></table></figure>
 
 
