@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Hive/HBase/HDFS 在 Python 中的基本使用">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python手册(13) Hive&#x2F;HBase&#x2F;HDFS">
+<meta property="og:url" content="http://yoursite.com/2020/01/08/python/manual/python-manual-13/index.html">
+<meta property="og:site_name" content="清欢小屋">
+<meta property="og:description" content="Hive/HBase/HDFS 在 Python 中的基本使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-08T13:27:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python手册(13) Hive&#x2F;HBase&#x2F;HDFS">
+<meta name="twitter:description" content="Hive/HBase/HDFS 在 Python 中的基本使用">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/08/python/manual/python-manual-13/">
+
+
+
+
+
+  <title>Python手册(13) Hive/HBase/HDFS | 清欢小屋</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb160f9403c6771c8b4af437c991f64e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">清欢小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/08/python/manual/python-manual-13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Irving">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="清欢小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python手册(13) Hive/HBase/HDFS</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-08T21:27:08+08:00">
+                2020-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/手册/" itemprop="url" rel="index">
+                    <span itemprop="name">手册</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  968
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  Hive/HBase/HDFS 在 Python 中的基本使用
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+
+<h2 id="1-Hive"><a href="#1-Hive" class="headerlink" title="1. Hive"></a>1. Hive</h2><h3 id="1-1-基本信息"><a href="#1-1-基本信息" class="headerlink" title="1.1. 基本信息"></a>1.1. 基本信息</h3><ul>
+<li>参考资料：<a href="https://github.com/dropbox/PyHive" target="_blank" rel="noopener">dropbox/PyHive</a></li>
+<li>使用的是 hiveserver2 服务，默认端口是10000。</li>
+<li>Linux下安装：<ul>
+<li><code>conda install thrift sasl pyhive</code></li>
+<li>PS：直接用pip好像不太行，不能安装sasl。</li>
+</ul>
+</li>
+<li>Windows下安装：<ul>
+<li><a href="http://landinghub.visualstudio.com/visual-cpp-build-tools" target="_blank" rel="noopener">安装Visual C++ 2015 Build Tools</a></li>
+<li>安装python包：<ul>
+<li>由于使用<code>pip install sasl</code>有问题，所以到<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="noopener">这里</a>直接下载sasl的whl文件，通过pip进行安装。</li>
+<li><code>pip install PyHive</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-基本使用"><a href="#1-2-基本使用" class="headerlink" title="1.2. 基本使用"></a>1.2. 基本使用</h3><ul>
+<li><p>可以通过 <a href="https://www.python.org/dev/peps/pep-0249/" target="_blank" rel="noopener">DB-API</a> 或 <a href="https://www.sqlalchemy.org/" target="_blank" rel="noopener">SqlAlchemy</a> 来操作 Hive。</p>
+</li>
+<li><p>其基本使用其实就是查看 DB-API 或 SqlAlchemy。</p>
+</li>
+<li><p>DB-API 实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pyhive <span class="keyword">import</span> hive</span><br><span class="line">conn = hive.Connection(host=<span class="string">'10.8.13.120'</span>, port=<span class="number">10000</span>, username=<span class="string">'hdfs'</span>, database=<span class="string">'default'</span>)</span><br><span class="line">cursor = conn.cursor()</span><br><span class="line">cursor.execute(<span class="string">'show tables'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> result <span class="keyword">in</span> cursor.fetchall():</span><br><span class="line">    print(result)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SqlAlchemy 实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.engine <span class="keyword">import</span> create_engine</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.schema <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># Presto</span></span><br><span class="line">engine = create_engine(<span class="string">'presto://localhost:8080/hive/default'</span>)</span><br><span class="line"><span class="comment"># Hive</span></span><br><span class="line">engine = create_engine(<span class="string">'hive://localhost:10000/default'</span>)</span><br><span class="line">logs = Table(<span class="string">'my_awesome_data'</span>, MetaData(bind=engine), autoload=<span class="literal">True</span>)</span><br><span class="line">print(select([func.count(<span class="string">'*'</span>)], from_obj=logs).scalar())</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="2-HBase"><a href="#2-HBase" class="headerlink" title="2. HBase"></a>2. HBase</h2><h3 id="2-1-基本信息"><a href="#2-1-基本信息" class="headerlink" title="2.1. 基本信息"></a>2.1. 基本信息</h3><ul>
+<li><p>参考资料</p>
+<ul>
+<li><a href="https://github.com/python-happybase/happybase" target="_blank" rel="noopener">Github: python-happybase/happybase</a></li>
+<li><a href="http://happybase.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">docs</a></li>
+<li><a href="https://blog.csdn.net/y472360651/article/details/79059457" target="_blank" rel="noopener">用Python操作HBase之happybase</a></li>
+</ul>
+</li>
+<li><p>进入响应环境后，安装<code>happybase</code>与<code>thrift</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install happybase</span><br><span class="line">pip install thrift</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>错误处理：</p>
+<ul>
+<li>出现的错误：<code>thriftpy.parser.exc.ThriftParserError: ThriftPy does not support generating module with path in protocol &#39;d&#39;</code></li>
+<li>Windows中才会出现此问题。</li>
+<li><a href="http://blog.csdn.net/dechengtju/article/details/61197641" target="_blank" rel="noopener">参考此文处理</a></li>
+<li>解决方案：修改<code>Lib\site-packages\thriftpy\parser\parser.py</code>文件中的代码：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改前</span></span><br><span class="line">url_scheme = urlparse(path).scheme</span><br><span class="line"><span class="keyword">if</span> url_scheme == <span class="string">''</span>:</span><br><span class="line">    <span class="keyword">with</span> open(path) <span class="keyword">as</span> fh:</span><br><span class="line">        data = fh.read()</span><br><span class="line"><span class="keyword">elif</span> url_scheme <span class="keyword">in</span> (<span class="string">'http'</span>, <span class="string">'https'</span>):</span><br><span class="line">    data = urlopen(path).read()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">raise</span> ThriftParserError(<span class="string">'ThriftPy does not support generating module '</span></span><br><span class="line">                            <span class="string">'with path in protocol \'&#123;&#125;\''</span>.format(</span><br><span class="line">                                url_scheme))</span><br><span class="line">                                </span><br><span class="line"><span class="comment"># 修改后</span></span><br><span class="line">url_scheme = urlparse(path).scheme</span><br><span class="line"><span class="keyword">if</span> url_scheme == <span class="string">''</span>:</span><br><span class="line">    <span class="keyword">with</span> open(path) <span class="keyword">as</span> fh:</span><br><span class="line">        data = fh.read()</span><br><span class="line"><span class="keyword">elif</span> url_scheme <span class="keyword">in</span> (<span class="string">'c'</span>, <span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>): <span class="comment"># 代表c盘、d盘、e盘、f盘等</span></span><br><span class="line">    <span class="keyword">with</span> open(path) <span class="keyword">as</span> fh:</span><br><span class="line">        data = fh.read()</span><br><span class="line"><span class="keyword">elif</span> url_scheme <span class="keyword">in</span> (<span class="string">'http'</span>, <span class="string">'https'</span>):</span><br><span class="line">    data = urlopen(path).read()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">raise</span> ThriftParserError(<span class="string">'ThriftPy does not support generating module '</span></span><br><span class="line">                            <span class="string">'with path in protocol \'&#123;&#125;\''</span>.format(</span><br><span class="line">                                url_scheme))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-基本使用"><a href="#2-2-基本使用" class="headerlink" title="2.2. 基本使用"></a>2.2. 基本使用</h3><ul>
+<li><p>建立连接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> happybase</span><br><span class="line">connection = happybase.Connection(HOST_IP)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示可用表刚</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(connection.tables())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DOCS: http://happybase.readthedocs.io/en/latest/api.html#happybase.Connection.create_table</span></span><br><span class="line"><span class="comment"># create_table(name, families)</span></span><br><span class="line"><span class="comment"># name (str) – The table name</span></span><br><span class="line"><span class="comment"># families (dict) – The name and options for each column family</span></span><br><span class="line">families = &#123;</span><br><span class="line">    <span class="string">'cf1'</span>: dict(max_versions=<span class="number">10</span>),</span><br><span class="line">    <span class="string">'cf2'</span>: dict(max_versions=<span class="number">1</span>, block_cache_enabled=<span class="literal">False</span>),</span><br><span class="line">    <span class="string">'cf3'</span>: dict(),  <span class="comment"># use defaults</span></span><br><span class="line">&#125;</span><br><span class="line">connection.create_table(<span class="string">'mytable'</span>, families)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取表、行对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不需要进行编码</span></span><br><span class="line">table = connection.table(<span class="string">'table_name'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要进行编码</span></span><br><span class="line"><span class="comment"># 取得的数据结构是字典，形如 &#123;b'cf:col1': b'value1'&#125;</span></span><br><span class="line">row = table.row(<span class="string">b'row_key'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.5. 基本操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取数据，需要编码</span></span><br><span class="line">print(row[<span class="string">b'cf1:col1'</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储数据，需要编码</span></span><br><span class="line"><span class="comment"># DOCS: http://happybase.readthedocs.io/en/latest/api.html#happybase.Table.put</span></span><br><span class="line">table.put(<span class="string">b'row-key'</span>,  &#123;<span class="string">b'cf:col1'</span>: <span class="string">b'value1'</span>, <span class="string">b'cf:col2'</span>: <span class="string">b'value2'</span>&#125;, timestamp=<span class="number">123456789</span>)</span><br><span class="line">table.put(<span class="string">b'row-key'</span>,  &#123;<span class="string">b'cf:col1'</span>: <span class="string">b'value1'</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除数据，需要编码</span></span><br><span class="line">table.delete(<span class="string">b'row-key'</span>)</span><br><span class="line">table.delete(<span class="string">b'row-key'</span>, columns=[<span class="string">b'cf1:col1'</span>, <span class="string">b'cf1:col2'</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.6. 批量操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DOCS: http://happybase.readthedocs.io/en/latest/api.html#batch</span></span><br><span class="line">b = table.batch()</span><br><span class="line">b.put(<span class="string">b'row-key-1'</span>, &#123;<span class="string">b'cf:col1'</span>: <span class="string">b'value1'</span>, <span class="string">b'cf:col2'</span>: <span class="string">b'value2'</span>&#125;)</span><br><span class="line">b.put(<span class="string">b'row-key-2'</span>, &#123;<span class="string">b'cf:col2'</span>: <span class="string">b'value2'</span>, <span class="string">b'cf:col3'</span>: <span class="string">b'value3'</span>&#125;)</span><br><span class="line">b.put(<span class="string">b'row-key-3'</span>, &#123;<span class="string">b'cf:col3'</span>: <span class="string">b'value3'</span>, <span class="string">b'cf:col4'</span>: <span class="string">b'value4'</span>&#125;)</span><br><span class="line">b.delete(<span class="string">b'row-key-4'</span>)</span><br><span class="line">b.send()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.7 连接池</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># DOCS: http://happybase.readthedocs.io/en/latest/api.html#connection-pool</span></span><br><span class="line">pool = happybase.ConnectionPool(size=<span class="number">3</span>, host=<span class="string">'...'</span>)</span><br><span class="line"><span class="comment"># 应尽快使用connection对象，不应在with中处理数据</span></span><br><span class="line"><span class="comment"># 在with中获取数据，在with外处理数据</span></span><br><span class="line"><span class="keyword">with</span> pool.connection() <span class="keyword">as</span> connection:</span><br><span class="line">    table = connection.table(<span class="string">'table-name'</span>)</span><br><span class="line">    row = table.row(<span class="string">b'row-key'</span>)</span><br><span class="line"></span><br><span class="line">process_data(row)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="3-HDFS"><a href="#3-HDFS" class="headerlink" title="3. HDFS"></a>3. HDFS</h2><h3 id="3-1-基本信息"><a href="#3-1-基本信息" class="headerlink" title="3.1. 基本信息"></a>3.1. 基本信息</h3><ul>
+<li>参考资料<ul>
+<li><a href="https://github.com/mtth/hdfs" target="_blank" rel="noopener">Github: mtth/hdfs</a></li>
+<li><a href="https://hdfscli.readthedocs.io/en/latest/" target="_blank" rel="noopener">docs</a></li>
+<li><a href="https://blog.csdn.net/jiede1/article/details/79829242" target="_blank" rel="noopener">使用python的hdfs包操作HDFS</a></li>
+</ul>
+</li>
+<li>安装：<code>pip install hdfs</code></li>
+</ul>
+<h3 id="3-1-基本使用"><a href="#3-1-基本使用" class="headerlink" title="3.1. 基本使用"></a>3.1. 基本使用</h3><ul>
+<li><p>创建 client 对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hdfs.client <span class="keyword">import</span> Client</span><br><span class="line">client = Client(<span class="string">"http://hdfs:50070/"</span>, root=<span class="string">"/"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他基本操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line">client.makedirs(<span class="string">"/test"</span>,permission=<span class="number">777</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定目录下文件列表</span></span><br><span class="line"><span class="comment"># status：为True时，也返回子目录的状态信息，默认为Flase</span></span><br><span class="line">client.list(hdfs_path, status=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重命名/移动文件</span></span><br><span class="line">client.rename(hdfs_src_path, hdfs_dst_path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入</span></span><br><span class="line"><span class="comment"># 追加/覆盖文件，主要看 overwrite 选项</span></span><br><span class="line">client.write(hdfs_path, data, overwrite=<span class="literal">True</span>, append=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从hdfs下载文件到本地</span></span><br><span class="line">client.download(hdfs_path, local_path, overwrite=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从本地上传文件到hdfs</span></span><br><span class="line">client.upload(hdfs_path, local_path, cleanup=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除hdfs中文件</span></span><br><span class="line">client.delete(hdfs_path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取文件</span></span><br><span class="line"><span class="keyword">with</span> client.read(<span class="string">'foo'</span>) <span class="keyword">as</span> reader:</span><br><span class="line">    content = reader.read()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/08/python/manual/python-manual-12/" rel="next" title="Python手册(12) 日期">
+                <i class="fa fa-chevron-left"></i> Python手册(12) 日期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/1.jpg" alt="Irving">
+            
+              <p class="site-author-name" itemprop="name">Irving</p>
+              <p class="site-description motion-element" itemprop="description">人间有味是清欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/irvingzhang0512" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/kingbob" target="_blank" title="ZhiHu">
+                      
+                        <i class="fa fa-fw fa-book"></i>ZhiHu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hive"><span class="nav-text">1. Hive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-基本信息"><span class="nav-text">1.1. 基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-基本使用"><span class="nav-text">1.2. 基本使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HBase"><span class="nav-text">2. HBase</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本信息"><span class="nav-text">2.1. 基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-基本使用"><span class="nav-text">2.2. 基本使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-HDFS"><span class="nav-text">3. HDFS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-基本信息"><span class="nav-text">3.1. 基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-基本使用"><span class="nav-text">3.1. 基本使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Irving</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

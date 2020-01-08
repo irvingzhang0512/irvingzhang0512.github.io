@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  501
+                  586
                 </span>
               
 
@@ -450,6 +450,11 @@
 <li>安装 ipykernel 或 jupyter，即<code>pip install ipykernel</code> 或 <code>pip install jupyter</code>。</li>
 <li>添加 kernel 命令：<code>python -m ipykernel install --name mykernel_name</code>。</li>
 <li>注意：有可能会因为权限不足安装失败，这时需要执行 <code>sudo /path/to/my/python -m ipykernel install --name mykernel_name</code></li>
+</ul>
+<h3 id="2-5-计时"><a href="#2-5-计时" class="headerlink" title="2.5. 计时"></a>2.5. 计时</h3><ul>
+<li>在一个cell最开始添加 <code>%%time</code>，会计算当前cell的运行时间。</li>
+<li>对某一行添加 <code>%time</code>，则会计算当前行的运行时间。</li>
+<li>对某一行添加 <code>%timeit</code>，则会多次运行本行（说是默认跑100000次，但我是的时候跑了1loop，7runs），计算平均时间与方差。</li>
 </ul>
 <h2 id="3-碰到的问题"><a href="#3-碰到的问题" class="headerlink" title="3. 碰到的问题"></a>3. 碰到的问题</h2><h3 id="3-1-创建文件时-Permission-Denied"><a href="#3-1-创建文件时-Permission-Denied" class="headerlink" title="3.1. 创建文件时 Permission Denied"></a>3.1. 创建文件时 Permission Denied</h3><ul>
 <li>问题描述：<code>nohup jupyter notebook</code> 是不能正常运行的。</li>
@@ -595,7 +600,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -666,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-远程访问"><span class="nav-text">1. 远程访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-方法一"><span class="nav-text">1.1. 方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-方法二"><span class="nav-text">1.2. 方法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-小技巧"><span class="nav-text">2. 小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-重载模块"><span class="nav-text">2.1. 重载模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-执行命令行命令"><span class="nav-text">2.2. 执行命令行命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-设置主题"><span class="nav-text">2.3. 设置主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-添加ikernel"><span class="nav-text">2.4. 添加ikernel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-碰到的问题"><span class="nav-text">3. 碰到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-创建文件时-Permission-Denied"><span class="nav-text">3.1. 创建文件时 Permission Denied</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Win10中偶尔出现的Matplotlib问题"><span class="nav-text">3.2. Win10中偶尔出现的Matplotlib问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-进阶扩展包"><span class="nav-text">4. 进阶扩展包</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-前言"><span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-远程访问"><span class="nav-text">1. 远程访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-方法一"><span class="nav-text">1.1. 方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-方法二"><span class="nav-text">1.2. 方法二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-小技巧"><span class="nav-text">2. 小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-重载模块"><span class="nav-text">2.1. 重载模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-执行命令行命令"><span class="nav-text">2.2. 执行命令行命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-设置主题"><span class="nav-text">2.3. 设置主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-添加ikernel"><span class="nav-text">2.4. 添加ikernel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-计时"><span class="nav-text">2.5. 计时</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-碰到的问题"><span class="nav-text">3. 碰到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-创建文件时-Permission-Denied"><span class="nav-text">3.1. 创建文件时 Permission Denied</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Win10中偶尔出现的Matplotlib问题"><span class="nav-text">3.2. Win10中偶尔出现的Matplotlib问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-进阶扩展包"><span class="nav-text">4. 进阶扩展包</span></a></li></ol></div>
             
 
           </div>
